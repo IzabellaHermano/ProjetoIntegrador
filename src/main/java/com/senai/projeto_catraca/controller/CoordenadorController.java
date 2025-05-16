@@ -1,4 +1,4 @@
 package com.senai.projeto_catraca.controller;
 
-public class FuncionarioController {
+public class CoordenadorController {
 }
