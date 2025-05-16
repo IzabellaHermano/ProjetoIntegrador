@@ -10,4 +10,6 @@ public class SubTurma {
     String nome;
     List<Aluno> aluno = new ArrayList<>();
     List<Semestre> semestre = new ArrayList<>();
+
+
 }
