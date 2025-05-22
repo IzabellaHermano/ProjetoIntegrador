@@ -4,10 +4,8 @@ import com.senai.projeto_catraca.model.dao.json.AlunoDAO;
 import com.senai.projeto_catraca.model.dao.json.HorarioDAO;
 import com.senai.projeto_catraca.model.dao.json.ProfessorDAO;
 import com.senai.projeto_catraca.model.usuario.aluno.Aluno;
-import com.senai.projeto_catraca.model.turma.horario.Horario;
+import com.senai.projeto_catraca.model.turma.horario.HorarioBase;
 import com.senai.projeto_catraca.model.usuario.Professor;
-import com.senai.projeto_catraca.websocket.WebSocketSender;
-
 import java.util.Optional;
 
 public class ControleDeAcessoController {
