@@ -1,4 +1,4 @@
 package com.senai.projeto_catraca.model.usuario;
 
-public class ProfessorDAO {
+public class Administrador {
 }
