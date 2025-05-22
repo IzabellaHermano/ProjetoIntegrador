@@ -1,6 +1,6 @@
 package com.senai.projeto_catraca.model.usuario;
 
-abstract class Usuario {
+public abstract class Usuario {
     private String nome;
     private String CPF;
     private int id;
