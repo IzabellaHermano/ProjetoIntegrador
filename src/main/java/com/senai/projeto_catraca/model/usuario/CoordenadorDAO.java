@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CoordenadorDAO {
-    private final String caminho = "alunos.json";
+    private final String caminho = "coordenadores.json";
     private final Gson gson = new Gson();
     private final List<Coordenador> coordenadores;
 
@@ -54,6 +54,7 @@ public class CoordenadorDAO {
         coordenadores.removeIf(a -> a.getId() == id);
         salvar(coordenadores);
     }
+
     public List<Coordenador> listar(){
         return coordenadores;
     }
