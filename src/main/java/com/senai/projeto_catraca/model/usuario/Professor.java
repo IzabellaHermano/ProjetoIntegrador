@@ -15,4 +15,9 @@ public class Professor extends Usuario {
     public void setDisciplina(String disciplina) {
         this.disciplina = disciplina;
     }
+
+    @Override
+    public String getTipo() {
+        return "Professor";
+    }
 }

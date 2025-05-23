@@ -14,4 +14,9 @@ public class Administrador extends Usuario {
     public void setPermissao(String permissao) {
         this.permissao = permissao;
     }
+
+    @Override
+    public String getTipo() {
+        return "Administrador";
+    }
 }

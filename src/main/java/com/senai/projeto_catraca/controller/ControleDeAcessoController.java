@@ -3,9 +3,9 @@ package com.senai.projeto_catraca.controller;
 import com.senai.projeto_catraca.model.dao.json.AlunoDAO;
 import com.senai.projeto_catraca.model.dao.json.HorarioDAO;
 import com.senai.projeto_catraca.model.dao.json.ProfessorDAO;
-import com.senai.projeto_catraca.model.usuario.aluno.Aluno;
-import com.senai.projeto_catraca.model.turma.horario.HorarioBase;
 import com.senai.projeto_catraca.model.usuario.Professor;
+import com.senai.projeto_catraca.model.usuario.aluno.Aluno;
+
 import java.util.Optional;
 
 public class ControleDeAcessoController {
@@ -18,7 +18,10 @@ public class ControleDeAcessoController {
         if (alunoOpt.isEmpty()) {
             return "[ACESSO NEGADO] Aluno não encontrado para RFID: " + rfid;
         }
-
+        return "";
+    }
+}
+/*
         Aluno aluno = alunoOpt.get();
         Optional<Horario> horarioOpt = horarioDAO.buscarHorarioDoAluno(aluno.getId());
 
@@ -41,5 +44,5 @@ public class ControleDeAcessoController {
         return "[ENTRADA AUTORIZADA] Aluno: " + aluno.getNome();
     }
 }
-
+*/
 
