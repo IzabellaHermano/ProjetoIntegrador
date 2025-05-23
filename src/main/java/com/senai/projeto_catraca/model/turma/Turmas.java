@@ -4,17 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Turmas {
+ private int id;
  private String nome;
  private String sigla;
- private int dataInicio;
+ private String dataInicio;
  private int qntSemestre;
- private int horarioEntrada;
- private int periodo;
-//  A explicação para a list subturma seria especificar um ID que seria o numero da subturma que iria pra
-// classe da sub turma e de la criar a tabela de alunos
+ private String horarioEntrada;
+ private String periodo;
+//A ideia é criar uma lista vazia de alunos na classe subturma para salvar la, mais o id que seria o numero da subturma.
+//essa lista seria tipo, pra guardar os nomes de alunos, ok?
  private List<SubTurma> subTurmas = new ArrayList<>();
 
- public Turmas(String nome, String sigla, int dataInicio, int qntSemestre, int horarioEntrada, int periodo, List<SubTurma> subTurmas) {
+ public Turmas(int id, String nome, String sigla, String dataInicio, int qntSemestre, String horarioEntrada, String periodo, List<SubTurma> subTurmas) {
+  this.id = id;
   this.nome = nome;
   this.sigla = sigla;
   this.dataInicio = dataInicio;
@@ -24,12 +26,12 @@ public class Turmas {
   this.subTurmas = subTurmas;
  }
 
- public List<SubTurma> getSubTurmas() {
-  return subTurmas;
+ public int getId() {
+  return id;
  }
 
- public void setSubTurmas(List<SubTurma> subTurmas) {
-  this.subTurmas = subTurmas;
+ public void setId(int id) {
+  this.id = id;
  }
 
  public String getNome() {
@@ -48,11 +50,11 @@ public class Turmas {
   this.sigla = sigla;
  }
 
- public int getDataInicio() {
+ public String getDataInicio() {
   return dataInicio;
  }
 
- public void setDataInicio(int dataInicio) {
+ public void setDataInicio(String dataInicio) {
   this.dataInicio = dataInicio;
  }
 
@@ -64,19 +66,27 @@ public class Turmas {
   this.qntSemestre = qntSemestre;
  }
 
- public int getHorarioEntrada() {
+ public String getHorarioEntrada() {
   return horarioEntrada;
  }
 
- public void setHorarioEntrada(int horarioEntrada) {
+ public void setHorarioEntrada(String horarioEntrada) {
   this.horarioEntrada = horarioEntrada;
  }
 
- public int getPeriodo() {
+ public String getPeriodo() {
   return periodo;
  }
 
- public void setPeriodo(int periodo) {
+ public void setPeriodo(String periodo) {
   this.periodo = periodo;
+ }
+
+ public List<SubTurma> getSubTurmas() {
+  return subTurmas;
+ }
+
+ public void setSubTurmas(List<SubTurma> subTurmas) {
+  this.subTurmas = subTurmas;
  }
 }

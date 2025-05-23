@@ -7,9 +7,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SubTurma {
-    String nome;
-    List<Aluno> aluno = new ArrayList<>();
-    List<Semestre> semestre = new ArrayList<>();
+    private int id;
+    private List<String> alunos;
 
+    public SubTurma(int id, List<String> alunos) {
+        this.id = id;
+        this.alunos = alunos;
+    }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<String> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<String> alunos) {
+        this.alunos = alunos;
+    }
 }
