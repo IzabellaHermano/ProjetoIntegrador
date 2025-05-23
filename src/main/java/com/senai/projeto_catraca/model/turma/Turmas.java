@@ -9,7 +9,7 @@ public class Turmas {
     private int id;
     private String nome;
     private String turno;
-    private int professorId;  // Id do professor responsável
+    private int professorId;
     private List<Aluno> matriculasAlunos = new ArrayList<>();  // IDs de alunos associados à turma
 
     public Turmas(String nome, String turno, int professorId) {
