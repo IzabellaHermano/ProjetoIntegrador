@@ -49,6 +49,7 @@ public class Aluno extends Usuario {
         this.matricula = matricula;
     }
 
+
     public Aluno(String nome, String senha, String CPF, int id, String endereco, String telefone, String idCartaoRfid, List<Justificativa> justificativas, List<Ocorrencia> ocorrencias, String matricula) {
         super(nome, senha, CPF, id, endereco, telefone);
         this.idCartaoRfid = idCartaoRfid;
