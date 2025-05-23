@@ -1,6 +1,6 @@
 package com.senai.projeto_catraca.model.usuario;
 
-abstract class Usuario {
+public abstract class Usuario {
     private String nome;
     private String CPF;
     private int id;
@@ -64,4 +64,6 @@ abstract class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public abstract String getTipo();
 }
