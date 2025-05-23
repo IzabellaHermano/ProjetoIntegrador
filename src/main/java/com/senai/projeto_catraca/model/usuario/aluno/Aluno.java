@@ -9,7 +9,7 @@ public class Aluno extends Usuario {
     private String idCartaoRfid;
     private List <Justificativa> justificativas;
     private List <Ocorrencia> ocorrencias;
-    private int matricula;
+    private String matricula;
 
     public String getIdCartaoRfid() {
         return idCartaoRfid;
@@ -35,27 +35,29 @@ public class Aluno extends Usuario {
         this.ocorrencias = ocorrencias;
     }
 
-    public int getMatricula() {
+    public String getMatricula() {
         return matricula;
     }
 
-    public void setMatricula(int matricula) {
+    public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 
-    public Aluno(String nome, String senha, String CPF, int id, String endereco, String telefone, String idCartaoRfid, List<Justificativa> justificativas, List<Ocorrencia> ocorrencias, int matricula) {
+    public Aluno(String nome, String senha, String CPF, int id, String endereco, String telefone, String idCartaoRfid, String matricula) {
+        super(nome, senha, CPF, id, endereco, telefone);
+        this.idCartaoRfid = idCartaoRfid;
+        this.matricula = matricula;
+    }
+
+    public Aluno(String nome, String senha, String CPF, int id, String endereco, String telefone, String idCartaoRfid, List<Justificativa> justificativas, List<Ocorrencia> ocorrencias, String matricula) {
         super(nome, senha, CPF, id, endereco, telefone);
         this.idCartaoRfid = idCartaoRfid;
         this.justificativas = justificativas;
         this.ocorrencias = ocorrencias;
         this.matricula = matricula;
     }
+
     public boolean Atraso(LocalTime horarioEntrada) {
         return LocalTime.now().isAfter(horarioEntrada.plusMinutes(15));
-    }
-
-    @Override
-    public String getTipo() {
-        return "Aluno";
     }
 }
