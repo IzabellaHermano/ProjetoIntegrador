@@ -2,6 +2,8 @@ package com.senai.projeto_catraca.view;
 
 import com.senai.projeto_catraca.model.turma.Turmas;
 import com.senai.projeto_catraca.model.turma.TurmasDAO;
+import com.senai.projeto_catraca.model.dao.json.ProfessorDAO;
+import com.senai.projeto_catraca.model.usuario.Professor;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +14,7 @@ public class TurmasView {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         TurmasDAO turmasDAO = new TurmasDAO();
+        ProfessorDAO professorDAO = new ProfessorDAO();
 
         executarMenu("""
                 ===== MENU TURMA =====
@@ -28,10 +31,20 @@ public class TurmasView {
                             String nome = scanner.nextLine();
                             System.out.println("Digite o turno (Manhã/Tarde/Noite):");
                             String turno = scanner.nextLine();
-                            System.out.println("Digite o ID do professor responsável:");
-                            int professorId = scanner.nextInt();
-                            scanner.nextLine();
 
+                            int professorId;
+                            boolean professorValido = false;
+                            do {
+                                System.out.println("Digite o ID do professor responsável:");
+                                professorId = scanner.nextInt();
+                                scanner.nextLine();
+                                Optional<Professor> professorOpt = professorDAO.buscarPorId(professorId);
+                                if (professorOpt.isPresent()) {
+                                    professorValido = true;
+                                } else {
+                                    System.out.println("ID de professor inválido. Tente novamente.");
+                                }
+                            } while (!professorValido);
                             Turmas novaTurma = new Turmas(nome, turno, professorId);
                             turmasDAO.inserir(novaTurma);
                             System.out.println("Turma criada com sucesso!");
@@ -83,3 +96,4 @@ public class TurmasView {
         } while (!opcao.equals("0"));
     }
 }
+
