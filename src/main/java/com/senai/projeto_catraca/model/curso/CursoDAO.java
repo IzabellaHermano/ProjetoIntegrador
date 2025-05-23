@@ -3,39 +3,42 @@ package com.senai.projeto_catraca.model.curso;
 import java.util.ArrayList;
 
 public class CursoDAO {
-    private ArrayList<Curso> listaCursos = new ArrayList<>();
+    private static ArrayList<Curso> listaCursos = new ArrayList<>();
 
-    // Adicionar Curso novo //
-    public void adicionarCurso(Curso curso) {
+    public static void adicionarCurso(Curso curso) {
         listaCursos.add(curso);
+        salvarCurso();
     }
 
-    // Retornar todos os cursos //
-    public ArrayList<Curso> listarCursos() {
+    private static void salvarCurso() {
+        System.out.println("Curso salvo!");
+    }
+
+    public static ArrayList<Curso> listarCursos() {
         return listaCursos;
     }
-    // Metodo buscar curso por id //
-    public Curso buscarCursoPorId(int id) {
+    public static Curso buscarCursoPorId(int id) {
         for (Curso curso : listaCursos) {
             if (curso.getId() == id) {
                 return curso;
             }
         }
-        // Retorna null se não encontrar //
         return null;
     }
-    // Remover curso por id //
-    public boolean removerCurso(int id) {
+    public static boolean removerCurso(int id) {
         Curso curso = buscarCursoPorId(id);
         if (curso != null) {
             listaCursos.remove(curso);
+            salvarCurso();
             return true;
         }
         return false;
     }
+
+    public static void carregarCursos() {
+        System.out.println("Cursos carregados!");
+        listaCursos.add(new Curso("Python"));
+        listaCursos.add(new Curso("Java"));
+    }
 }
-
-
-
-
 
