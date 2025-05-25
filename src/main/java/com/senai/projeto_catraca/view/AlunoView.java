@@ -37,7 +37,7 @@ public class AlunoView {
                     String nome = scannerPrompt("|Nome: ");
                     String CPF = scannerPrompt("|CPF:");
                     String telefone = scannerPrompt("|Telefone:");
-                    String endereco= scannerPrompt("|Endereço");
+                    String endereco= scannerPrompt("|Endereço:");
                     String matricula = scannerPrompt("|Matricula:");
                     String rfid= scannerPrompt("|ID do cartão RFID:");
                     String senha = scannerPrompt("|Senha:");
@@ -48,7 +48,7 @@ public class AlunoView {
                     String nomeN = scannerPrompt("|Novo Nome: ");
                     String CPFN = scannerPrompt("|Novo CPF:");
                     String telefoneN = scannerPrompt("|Novo Telefone:");
-                    String enderecoN = scannerPrompt("|Novo Endereço");
+                    String enderecoN = scannerPrompt("|Novo Endereço:");
                     String matriculaN = scannerPrompt("|Nova Matricula:");
                     String rfidN = scannerPrompt("|Novo ID do cartão RFID:");
                     String senhaN = scannerPrompt("|Nova Senha:");
