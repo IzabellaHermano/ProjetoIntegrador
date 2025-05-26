@@ -26,6 +26,9 @@ public class Turmas {
   this.subTurmas = subTurmas;
  }
 
+ public Turmas(int id, String nome, String sigla, String dataInicio, int qntSemestres, String horarioEntrada, String periodo, String s) {
+ }
+
  public int getId() {
   return id;
  }

@@ -8,9 +8,9 @@ import java.util.List;
 
 public class SubTurma {
     private int id;
-    private List<String> alunos;
+    private int alunos;
 
-    public SubTurma(int id, List<String> alunos) {
+    public SubTurma(int id, int alunos) {
         this.id = id;
         this.alunos = alunos;
     }
@@ -23,11 +23,11 @@ public class SubTurma {
         this.id = id;
     }
 
-    public List<String> getAlunos() {
+    public int getAlunos() {
         return alunos;
     }
 
-    public void setAlunos(List<String> alunos) {
+    public void setAlunos(int alunos) {
         this.alunos = alunos;
     }
 }

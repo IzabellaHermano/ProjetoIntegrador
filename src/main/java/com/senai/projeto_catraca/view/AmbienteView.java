@@ -55,10 +55,11 @@ public class AmbienteView {
     }
     public void listar() {
         for (Ambiente a : controller.listarAmbiente()) {
-            System.out.printf("ID: %d | Nome: %d | Número: %d\n",
+            System.out.printf("ID: %d | Nome: %s | Número: %d%n",
                     a.getId(), a.getNome(), a.getNumero());
         }
     }
+
     private int scannerPromptInt(String msg) {
         System.out.print(msg);
         return Integer.parseInt(scanner.nextLine());
