@@ -71,12 +71,13 @@ public class CursoView {
                     case 4:
                         System.out.print("Nome da unidade curricular: ");
                         String nomeUC = scanner.nextLine();
-                       UnidadeCurricular novaUC = new UnidadeCurricular(nomeUC);
+
+                        System.out.print("Id do curso ao qual pertence: "); 
+                        int idCurso = Integer.parseInt(scanner.nextLine()); 
+                        
+                       UnidadeCurricular novaUC = new UnidadeCurricular(nomeUC, idCurso);
                        UnidadeCurricularDAO.adicionarUC(novaUC);
-                        System.out.println("Desenvolvimento de Sistemas");
-                        System.out.println("Mecatronica ");
-                        System.out.println("Eletronica ");
-                        System.out.println("Unidade Curricular adicionada com sucesso");
+                        System.out.println("Unidade Curricular adicionada com sucesso!" ); 
                         break;
 
                     case 5:
