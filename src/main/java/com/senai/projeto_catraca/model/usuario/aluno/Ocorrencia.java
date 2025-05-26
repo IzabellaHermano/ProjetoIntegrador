@@ -4,6 +4,7 @@ public class Ocorrencia {
     private int AlunoID;
     private int JustificativaID;
     private String dataHora;
+    private int TurmaID;
 
 
 }
