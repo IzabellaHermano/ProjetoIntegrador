@@ -15,13 +15,13 @@ public class JustificativaView {
         justificativaView.menu();
     }
     public void menu(){
-        System.out.println("--Coordenador--");
+        System.out.println("--Justificativa--");
         String menu = """
                 ______________________________
-                |1. Cadastrar Coordenador    |
-                |2. Deletar Coordenador      |
-                |3. Atualizar Coordenador    |
-                |4. Exibir Coordenador       |
+                |1. Cadastrar Justificativa  |
+                |2. Deletar Justificativa    |
+                |3. Atualizar Justificativa  |
+                |4. Exibir Justificativa     |
                 |5. Sair                     |
                 |____________________________|
                """;
