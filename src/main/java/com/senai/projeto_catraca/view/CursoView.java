@@ -11,6 +11,12 @@ public class CursoView {
 
     public static void main(String[] args) {
             CursoDAO.carregarCursos();
+        
+        if (CursoDAO.listarCursos().isEmpty()) {
+            CursoDAO.adicionarCurso(new Curso(1, "Desenvolvimento de Sistemas"));
+            CursoDAO.adicionarCurso(new Curso(2, "Eletrônica"));
+            CursoDAO.adicionarCurso(new Curso(3, "Mecatrônica")); 
+        }
             Scanner scanner = new Scanner(System.in);
             int opcao;
             do {
@@ -25,27 +31,33 @@ public class CursoView {
                 System.out.println("|             6. Remover Unidade Curricular            |");
                 System.out.println("|             0. Sair                                  |");
                 System.out.println("|------------------------------------------------------|");
-
                 opcao = scanner.nextInt();
                 scanner.nextLine();
+                
                 switch (opcao) {
                     case 1:
+                        System.out.print("ID do curso: "); 
+                        int idCurso = Integer.parseInt(scanner.nextLine()); 
+                        
                         System.out.print("Nome do curso: ");
                         String nomeCurso = scanner.nextLine();
+                        
                         Curso novoCurso = new Curso(nomeCurso);
                         CursoDAO.adicionarCurso(novoCurso);
+                        
                         System.out.println("Curso adicionado com sucesso.");
                         break;
+                        
                     case 2:
                         System.out.println("\n--- Lista de Cursos ---");
+                        System.out.printf("%-5s" | %-30s, "ID", "NOME"); 
+                        System.out.println("----------------------------------");
+                        
                         for (Curso c : CursoDAO.listarCursos()) {
-                            System.out.println("- " + c.getNome());
-                            System.out.println("Desenvolvimento de Sistemas");
-                            System.out.println("Mecatronica ");
-                            System.out.println("Eletronica ");
+                            System.out.println("%-5d | %-30s\n", c.getId(), c.getNome());
                         }
-
                         break;
+                        
                     case 3:
                         System.out.print("Id do curso a remover: ");
                         int idRemover = Integer.parseInt(scanner.nextLine());
@@ -55,6 +67,7 @@ public class CursoView {
                             System.out.println("Curso não encontrado");
                         }
                         break;
+                        
                     case 4:
                         System.out.print("Nome da unidade curricular: ");
                         String nomeUC = scanner.nextLine();
@@ -71,8 +84,8 @@ public class CursoView {
                         for (UnidadeCurricular uc : UnidadeCurricularDAO.listarUCs()) {
                             System.out.println("- " + uc.getNome());
                         }
-
                         break;
+                        
                     case 6:
                         System.out.print("Nome da unidade curricular a remover: ");
                         String ucRemover = scanner.nextLine();
@@ -82,9 +95,11 @@ public class CursoView {
                             System.out.println("UC não encontrada.");
                         }
                         break;
+                        
                     case 0:
                         System.out.println("Encerrando testes...");
                         break;
+                        
                     default:
                         System.out.println("Opção inválida. Tente novamente.");
                 }
