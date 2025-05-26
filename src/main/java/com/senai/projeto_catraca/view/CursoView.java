@@ -81,9 +81,14 @@ public class CursoView {
 
                     case 5:
                         System.out.println("\n--- Lista de Unidades Curriculares ---");
+                        ArrayList<UnidadeCurricular> ucs = UnidadeCurricularDAO.listarUCs();
+                        if (ucs.isEmpty()) {
+                            System.out.println("Nenhuma unidade curricular cadastrada. ");
+                        }else{
                         for (UnidadeCurricular uc : UnidadeCurricularDAO.listarUCs()) {
                             System.out.println("- " + uc.getNome());
                         }
+                    }
                         break;
                         
                     case 6:
