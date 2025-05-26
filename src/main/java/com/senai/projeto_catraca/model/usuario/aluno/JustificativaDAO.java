@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.senai.projeto_catraca.model.usuario.Coordenador;
 
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,9 +22,9 @@ public class JustificativaDAO {
         this.justificativas = carregar();
     }
 
-    private List<Justificativa> carregar() {
+    private List<Justificativa> carregar(){
         try (FileReader reader = new FileReader(caminho)) {
-            Type listType = new TypeToken<List<Coordenador>>() {}.getType();
+            Type listType = new TypeToken<List<Justificativa>>() {}.getType();
             return gson.fromJson(reader, listType);
         } catch (IOException e) {
             return new ArrayList<>();
@@ -53,10 +54,11 @@ public class JustificativaDAO {
     }
 
     public void remover(int id){
-        justificativas.remove(id);
+        justificativas.removeIf(a -> a.getId() == id);
         salvar(justificativas);
     }
     public List<Justificativa> listar(){
         return justificativas;
     }
+
 }

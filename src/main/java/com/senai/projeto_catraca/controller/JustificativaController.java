@@ -11,11 +11,11 @@ import java.util.List;
 public class JustificativaController {
     private final JustificativaDAO justificativaDAO = new JustificativaDAO();
 
-    public String cadastrarJustificativa(String tipo, String descricao, LocalDate data, String anexo){
+    public String cadastrarJustificativa(String tipo, String descricao, String data, String anexo){
         justificativaDAO.inserir(new Justificativa(tipo, anexo, data, descricao, 0));
         return "Justificativa criada com sucesso!";
     }
-    public String atualizarJustificativa(String tipo, String descricao, LocalDate data, String anexo, int id) {
+    public String atualizarJustificativa(String tipo, String descricao, String data, String anexo, int id) {
         justificativaDAO.atualizar(new Justificativa(tipo, anexo, data, descricao, id));
         return "Justificativa atualizada.";
     }

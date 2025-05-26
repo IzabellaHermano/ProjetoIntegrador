@@ -13,7 +13,7 @@ public class CoordenadorView {
         coordenadorView.menu();
     }
     public void menu(){
-        System.out.println("--Coordenador--");
+        System.out.println("--Coordenadores--");
         String menu = """
                 ______________________________
                 |1. Cadastrar Coordenador    |
@@ -24,7 +24,7 @@ public class CoordenadorView {
                 |____________________________|
                """;
 
-        int opcao = 0;
+        int opcao;
         do {
             System.out.println(menu);
             opcao = scanner.nextInt();

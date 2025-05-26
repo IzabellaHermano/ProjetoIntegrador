@@ -1,1 +1,3 @@
-[{"nome":"Andre andada","CPF":"dsa","id":1,"endereco":"sad","telefone":"d","senha":"dsada"}]
+[{"nome":"André","CPF":"12345678910","id":2,"endereco":"Rua dos Ruaceiros","telefone":"11912345678","senha":"1234"},
+  {"nome":"Antônio","CPF":"737838392087","id":3,"endereco":"Rua ruazinha 234","telefone":"1198436473","senha":"12334"}
+]
