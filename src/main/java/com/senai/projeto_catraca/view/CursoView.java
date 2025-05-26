@@ -104,12 +104,12 @@ public class CursoView {
 
                     case 7:
                         System.out.print("Digite o ID do curso para listar as unidades curriculares: ");
-                        int idCursoBusca = Integer.parseInt(scanner.nextLine()); 
+                        int buscarCursoPorId = Integer.parseInt(scanner.nextLine()); 
                         ArrayList<UnidadeCurricular> ucsDoCurso = UnidadeCurricularDAO.listarUCsPorCurso(idCursoBusca); 
                         if (ucsDoCurso.isEmpty()) {
                             System.out.println("Nenhuma unidade curricular encontrada para esse curso.");
                         }else{
-                            System.out.println("\n--- Unidades Curriculares do Curso ID " + idCursoBusca + "----");
+                            System.out.println("\n--- Unidades Curriculares do Curso ID " + buscarCursoPorId + "----");
                             for (UnidadeCurricular uc : ucsDoCurso){
                                 System.out.println("-" + uc.getNome()); 
                             }
