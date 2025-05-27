@@ -1,0 +1,1 @@
+[{"id":3,"nome":"Engenheiro de Software","sigla":"EdS","dataInicio":"15/20","qntSemestre":4,"horarioEntrada":"19","periodo":"4","subTurmas":[{"id":0,"alunos":["Carlos","Petricia"]}]},{"id":4,"nome":"Mecatronica","sigla":"MT","dataInicio":"20/15","qntSemestre":4,"horarioEntrada":"12","periodo":"4","subTurmas":[{"id":0,"alunos":["João","Jamanta","Paulo"]}]}]

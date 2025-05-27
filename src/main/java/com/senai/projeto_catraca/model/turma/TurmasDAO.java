@@ -17,12 +17,13 @@ public class TurmasDAO {
  private final List<Turmas> turma;
 
     public TurmasDAO() {
-        turma = carregar();
+        this.turma = carregar();
     }
     private List<Turmas> carregar() {
         try (FileReader reader = new FileReader(caminho)) {
             Type listType = new TypeToken<List<Turmas>>() {}.getType();
-            return gson.fromJson(reader, listType);
+            List<Turmas> lista = gson.fromJson(reader, listType);
+            return (lista != null) ? lista : new ArrayList<>();
         } catch (IOException e) {
             return new ArrayList<>();
     }

@@ -17,11 +17,11 @@ public class TurmaController {
 
 
     public String atualizarTurma(int id, String nome, String sigla, String dataInicio, int qntSemestres, String horarioEntrada, String periodo, List<SubTurma> subTurmas) {
-        turmasDAO.inserir(new Turmas(id, nome, sigla, dataInicio, qntSemestres, horarioEntrada, periodo, subTurmas));
+        turmasDAO.atualizar(new Turmas(id, nome, sigla, dataInicio, qntSemestres, horarioEntrada, periodo, subTurmas));
         return "Turma atualizada com sucesso.";
     }
 
-    public String removerHorario(int id) {
+    public String removerTurma(int id) {
         turmasDAO.remover(id);
         return "Turma removida com sucesso.";
     }

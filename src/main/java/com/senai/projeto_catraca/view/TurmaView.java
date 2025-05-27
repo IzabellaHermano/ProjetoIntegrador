@@ -3,7 +3,6 @@ package com.senai.projeto_catraca.view;
 import com.senai.projeto_catraca.controller.TurmaController;
 import com.senai.projeto_catraca.model.turma.SubTurma;
 import com.senai.projeto_catraca.model.turma.Turmas;
-import com.senai.projeto_catraca.model.usuario.aluno.Aluno;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,17 +41,25 @@ do {
     private void cadastrar(){
         String nome = scannerPrompt("Nome da turma: ");
         String sigla = scannerPrompt("Sigla da turma: ");
-        int quantidadeAlunos = Integer.parseInt(scannerPrompt("Quantidade de alunos: "));
         String dataInicio = scannerPrompt("Data de inicio: ");
         int qntSemestres = scannerPromptInt("Quantidades de Semestres: ");
         String horarioEntrada = scannerPrompt("O Horario de entrada: ");
         String periodo = scannerPrompt("O periodo entre as aulas: ");
 
-        SubTurma subTurma = new SubTurma(0, quantidadeAlunos);
+        List<String> alunos = new ArrayList<>();
+        String aluno;
+        do {
+            aluno = scannerPrompt("Digite o nome do aluno (ou 'fim' para encerrar): ");
+            if (!aluno.equalsIgnoreCase("fim")) {
+                alunos.add(aluno);
+            }
+        } while (!aluno.equalsIgnoreCase("fim"));
+
+        SubTurma subTurma = new SubTurma(0, alunos);
         List<SubTurma> listaSubTurmas = new ArrayList<>();
         listaSubTurmas.add(subTurma);
-
         System.out.println(controller.cadastrarTurma(nome, sigla, dataInicio, qntSemestres, horarioEntrada, periodo, listaSubTurmas));
+
     }
 
 
@@ -60,24 +67,31 @@ do {
             int id = scannerPromptInt("ID da turma: ");
             String nome = scannerPrompt("Nome da turma: ");
             String sigla = scannerPrompt("Sigla da turma: ");
-            int quantidadeAlunos = Integer.parseInt(scannerPrompt("Quantidade de alunos: "));
             String dataInicio = scannerPrompt("Data de inicio: ");
             int qntSemestres = scannerPromptInt("Quantidades de Semestres: ");
             String horarioEntrada = scannerPrompt("O Horario de entrada: ");
             String periodo = scannerPrompt("O periodo entre as aulas: ");
 
-            SubTurma subTurma = new SubTurma(0, quantidadeAlunos);
-            List<SubTurma> listaSubTurmas = new ArrayList<>();
-            listaSubTurmas.add(subTurma);
+        List<String> alunos = new ArrayList<>();
+        String aluno;
+        do {
+            aluno = scannerPrompt("Digite o nome do aluno (ou 'fim' para encerrar): ");
+            if (!aluno.equalsIgnoreCase("fim")) {
+                alunos.add(aluno);
+            }
+        } while (!aluno.equalsIgnoreCase("fim"));
+        SubTurma subTurma = new SubTurma(0, alunos);
+        List<SubTurma> listaSubTurmas = new ArrayList<>();
+        listaSubTurmas.add(subTurma);
+        System.out.println(controller.atualizarTurma(id,nome, sigla, dataInicio, qntSemestres, horarioEntrada, periodo, listaSubTurmas));
 
-            System.out.println(controller.atualizarTurma(id, nome, sigla, dataInicio, qntSemestres, horarioEntrada, periodo, listaSubTurmas));
-        }
+    }
 
 
 
         private void remover(){
         int idTurma = scannerPromptInt("ID da turma: ");
-        System.out.println(controller.removerHorario(idTurma));
+        System.out.println(controller.removerTurma(idTurma));
     }
     public void listar(){
         for (Turmas t : controller.listarTurmas()){
