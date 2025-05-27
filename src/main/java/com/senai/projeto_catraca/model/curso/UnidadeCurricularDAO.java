@@ -19,7 +19,7 @@ public class UnidadeCurricularDAO {
         }
         return null;
     }
-    public ArrayList<UnidadeCurricular> listarUCsPorCurso(int idCurso) {
+    public static ArrayList<UnidadeCurricular> listarUCsPorCurso(int idCurso) {
         ArrayList<UnidadeCurricular> resultado = new ArrayList<>();
         for (UnidadeCurricular uc : listaUCs) {
             if (uc.getIdCurso() == idCurso) {

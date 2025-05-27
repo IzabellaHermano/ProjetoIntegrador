@@ -7,7 +7,7 @@ public class Curso extends ArrayList<Curso> {
     private int id;
     private int duracao;
 
-    public Curso(String nome, int id, int duracao) {
+    public Curso() {
         this.nome = nome;
         this.id = id;
         this.duracao = duracao;

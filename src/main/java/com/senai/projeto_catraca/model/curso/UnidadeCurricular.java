@@ -12,6 +12,10 @@ public class UnidadeCurricular {
         this.cargaHoraria = cargaHoraria;
         this.idCurso = idCurso;
     }
+
+    public UnidadeCurricular(String nomeUC, int idCurso) {
+    }
+
     public int getId() {
         return id;
     }

@@ -2,8 +2,15 @@ package com.senai.projeto_catraca.model.curso;
 
 import java.util.ArrayList;
 
+
 public class CursoDAO {
     private static ArrayList<Curso> listaCursos = new ArrayList<>();
+
+    private static void cadastrarCurso() {
+        listaCursos.add(new Curso());
+        cadastrarCurso();
+
+    }
 
     public static void adicionarCurso(Curso curso) {
         listaCursos.add(curso);

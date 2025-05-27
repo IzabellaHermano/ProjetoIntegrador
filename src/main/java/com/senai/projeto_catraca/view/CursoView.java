@@ -4,33 +4,26 @@ import com.senai.projeto_catraca.model.curso.Curso;
 import com.senai.projeto_catraca.model.curso.CursoDAO;
 import com.senai.projeto_catraca.model.curso.UnidadeCurricular;
 import com.senai.projeto_catraca.model.curso.UnidadeCurricularDAO;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CursoView {
-    private static String cursoRemover;
-
     public static void main(String[] args) {
-            CursoDAO.carregarCursos();
-        
-        if (CursoDAO.listarCursos().isEmpty()) {
-            CursoDAO.adicionarCurso(new Curso(1, "Desenvolvimento de Sistemas"));
-            CursoDAO.adicionarCurso(new Curso(2, "Eletrônica"));
-            CursoDAO.adicionarCurso(new Curso(3, "Mecatrônica")); 
-        }
             Scanner scanner = new Scanner(System.in);
             int opcao;
-            do {
-
-                System.out.println("-------------------MENU DE TESTES ----------------------");
-                System.out.println("|             Escolha uma opção:                       |");
-                System.out.println("|             1. Adicionar curso                       |");
-                System.out.println("|             2. Listar Cursos                         |");
-                System.out.println("|             3. Remover Curso                         |");
-                System.out.println("|             4. Adicionar Unidade Curricular          |");
-                System.out.println("|             5. Listar Unidades Curriculares          |");
-                System.out.println("|             6. Remover Unidade Curricular            |");
-                System.out.println("|             0. Sair                                  |");
-                System.out.println("|------------------------------------------------------|");
+            do{
+                String menu = """
+                _______________________________________________
+                |      1. Adicionar cursos                    |
+                |      2. Listar cursos                       |
+                |      3. Remover cursos                      |
+                |      4. Adicionar unidade curricular        |
+                |      5. Listar unidades curiculares         |
+                |      6. Remover unidade currricular         |     
+                |      0. Sair                                |
+                |_____________________________________________|
+               """;
                 opcao = scanner.nextInt();
                 scanner.nextLine();
                 
@@ -50,18 +43,15 @@ public class CursoView {
                         
                     case 2:
                         System.out.println("\n--- Lista de Cursos ---");
-                        System.out.printf("%-5s" | %-30s, "ID", "NOME"); 
-                        System.out.println("----------------------------------");
-                        
                         for (Curso c : CursoDAO.listarCursos()) {
-                            System.out.println("%-5d | %-30s\n", c.getId(), c.getNome());
+                            System.out.println("-" + c.getNome());
                         }
                         break;
                         
                     case 3:
                         System.out.print("Id do curso a remover: ");
                         int idRemover = Integer.parseInt(scanner.nextLine());
-                        if (CursoDAO.removerCurso(Integer.parseInt(cursoRemover))) {
+                        if (CursoDAO.removerCurso(Integer.parseInt(String.valueOf(idRemover)))) {
                             System.out.println("Curso removido com sucesso");
                         } else {
                             System.out.println("Curso não encontrado");
@@ -72,8 +62,8 @@ public class CursoView {
                         System.out.print("Nome da unidade curricular: ");
                         String nomeUC = scanner.nextLine();
 
-                        System.out.print("Id do curso ao qual pertence: "); 
-                        int idCurso = Integer.parseInt(scanner.nextLine()); 
+                        System.out.print("Id do curso ao qual pertence: ");
+                        idCurso = Integer.parseInt(scanner.nextLine());
                         
                        UnidadeCurricular novaUC = new UnidadeCurricular(nomeUC, idCurso);
                        UnidadeCurricularDAO.adicionarUC(novaUC);
@@ -105,7 +95,7 @@ public class CursoView {
                     case 7:
                         System.out.print("Digite o ID do curso para listar as unidades curriculares: ");
                         int buscarCursoPorId = Integer.parseInt(scanner.nextLine()); 
-                        ArrayList<UnidadeCurricular> ucsDoCurso = UnidadeCurricularDAO.listarUCsPorCurso(idCursoBusca); 
+                        ArrayList<UnidadeCurricular> ucsDoCurso = UnidadeCurricularDAO.listarUCsPorCurso(buscarCursoPorId);
                         if (ucsDoCurso.isEmpty()) {
                             System.out.println("Nenhuma unidade curricular encontrada para esse curso.");
                         }else{
