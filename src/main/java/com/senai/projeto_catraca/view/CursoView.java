@@ -3,6 +3,7 @@ package com.senai.projeto_catraca.view;
 import com.senai.projeto_catraca.controller.CursoController;
 import com.senai.projeto_catraca.controller.UCController;
 import com.senai.projeto_catraca.model.curso.Curso;
+import com.senai.projeto_catraca.model.curso.CursoDAO;
 import com.senai.projeto_catraca.model.curso.UnidadeCurricular;
 import com.senai.projeto_catraca.model.curso.UnidadeCurricularDAO;
 
@@ -16,6 +17,7 @@ public class CursoView {
     private final UCController controllerUC = new UCController();
     private final Scanner scanner = new Scanner(System.in);
     private final UnidadeCurricularDAO ucDAO = new UnidadeCurricularDAO();
+    private final CursoDAO cursoDAO = new CursoDAO();
 
     public static void main(String[] args) {
         CursoView cursoView = new CursoView();
@@ -170,6 +172,16 @@ public class CursoView {
         int idCurso = scanner.nextInt();
         scanner.nextLine();
 
+        // Busca o curso específico pelo ID
+        Optional<Curso> cursoOptional = cursoDAO.buscarPorId(idCurso);
+
+        if (cursoOptional.isEmpty()) {
+            System.out.println("Curso não encontrado.");
+            return;
+        }
+
+        Curso curso = cursoOptional.get(); // Obtém o curso correto
+
         System.out.println("Digite o ID da UC que deseja remover do curso: ");
         System.out.println("--- Unidades Curriculares ---");
         for (UnidadeCurricular uc : controllerUC.listarUC()) {
@@ -180,11 +192,20 @@ public class CursoView {
 
         Optional<UnidadeCurricular> ucOptional = ucDAO.buscarPorId(idUC);
 
-        UnidadeCurricular uc = ucOptional.get();
-        listaUCs.remove(uc.getNome());
-        System.out.println("Unidade Curricular removida: " + uc.getNome());
+        if (ucOptional.isEmpty()) {
+            System.out.println("Unidade Curricular não encontrada.");
+            return;
+        }
 
-        controllerCurso.addUC(listaUCs, idCurso);
+        UnidadeCurricular uc = ucOptional.get();
+
+        // Remove da lista apenas do curso correto
+        if (curso.getUnidadeCurricular().remove(uc.getNome())) {
+            System.out.println("Unidade Curricular removida: " + uc.getNome());
+            cursoDAO.atualizarUC(curso.getId(), curso.getUnidadeCurricular()); // Atualiza apenas a lista de UCs do curso correto
+        } else {
+            System.out.println("Unidade Curricular não encontrada na lista do curso.");
+        }
     }
 
 }

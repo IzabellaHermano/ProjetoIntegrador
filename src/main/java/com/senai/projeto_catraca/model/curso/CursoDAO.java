@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 public class CursoDAO {
@@ -68,5 +69,9 @@ public class CursoDAO {
             }
         }
         salvar(cursos);
+    }
+
+    public Optional<Curso> buscarPorId(int idCurso) {
+        return carregar().stream().filter(c -> c.getId() == idCurso).findFirst();
     }
 }

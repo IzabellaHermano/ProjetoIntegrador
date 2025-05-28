@@ -63,7 +63,6 @@ public class UnidadeCurricularView {
 
     public void cadastrar() {
         System.out.println("Digite as seguintes informações: ");
-        System.out.print("Lista de professores: ");
         ArrayList<String> listaProfessores = null;
         System.out.print("Carga horaria (HH:mm): ");
         String cargaHoraria = scanner.nextLine();
@@ -88,7 +87,6 @@ public class UnidadeCurricularView {
         scanner.nextLine();
         System.out.println("Digite as seguintes informações: ");
 
-        System.out.print("Lista de professores: ");
         ArrayList<String> listaProfessores = null;
         System.out.print("Carga horaria (HH:mm): ");
         String cargaHoraria = scanner.nextLine();

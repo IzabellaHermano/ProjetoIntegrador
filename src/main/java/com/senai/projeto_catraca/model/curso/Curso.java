@@ -54,7 +54,7 @@ public class Curso {
         this.duracao = duracao;
     }
 
-    public ArrayList getUnidadeCurricular() {
+    public ArrayList<String> getUnidadeCurricular() {
         return unidadeCurricular;
     }
 
