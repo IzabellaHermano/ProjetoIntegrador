@@ -12,7 +12,7 @@ public class Turmas {
  private String horarioEntrada;
  private String periodo;
 //A ideia é criar uma lista vazia de alunos na classe subturma para salvar la, mais o id que seria o numero da subturma.
-//essa lista seria tipo, pra guardar os nomes de alunos, ok?
+//essa lista seria tipo, pra guardar os nomes de alunos
  private List<SubTurma> subTurmas = new ArrayList<>();
 
  public Turmas(int id, String nome, String sigla, String dataInicio, int qntSemestre, String horarioEntrada, String periodo, List<SubTurma> subTurmas) {
