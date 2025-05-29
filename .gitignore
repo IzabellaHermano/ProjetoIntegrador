@@ -38,3 +38,10 @@ build/
 .DS_Store
 
 Oracle_JDK-24
+
+aqvs.json
+ocorrencias.json
+professores.json
+alunos.json
+justificativa.json
+coordenador.json
