@@ -30,6 +30,9 @@ public class TurmaController {
         return turmasDAO.listarTodos().toArray(new Turmas[0]);
     }
 
+//    esse cadastrarSubTurma foi uma tentativa de fazer o codigo funcionar, no final nem precisei dele
+//    talvez a gente usa mais tarde.
+
     public String cadastrarSubTurma(SubTurma subTurma) {
         List<SubTurma> subTurmas = new ArrayList<>();
         subTurmas.add(subTurma);
