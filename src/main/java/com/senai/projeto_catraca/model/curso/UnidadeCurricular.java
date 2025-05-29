@@ -6,11 +6,11 @@ public class UnidadeCurricular {
     private int id;
     private String nome;
     private String cargaHoraria;
-    private ArrayList<String> listaProfessores;
+    //private ArrayList<String> listaProfessores;
 
-    public UnidadeCurricular(int id, ArrayList<String> listaProfessores, String cargaHoraria, String nome) {
+    public UnidadeCurricular(int id/*ArrayList<String> listaProfessores*/, String cargaHoraria, String nome) {
         this.id = id;
-        this.listaProfessores = listaProfessores;
+        //this.listaProfessores = listaProfessores;
         this.cargaHoraria = cargaHoraria;
         this.nome = nome;
     }
@@ -23,13 +23,13 @@ public class UnidadeCurricular {
         this.id = id;
     }
 
-    public ArrayList getListaProfessores() {
+   /* public ArrayList<String> getListaProfessores() {
         return listaProfessores;
-    }
+    }*/
 
-    public void setListaProfessores(ArrayList listaProfessores) {
+   /* public void setListaProfessores(ArrayList<String> listaProfessores) {
         this.listaProfessores = listaProfessores;
-    }
+    }*/
 
     public String getCargaHoraria() {
         return cargaHoraria;

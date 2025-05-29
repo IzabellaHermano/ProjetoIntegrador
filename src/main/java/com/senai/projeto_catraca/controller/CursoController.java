@@ -3,7 +3,6 @@ package com.senai.projeto_catraca.controller;
 import com.senai.projeto_catraca.model.curso.Curso;
 import com.senai.projeto_catraca.model.curso.CursoDAO;
 import com.senai.projeto_catraca.model.curso.UnidadeCurricular;
-import com.senai.projeto_catraca.model.curso.UnidadeCurricularDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +11,13 @@ import java.util.List;
 public class CursoController {
     CursoDAO cursoDAO = new CursoDAO();
 
-    public String cadastrarCurso(String nome, String tipo, int duracao, ArrayList<String> listaUCs) {
+
+    public String cadastrarCurso(String nome, String tipo, int duracao, ArrayList<UnidadeCurricular> listaUCs) {
         cursoDAO.inserir(new Curso(nome, tipo, duracao, 0, listaUCs));
         return "Curso adicionado com sucesso!";
     }
 
-    public String atualizarCurso(String nome, String tipo, int duracao, int id,ArrayList<String> listaUCs) {
+    public String atualizarCurso(String nome, String tipo, int duracao, int id,ArrayList<UnidadeCurricular> listaUCs) {
         cursoDAO.atualizar(new Curso(nome, tipo, duracao, id, listaUCs));
         return "Curso atualizado.";
     }
@@ -31,8 +31,4 @@ public class CursoController {
         return cursoDAO.listar();
     }
 
-    public String addUC(ArrayList<String> listaUCs, int id){
-        cursoDAO.atualizarUC(id, listaUCs);
-        return "UC adicionada com sucesso!";
-    }
 }

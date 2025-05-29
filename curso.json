@@ -1,1 +1,3 @@
-[{"nome":"Dev","id":1,"duracao":2,"tipo":"Técnico","unidadeCurricular":["Back-End"]},{"nome":"Curso 2","id":2,"duracao":2,"tipo":"Técnico","unidadeCurricular":["Programação em Blocos"]}]
+[{"nome":"d","id":1,"duracao":2,"tipo":"Técnico","unidadeCurricular":["Front-End"]},{"nome":"Curso2","id":2,"duracao":2,"tipo":"Técnico",
+  "unidadeCurricular":["Banco de Dados"]
+}]

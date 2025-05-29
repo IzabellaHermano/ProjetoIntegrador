@@ -1,30 +1,30 @@
-package com.senai.projeto_catraca.controller;
+/*package com.senai.projeto_catraca.controller;
 
+import com.senai.projeto_catraca.model.curso.CursoDAO;
 import com.senai.projeto_catraca.model.curso.UnidadeCurricular;
-import com.senai.projeto_catraca.model.curso.UnidadeCurricularDAO;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UCController {
-    UnidadeCurricularDAO unidadeCurricularDAO = new UnidadeCurricularDAO();
+    CursoDAO cursoDAO = new CursoDAO();
 
-    public String cadastrarUC(ArrayList<String> listaProfessores, String cargaHoraria, String nome) {
-        unidadeCurricularDAO.inserir(new UnidadeCurricular(0,listaProfessores, cargaHoraria, nome));
+    public String cadastrarUC(String cargaHoraria, String nome) {
+        cursoDAO.inserir(new UnidadeCurricular(0, cargaHoraria, nome));
         return "UC adicionada com sucesso!";
     }
 
-    public String atualizarUC(int id, ArrayList<String> listaProfessores, String cargaHoraria, String nome) {
-        unidadeCurricularDAO.atualizar(new UnidadeCurricular(id, listaProfessores, cargaHoraria, nome));
+    public String atualizarUC(int id,String cargaHoraria, String nome) {
+        cursoDAO.atualizar(new UnidadeCurricular(id, cargaHoraria, nome));
         return "UC atualizada.";
     }
 
     public String removerUC(int id) {
-        unidadeCurricularDAO.remover(id);
+        cursoDAO.remover(id);
         return "UC removida.";
     }
 
     public List<UnidadeCurricular> listarUC() {
-        return unidadeCurricularDAO.listar();
+        return cursoDAO.listarUC();
     }
-}
+}*/

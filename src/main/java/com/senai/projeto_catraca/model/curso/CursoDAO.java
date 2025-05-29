@@ -17,8 +17,11 @@ public class CursoDAO {
     private final Gson gson = new Gson();
     private final List<Curso> cursos;
 
+
     public CursoDAO() {
+
         this.cursos = carregar();
+
     }
 
     private List<Curso> carregar(){
@@ -29,6 +32,8 @@ public class CursoDAO {
             return new ArrayList<>();
         }
     }
+
+
     private void salvar(List<Curso> lista){
         try (FileWriter writer = new FileWriter(caminho)){
             gson.toJson(lista, writer);
@@ -36,6 +41,7 @@ public class CursoDAO {
             e.printStackTrace();
         }
     }
+
     public void inserir(Curso curso){
         int novoId = cursos.stream().mapToInt(Curso::getId).max().orElse(0) + 1;
         curso.setId(novoId);
@@ -56,12 +62,9 @@ public class CursoDAO {
         cursos.removeIf(a -> a.getId() == id);
         salvar(cursos);
     }
-    public List<Curso> listar(){
-        return cursos;
-    }
 
     // Metodo apenas para atualizar apenas a lista de UCs
-    public void atualizarUC(int idCurso, ArrayList<String> listaUCs) {
+    public void atualizarUC(int idCurso, ArrayList<UnidadeCurricular> listaUCs) {
         for (Curso c : cursos) {
             if (c.getId() == idCurso) {
                 c.setUnidadeCurricular(listaUCs);
@@ -72,6 +75,41 @@ public class CursoDAO {
     }
 
     public Optional<Curso> buscarPorId(int idCurso) {
-        return carregar().stream().filter(c -> c.getId() == idCurso).findFirst();
+        return cursos.stream().filter(c -> c.getId() == idCurso).findFirst();
     }
+
+    public List<Curso> listar(){
+        return cursos;
+    }
+
+    //parte para UCS
+   public void inserir(UnidadeCurricular unidadeCurricular) {
+        int novoId = unidadeCurriculares.stream().mapToInt(UnidadeCurricular::getId).max().orElse(0) + 1;
+        unidadeCurricular.setId(novoId);
+        unidadeCurriculares.add(unidadeCurricular);
+        salvarUC(unidadeCurriculares);
+    }
+
+    public void atualizar(UnidadeCurricular unidadeCurricular) {
+        for (int i = 0; i < unidadeCurriculares.size(); i++) {
+            if (unidadeCurriculares.get(i).getId() == unidadeCurricular.getId()) {
+                unidadeCurriculares.set(i, unidadeCurricular);
+                break;
+            }
+        }
+        salvarUC(unidadeCurriculares);
+    }
+
+    public void removerUC(int id) {
+        unidadeCurriculares.removeIf(a -> a.getId() == id);
+        salvarUC(unidadeCurriculares);
+    }
+
+    public Optional<UnidadeCurricular> buscarUCPorId(int idUC) {
+        return unidadeCurriculares.stream().filter(uc -> uc.getId() == idUC).findFirst();
+    }
+    public List<UnidadeCurricular> listarUC(){
+        return unidadeCurriculares;
+    }
+
 }

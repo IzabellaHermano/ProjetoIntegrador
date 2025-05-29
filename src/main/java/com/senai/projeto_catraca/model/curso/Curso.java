@@ -7,14 +7,14 @@ public class Curso {
     private int id;
     private int duracao;
     private String tipo;
-    private ArrayList<String> unidadeCurricular;
+    private ArrayList<UnidadeCurricular> unidadeCurricular;
 
-    public Curso(ArrayList<String> unidadeCurricular, int id) {
+    public Curso(ArrayList<UnidadeCurricular> unidadeCurricular, int id) {
         this.unidadeCurricular = unidadeCurricular;
         this.id = id;
     }
 
-    public Curso(String nome, String tipo, int duracao, int id, ArrayList<String> unidadeCurricular) {
+    public Curso(String nome, String tipo, int duracao, int id, ArrayList<UnidadeCurricular> unidadeCurricular) {
         this.nome = nome;
         this.tipo = tipo;
         this.duracao = duracao;
@@ -54,11 +54,11 @@ public class Curso {
         this.duracao = duracao;
     }
 
-    public ArrayList<String> getUnidadeCurricular() {
+    public ArrayList<UnidadeCurricular> getUnidadeCurricular() {
         return unidadeCurricular;
     }
 
-    public void setUnidadeCurricular(ArrayList<String> unidadeCurricular) {
+    public void setUnidadeCurricular(ArrayList<UnidadeCurricular> unidadeCurricular) {
         this.unidadeCurricular = unidadeCurricular;
     }
 }
