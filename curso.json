@@ -1,3 +1,1 @@
-[{"nome":"d","id":1,"duracao":2,"tipo":"Técnico","unidadeCurricular":["Front-End"]},{"nome":"Curso2","id":2,"duracao":2,"tipo":"Técnico",
-  "unidadeCurricular":["Banco de Dados"]
-}]
+[{"nome":"Curso","id":1,"duracao":2,"tipo":"Técnico","listaUnidadeCurricular":[{"id":2,"nome":"UC!","cargaHoraria":"20:00"}]},{"nome":"a","id":2,"duracao":1,"tipo":"Técnico","listaUnidadeCurricular":[{"id":3,"nome":"uc2 po curso2","cargaHoraria":"20:00"}]}]

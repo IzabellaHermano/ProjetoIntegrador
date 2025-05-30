@@ -31,4 +31,19 @@ public class CursoController {
         return cursoDAO.listar();
     }
 
+    public UnidadeCurricular cadastrarUC(String cargaHoraria, String nome) {
+        UnidadeCurricular unidadecurricular;
+        cursoDAO.inserirUC(unidadecurricular = new UnidadeCurricular(0, cargaHoraria, nome));
+        return unidadecurricular;
+    }
+
+    public String removerUC(int idUC) {
+        cursoDAO.removerUC(idUC);
+        return "UC removida.";
+    }
+
+    public List<UnidadeCurricular> listarUC() {
+        return cursoDAO.listarUC();
+    }
+
 }
