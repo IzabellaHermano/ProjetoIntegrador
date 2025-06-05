@@ -1,7 +1,4 @@
 package com.senai.projeto_catraca.model.dao.json;
 
-
-
-public class AQVDAO {
-
+public class AdministradorDAO {
 }
