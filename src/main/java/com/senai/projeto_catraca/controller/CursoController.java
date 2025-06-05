@@ -31,14 +31,14 @@ public class CursoController {
         return cursoDAO.listar();
     }
 
-    public UnidadeCurricular cadastrarUC(String cargaHoraria, String nome) {
-        UnidadeCurricular unidadecurricular;
-        cursoDAO.inserirUC(unidadecurricular = new UnidadeCurricular(0, cargaHoraria, nome));
+    public UnidadeCurricular cadastrarUC(int idCurso, String cargaHoraria, String nome) {
+        UnidadeCurricular unidadecurricular  = new UnidadeCurricular(0, cargaHoraria, nome);
+        cursoDAO.inserirUC(idCurso, unidadecurricular);
         return unidadecurricular;
     }
 
-    public String removerUC(int idUC) {
-        cursoDAO.removerUC(idUC);
+    public String removerUC(int idCurso, int idUC) {
+        cursoDAO.removerUC(idCurso, idUC);
         return "UC removida.";
     }
 

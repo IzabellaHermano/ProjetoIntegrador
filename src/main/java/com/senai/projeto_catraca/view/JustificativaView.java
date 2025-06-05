@@ -4,7 +4,6 @@ import com.senai.projeto_catraca.controller.JustificativaController;
 import com.senai.projeto_catraca.model.usuario.aluno.Justificativa;
 
 import java.io.File;
-import java.time.LocalDate;
 import java.util.Scanner;
 
 public class JustificativaView {

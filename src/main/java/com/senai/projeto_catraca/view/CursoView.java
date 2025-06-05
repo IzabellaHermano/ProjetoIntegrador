@@ -11,7 +11,8 @@ import java.util.*;
 public class CursoView {
     private final ArrayList<UnidadeCurricular> listaUCs = new ArrayList<>();
     private final CursoController controllerCurso = new CursoController();
-    private final Scanner scanner = new Scanner(System.in);;
+    private final Scanner scanner = new Scanner(System.in);
+    ;
     private final CursoDAO cursoDAO = new CursoDAO();
 
 
@@ -21,6 +22,7 @@ public class CursoView {
     }
 
     public void menu() {
+        System.out.println("--Cursos--");
         String menu = """
                  _______________________________________________
                  |      1. Adicionar cursos                    |
@@ -28,11 +30,10 @@ public class CursoView {
                  |      3. Remover cursos                      |
                  |      4. Listar cursos                       |
                  |      5. Adicionar unidades curiculares      |
-                 |      7. Sair                                |
+                 |      6. Sair                                |
                  |_____________________________________________|
                 """;
         int opcao;
-
         do {
             System.out.println(menu);
             opcao = scanner.nextInt();
@@ -54,14 +55,13 @@ public class CursoView {
                     menuUC();
                     break;
                 case 6:
-                    break;
-                case 7:
                     System.out.println("Encerrando o sistema...");
                     break;
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
             }
-        } while (opcao != 7);
+        } while (opcao != 6);
+        scanner.close();
     }
 
     public void cadastrar() {
@@ -76,17 +76,16 @@ public class CursoView {
         System.out.print("""
                 Selecione do curso:
                 1. Técnico
-                2. KAF
+                2. CAI
                 """);
         int resposta = scanner.nextInt();
         scanner.nextLine();
         if (resposta == 1) {
             tipo = "Técnico";
-        } else tipo = "KAF";
-
+        } else tipo = "CAI";
 
         controllerCurso.cadastrarCurso(nome, tipo, duracao, listaUCs);
-        System.out.println("Curso cadastrado com sucesso!");
+        System.out.println("Curso cadastrado com sucesso! Reinicie o sistema para salvar as alterações!");
     }
 
     public void atualizar() {
@@ -106,15 +105,15 @@ public class CursoView {
             // parte dedicada ao tipo do curso
             String tipo;
             System.out.print("""
-                Selecione do curso:
-                1. Técnico
-                2. KAF
-                """);
+                    Selecione do curso:
+                    1. Técnico
+                    2. CAI
+                    """);
             int resposta = scanner.nextInt();
             scanner.nextLine();
             if (resposta == 1) {
                 tipo = "Técnico";
-            } else tipo = "KAF";
+            } else tipo = "CAI";
 
             controllerCurso.atualizarCurso(nome, tipo, duracao, id, listaUCs);
             System.out.println("Curso atualizado com sucesso!");
@@ -127,7 +126,7 @@ public class CursoView {
         } else {
             System.out.println("--- Cursos ---");
             for (Curso cs : controllerCurso.listarCurso()) {
-                System.out.printf("ID: %d | Nome: %s",
+                System.out.printf("ID: %d | Nome: %s\n",
                         cs.getId(), cs.getNome());
             }
             System.out.println("Digite o id do curso que deseja deletar: ");
@@ -136,20 +135,22 @@ public class CursoView {
             System.out.println("Curso deletado com sucesso.");
         }
     }
+
     public void listar() {
-        if (cursoDAO.listar().isEmpty()){
+        if (cursoDAO.listar().isEmpty()) {
             System.out.println("Não há cursos cadastrados!");
-        } else { System.out.println("--- Cursos ---");
-        controllerCurso.listarCurso().forEach(
-                curso -> {
-                    System.out.printf("Id: %d | Nome: %s |\n",curso.getId(),curso.getNome());
-                    curso.getListaUnidadeCurricular().forEach(
-                           uc-> System.out.printf(" -> Unidades Curriculares [ID: %d | Nome: %s | Carga Horaria: %s]\n", uc.getId(),uc.getNome(),uc.getCargaHoraria())
-                    );
-                }
-        );
+        } else {
+            System.out.println("--- Cursos ---");
+            controllerCurso.listarCurso().forEach(
+                    curso -> {
+                        System.out.printf("Id: %d | Nome: %s | | Duração: %s anos | Tipo: %s\n", curso.getId(), curso.getNome(), curso.getDuracao(), curso.getTipo());
+                        curso.getListaUnidadeCurricular().forEach(
+                                uc -> System.out.printf(" -> Unidades Curriculares [ID: %d | Nome: %s | Carga Horaria: %s]\n", uc.getId(), uc.getNome(), uc.getCargaHoraria())
+                        );
+                    }
+            );
+        }
     }
-}
 
     public void menuUC() {
         System.out.println("--Unidades Curriculares--");
@@ -162,10 +163,17 @@ public class CursoView {
                  |5. Voltar                          |
                  |___________________________________|
                 """;
+        String menu2 = """
+                 _____________________________________
+                 |1. Cadastrar Unidade Curricular    |
+                 |2. Deletar Unidade Curricular      |
+                 |3. Voltar                          |
+                 |___________________________________|
+                """;
 
         int opcao;
         do {
-            System.out.println(menu);
+            System.out.println(menu2);
             opcao = scanner.nextInt();
             scanner.nextLine();
             switch (opcao) {
@@ -176,59 +184,66 @@ public class CursoView {
                     deletarUC();
                     break;
                 case 3:
-                   // atualizarUC();
-                    break;
-                case 4:
-                    //exibirUC();
-                    break;
-                case 5:
-                    menu();
-                    break;
+                    return;
                 default:
                     System.out.println("Digite uma opção válida.");
             }
-        } while (opcao != 5);
+        } while (true);
 
     }
 
     public void cadastrarUC() {
-        System.out.println("Digite o ID do curso em que deseja cadastrar esta Unidade Curricular: ");
-        int idCurso = scanner.nextInt();
-        scanner.nextLine();
-        Optional<Curso> cursoOpt = cursoDAO.buscarPorId(idCurso);
-        if (cursoOpt.isPresent()) {
-            Curso c = cursoOpt.get();
+        if (controllerCurso.listarCurso().isEmpty()) {
+            System.out.println("Cadastre um curso para adicionar uma Unidade Curricular!");
+        } else {
+            System.out.println("Digite o ID do curso em que deseja cadastrar esta Unidade Curricular: ");
+            int idCurso = scanner.nextInt();
+            scanner.nextLine();
+            Optional<Curso> cursoOpt = cursoDAO.buscarPorId(idCurso);
+            if (cursoOpt.isPresent()) {
+                Curso c = cursoOpt.get();
 
-            System.out.println("Digite as seguintes informações: ");
-            System.out.print("Carga horaria (HH:mm): ");
-            String cargaHoraria = scanner.nextLine();
-            System.out.print("Nome: ");
-            String nome = scanner.nextLine();
+                System.out.println("Digite as seguintes informações: ");
+                System.out.print("Carga horaria (HH:mm): ");
+                String cargaHoraria = scanner.nextLine();
+                System.out.print("Nome: ");
+                String nome = scanner.nextLine();
 
-            c.getListaUnidadeCurricular().add(controllerCurso.cadastrarUC(cargaHoraria, nome));
+                c.getListaUnidadeCurricular().add(controllerCurso.cadastrarUC(idCurso, cargaHoraria, nome));
 
-            cursoDAO.atualizar(c);
+                cursoDAO.atualizar(c);
+            }
         }
     }
 
     public void deletarUC() {
-        System.out.println("Digite o ID do curso em que deseja cadastrar esta Unidade Curricular: ");
-        int idCurso = scanner.nextInt();
-        scanner.nextLine();
-        Optional<Curso> cursoOpt = cursoDAO.buscarPorId(idCurso);
-        if (cursoOpt.isPresent()) {
-            Curso c = cursoOpt.get();
+        if (controllerCurso.listarCurso().isEmpty()) {
+            System.out.println("Cadastre um curso para deletar uma Unidade Curricular!");
+        } else {
+            System.out.println("Digite o ID do curso em que deseja cadastrar esta Unidade Curricular: ");
+            System.out.println("--- Cursos ---");
+            controllerCurso.listarCurso().forEach(
+                    curso -> {
+                        System.out.printf("Id: %d | Nome: %s \n", curso.getId(), curso.getNome());
+                    }
+            );
+            int idCurso = scanner.nextInt();
+            scanner.nextLine();
+            Optional<Curso> cursoOpt = cursoDAO.buscarPorId(idCurso);
+            if (cursoOpt.isPresent()) {
+                Curso c = cursoOpt.get();
 
-            System.out.println("--- Unidades Curriculares ---");
-            for (UnidadeCurricular uc : controllerCurso.listarUC()) {
-                System.out.printf("ID: %d | Nome: %s\n", uc.getId(), uc.getNome());
+                System.out.println("--- Unidades Curriculares ---");
+                c.getListaUnidadeCurricular().forEach(
+                        uc -> System.out.printf(" -> Unidades Curriculares [ID: %d | Nome: %s]\n", uc.getId(), uc.getNome())
+                );
+
+                System.out.println("Digite o id da Unidade Curricular que deseja deletar: ");
+                int idUC = scanner.nextInt();
+                controllerCurso.removerUC(idCurso, idUC);
+                cursoDAO.atualizar(c);
             }
-            System.out.print("Digite o id da Unidade Curricular que deseja deletar: ");
-            int idUC = scanner.nextInt();
-            controllerCurso.removerUC(idUC);
-            cursoDAO.atualizar(c);
         }
-
     }
 }
 

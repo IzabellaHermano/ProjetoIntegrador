@@ -61,6 +61,7 @@ public class CursoDAO {
         cursos.add(curso);
         salvar(cursos);
     }
+
     public void atualizar(Curso curso){
         for (int i = 0; i < cursos.size(); i++) {
             if (cursos.get(i).getId() == curso.getId()){
@@ -96,17 +97,25 @@ public class CursoDAO {
     }
 
     //parte para UCS
-   public void inserirUC(UnidadeCurricular unidadeCurricular) {
-        int novoIdUC = unidadeCurriculares.stream().mapToInt(UnidadeCurricular::getId).max().orElse(0) + 1;
-        unidadeCurricular.setId(novoIdUC);
-        unidadeCurriculares.add(unidadeCurricular);
-        salvarUC(unidadeCurriculares);
+    public void inserirUC(int idCurso, UnidadeCurricular unidadeCurricular) {
+        Curso curso = cursos.stream().filter(c -> c.getId() == idCurso).findFirst().orElse(null);
+
+        if (curso != null) {
+            int novoIdUC = curso.getListaUnidadeCurricular().stream().mapToInt(UnidadeCurricular::getId).max().orElse(0) + 1;
+            unidadeCurricular.setId(novoIdUC);
+            curso.getListaUnidadeCurricular().add(unidadeCurricular);
+            salvar(cursos);
+        }
     }
 
-    public void removerUC(int idUC) {
-        unidadeCurriculares.removeIf(a -> a.getId() == idUC);
-        salvarUC(unidadeCurriculares);
+    public void removerUC(int idCurso, int idUC) {
+        Optional<Curso> cursoOpt = buscarPorId(idCurso);
+        if (cursoOpt.isPresent()){
+        Curso c = cursoOpt.get();
+        c.getListaUnidadeCurricular().removeIf(uc -> uc.getId() == idUC);
+        salvar(cursos);
     }
+}
 
     public Optional<UnidadeCurricular> buscarUCPorId(int idUC) {
         return unidadeCurriculares.stream().filter(uc -> uc.getId() == idUC).findFirst();

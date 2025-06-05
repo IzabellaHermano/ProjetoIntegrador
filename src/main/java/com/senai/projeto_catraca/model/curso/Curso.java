@@ -9,11 +9,6 @@ public class Curso {
     private String tipo;
     private ArrayList<UnidadeCurricular> listaUnidadeCurricular;
 
-    public Curso(ArrayList<UnidadeCurricular> unidadeCurricular, int id) {
-        this.listaUnidadeCurricular = unidadeCurricular;
-        this.id = id;
-    }
-
     public Curso(String nome, String tipo, int duracao, int id, ArrayList<UnidadeCurricular> unidadeCurricular) {
         this.nome = nome;
         this.tipo = tipo;
