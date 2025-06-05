@@ -1,7 +1,7 @@
 package com.senai.projeto_catraca.controller;
 
 import com.senai.projeto_catraca.model.usuario.Coordenador;
-import com.senai.projeto_catraca.model.usuario.CoordenadorDAO;
+import com.senai.projeto_catraca.model.usuario.dao.json.CoordenadorDAO;
 
 import java.util.List;
 
