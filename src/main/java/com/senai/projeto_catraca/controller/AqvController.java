@@ -1,7 +1,7 @@
 package com.senai.projeto_catraca.controller;
 
 import com.senai.projeto_catraca.model.usuario.AQV;
-import com.senai.projeto_catraca.model.usuario.AQVDAO;
+import com.senai.projeto_catraca.model.dao.json.AQVDAO;
 
 import java.util.List;
 
