@@ -7,7 +7,7 @@ public class MqttSubscriber {
     private static final String TOPICO = "catraca/rfid";
     private static final ControleDeAcessoController controller = new ControleDeAcessoController();
 
-    public static <MqttClient> void iniciarMqtt() {
+    public static void iniciarMqtt() {
         try {
             MqttClient client = new MqttClient(BROKER, CLIENT_ID);
             client.connect();
@@ -21,3 +21,4 @@ public class MqttSubscriber {
             e.printStackTrace();
         }
     }
+}
