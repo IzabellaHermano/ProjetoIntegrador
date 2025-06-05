@@ -45,20 +45,19 @@ do {
         int qntSemestres = scannerPromptInt("Quantidades de Semestres: ");
         String horarioEntrada = scannerPrompt("O Horario de entrada: ");
         String periodo = scannerPrompt("O periodo entre as aulas: ");
-
-        List<String> alunos = new ArrayList<>();
-        String aluno;
-        do {
-            aluno = scannerPrompt("Digite o nome do aluno (ou 'fim' para encerrar): ");
-            if (!aluno.equalsIgnoreCase("fim")) {
-                alunos.add(aluno);
-            }
-        } while (!aluno.equalsIgnoreCase("fim"));
-
-        SubTurma subTurma = new SubTurma(0, alunos);
-        List<SubTurma> listaSubTurmas = new ArrayList<>();
-        listaSubTurmas.add(subTurma);
-        System.out.println(controller.cadastrarTurma(nome, sigla, dataInicio, qntSemestres, horarioEntrada, periodo, listaSubTurmas));
+//        List<String> alunos = new ArrayList<>();
+//        String aluno;
+//        do {
+//            aluno = scannerPrompt("Digite o nome do aluno (ou 'fim' para encerrar): ");
+//            if (!aluno.equalsIgnoreCase("fim")) {
+//                alunos.add(aluno);
+//            }
+//        } while (!aluno.equalsIgnoreCase("fim"));
+//        SubTurma subTurma = new SubTurma(0, alunos);
+//        List<SubTurma> listaSubTurmas = new ArrayList<>();
+//        listaSubTurmas.add(subTurma);
+        //codigo para a lista de SubTurma.
+        System.out.println(controller.cadastrarTurma(nome, sigla, dataInicio, qntSemestres, horarioEntrada, periodo));
 
     }
 
@@ -71,19 +70,8 @@ do {
             int qntSemestres = scannerPromptInt("Quantidades de Semestres: ");
             String horarioEntrada = scannerPrompt("O Horario de entrada: ");
             String periodo = scannerPrompt("O periodo entre as aulas: ");
-
-        List<String> alunos = new ArrayList<>();
-        String aluno;
-        do {
-            aluno = scannerPrompt("Digite o nome do aluno (ou 'fim' para encerrar): ");
-            if (!aluno.equalsIgnoreCase("fim")) {
-                alunos.add(aluno);
-            }
-        } while (!aluno.equalsIgnoreCase("fim"));
-        SubTurma subTurma = new SubTurma(0, alunos);
-        List<SubTurma> listaSubTurmas = new ArrayList<>();
-        listaSubTurmas.add(subTurma);
-        System.out.println(controller.atualizarTurma(id,nome, sigla, dataInicio, qntSemestres, horarioEntrada, periodo, listaSubTurmas));
+            ;
+        System.out.println(controller.atualizarTurma(id,nome, sigla, dataInicio, qntSemestres, horarioEntrada, periodo, id));
 
     }
 

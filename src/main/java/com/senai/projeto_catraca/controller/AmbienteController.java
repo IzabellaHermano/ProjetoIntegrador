@@ -1,7 +1,7 @@
 package com.senai.projeto_catraca.controller;
 
 import com.senai.projeto_catraca.model.turma.horario.Ambiente;
-import com.senai.projeto_catraca.model.turma.horario.AmbienteDAO;
+import com.senai.projeto_catraca.model.dao.json.AmbienteDAO;
 
 import java.util.List;
 

@@ -1,8 +1,5 @@
 package com.senai.projeto_catraca.model.turma;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Turmas {
  private int id;
  private String nome;
@@ -12,10 +9,11 @@ public class Turmas {
  private String horarioEntrada;
  private String periodo;
 //A ideia é criar uma lista vazia de alunos na classe subturma para salvar la, mais o id que seria o numero da subturma.
-//essa lista seria tipo, pra guardar os nomes de alunos
- private List<SubTurma> subTurmas = new ArrayList<>();
+//essa lista seria tipo, pra guardar os nomes de alunos.
+ //Subturma voltou a ser id, por causa que é muito complicado bota list no MySQL, a pedido do Professor.
+ private int idSubTurmas;
 
- public Turmas(int id, String nome, String sigla, String dataInicio, int qntSemestre, String horarioEntrada, String periodo, List<SubTurma> subTurmas) {
+ public Turmas(int id, String nome, String sigla, String dataInicio, int qntSemestre, String horarioEntrada, String periodo, int idSubTurmas) {
   this.id = id;
   this.nome = nome;
   this.sigla = sigla;
@@ -23,7 +21,7 @@ public class Turmas {
   this.qntSemestre = qntSemestre;
   this.horarioEntrada = horarioEntrada;
   this.periodo = periodo;
-  this.subTurmas = subTurmas;
+  this.idSubTurmas = idSubTurmas;
  }
 
  public Turmas(int id, String nome, String sigla, String dataInicio, int qntSemestres, String horarioEntrada, String periodo, String s) {
@@ -85,11 +83,11 @@ public class Turmas {
   this.periodo = periodo;
  }
 
- public List<SubTurma> getSubTurmas() {
-  return subTurmas;
+ public int getIdSubTurmas() {
+  return idSubTurmas;
  }
 
- public void setSubTurmas(List<SubTurma> subTurmas) {
-  this.subTurmas = subTurmas;
+ public void setIdSubTurmas(int idSubTurmas) {
+  this.idSubTurmas = idSubTurmas;
  }
 }

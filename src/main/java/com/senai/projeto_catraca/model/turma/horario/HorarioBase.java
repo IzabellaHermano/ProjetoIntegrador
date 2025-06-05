@@ -4,13 +4,12 @@ public class HorarioBase {
     private int id;
     private int idProfessor;
     private int idTurma;
-    private String horario;
 
-    public HorarioBase(int id, int idProfessor, int idTurma, String horario) {
+
+    public HorarioBase(int id, int idProfessor, int idTurma) {
         this.id = id;
         this.idProfessor = idProfessor;
         this.idTurma = idTurma;
-        this.horario = horario;
     }
 
     public int getId() {
@@ -35,13 +34,5 @@ public class HorarioBase {
 
     public void setIdTurma(int idTurma) {
         this.idTurma = idTurma;
-    }
-
-    public String getHorario() {
-        return horario;
-    }
-
-    public void setHorario(String horario) {
-        this.horario = horario;
     }
 }
