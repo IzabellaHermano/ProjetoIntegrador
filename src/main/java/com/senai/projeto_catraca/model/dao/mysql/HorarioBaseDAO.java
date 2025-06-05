@@ -8,54 +8,79 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class HorarioBaseDAO {
-    private final String caminho = "horarios.json";
-    private final Gson gson = new Gson();
-    private final List<HorarioBase> horarioBase;
 
-    public HorarioBaseDAO() {
-        horarioBase = carregar();
-    }
-
-
-    private List<HorarioBase> carregar() {
-        try (FileReader reader = new FileReader(caminho)) {
-            Type listType = new TypeToken<List<HorarioBase>>() {}.getType();
-            return gson.fromJson(reader, listType);
-        } catch (IOException e) {
-            return new ArrayList<>();
-        }
-    }
-    private void salvar(List<HorarioBase> lista) {
-        try (FileWriter writer = new FileWriter(caminho)) {
-            gson.toJson(lista, writer);
-        } catch (IOException e) {
+    public void inserir(HorarioBase horario) {
+        try (Connection conn = ConexaoMySQL.conectar()) {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO horario (id_aluno, id_professor) VALUES (?, ?)");
+            stmt.setInt(1, horario.getIdTurma());
+            stmt.setInt(2, horario.getIdProfessor());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    public void inserir(HorarioBase horario) {
-        int novoId = horarioBase.stream().mapToInt(HorarioBase::getId).max().orElse(0) + 1;
-        horario.setId(novoId);
-        horarioBase.add(horario);
-        salvar(horarioBase);
-    }
+
     public void atualizar(HorarioBase horario) {
-        for (int i = 0; i < horarioBase.size(); i++) {
-            if (horarioBase.get(i).getId() == horario.getId()) {
-                horarioBase.set(i, horario);
-                break;
-            }
+        try (Connection conn = ConexaoMySQL.conectar()) {
+            PreparedStatement stmt = conn.prepareStatement("UPDATE horario SET id_aluno = ?, id_professor = ? WHERE id = ?");
+            stmt.setInt(1, horario.getIdTurma());
+            stmt.setInt(2, horario.getIdProfessor());
+            stmt.setInt(3, horario.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        salvar(horarioBase);
     }
+
     public void remover(int id) {
-        horarioBase.removeIf(h -> h.getId() == id);
-        salvar(horarioBase);
+        try (Connection conn = ConexaoMySQL.conectar()) {
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM horario WHERE id = ?");
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
-    public List<HorarioBase> listarTodos(){
-          return horarioBase;
+
+    public Optional<HorarioBase> buscarHorarioDoAluno(int idAluno) {
+        try (Connection conn = ConexaoMySQL.conectar()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM horario WHERE id_aluno = ?");
+            stmt.setInt(1, idAluno);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return Optional.of(new HorarioBase(
+                        rs.getInt("id"),
+                        rs.getInt("id_aluno"),
+                        rs.getInt("id_professor")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    public List<HorarioBase> listarTodos() {
+        List<HorarioBase> lista = new ArrayList<>();
+        try (Connection conn = ConexaoMySQL.conectar()) {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM horario");
+            while (rs.next()) {
+                lista.add(new HorarioBase(
+                        rs.getInt("id"),
+                        rs.getInt("id_aluno"),
+                        rs.getInt("id_professor")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
     }
 }

@@ -1,7 +1,7 @@
 package com.senai.projeto_catraca.controller;
 
 import com.senai.projeto_catraca.model.turma.horario.HorarioBase;
-import com.senai.projeto_catraca.model.dao.mysql.HorarioBaseDAO;
+import com.senai.projeto_catraca.model.dao.json.HorarioBaseDAO;
 
 import java.util.List;
 
