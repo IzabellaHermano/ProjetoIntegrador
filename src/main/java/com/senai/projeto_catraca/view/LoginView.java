@@ -11,7 +11,7 @@ public class LoginView {
     private final LoginController loginController = new LoginController();
 
     public Optional <Usuario> exibirLogin(){
-        System.out.println("SENAI ANCHIETA\NLOGIN:");
+        System.out.println("SENAI ANCHIETA\nLOGIN:");
         System.out.print("|Nome: ");
         String nome = scanner.nextLine();
 
