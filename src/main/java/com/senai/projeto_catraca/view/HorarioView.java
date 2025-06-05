@@ -5,6 +5,7 @@ import com.senai.projeto_catraca.controller.HorarioController;
 import com.senai.projeto_catraca.model.turma.horario.Ambiente;
 import com.senai.projeto_catraca.model.turma.horario.HorarioBase;
 
+import java.time.LocalTime;
 import java.util.Scanner;
 
 public class HorarioView {
@@ -42,14 +43,14 @@ public class HorarioView {
     private void cadastrar(){
         int professor = scannerPromptInt("ID do professor: ");
         int turma = scannerPromptInt("ID da turma: ");
-        String horario = scannerPrompt("Horario da turma: ");
+        LocalTime horario = LocalTime.parse(scannerPrompt("Horario da turma: "));
         System.out.println(controller.cadastrarHorario(professor, turma, horario));
     }
     private void atualizar(){
         int id = scannerPromptInt("ID do horario: ");
         int professor = scannerPromptInt("ID do professor: ");
         int turma = scannerPromptInt("ID da turma");
-        String horario = scannerPrompt("Horario da turma: ");
+        LocalTime horario = LocalTime.parse(scannerPrompt("Horario da turma: "));
         System.out.println(controller.atualizarHorario(id, professor, turma, horario));
     }
     private void remover(){
