@@ -4,6 +4,7 @@ package com.senai.projeto_catraca.model.dao.json;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.senai.projeto_catraca.model.usuario.Professor;
+import com.senai.projeto_catraca.model.usuario.aluno.Aluno;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -64,8 +65,8 @@ public class ProfessorDAO {
         return carregar().stream().filter(p -> p.getId() == id).findFirst();
     }
 
-    public Optional<Professor> buscarPorLogin(String login) {
-        return professores.stream().filter(a -> a.getNome().equals(login)).findFirst();
+    public Optional<Professor> buscarPorLogin(String nome) {
+        return professores.stream().filter(p -> p.getNome() == nome).findFirst();
     }
 
     public List<Professor> listarTodos() {

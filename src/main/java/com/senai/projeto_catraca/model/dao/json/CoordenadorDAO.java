@@ -2,7 +2,9 @@ package com.senai.projeto_catraca.model.dao.json;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.senai.projeto_catraca.model.usuario.AQV;
 import com.senai.projeto_catraca.model.usuario.Coordenador;
+import com.senai.projeto_catraca.model.usuario.Professor;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -10,6 +12,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class CoordenadorDAO {
     private final String caminho = "alunos.json";
@@ -54,6 +57,13 @@ public class CoordenadorDAO {
     public void remover(int id) {
         coordenadores.removeIf(a -> a.getId() == id);
         salvar(coordenadores);
+    }
+    public Optional<Coordenador> buscarPorLogin(String nome) {
+        return coordenadores.stream().filter(c -> c.getNome() == nome).findFirst();
+    }
+
+    public Optional<Coordenador> buscarPorId(int id) {
+        return coordenadores.stream().filter(c -> c.getId() == id).findFirst();
     }
     public List<Coordenador> listar(){
         return coordenadores;

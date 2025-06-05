@@ -37,4 +37,9 @@ public class Aluno extends Usuario {
     public String getTipo() {
         return "";
     }
+
+    @Override
+    public String getTipo() {
+        return "Aluno";
+    }
 }
