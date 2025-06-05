@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class HorarioBaseDAO {
     private final String caminho = "horarios.json";
@@ -55,7 +56,11 @@ public class HorarioBaseDAO {
         horarioBase.removeIf(h -> h.getId() == id);
         salvar(horarioBase);
     }
-    public List<HorarioBase> listarTodos(){
-          return horarioBase;
+    public Optional<HorarioBase> buscarHorarioDoAluno(int idAluno) {
+        return horarioBase.stream().filter(h -> h.getId() == idAluno).findFirst();
+    }
+
+    public List<HorarioBase> listarTodos() {
+        return horarioBase;
     }
 }
