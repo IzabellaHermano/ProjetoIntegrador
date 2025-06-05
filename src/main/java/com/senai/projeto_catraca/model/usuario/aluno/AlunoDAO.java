@@ -56,6 +56,10 @@ public class AlunoDAO {
         salvar(alunoList);
     }
 
+    public Optional<Aluno> buscarPorLogin( String nome) {
+        return alunoList.stream().filter(a -> a.getNome() == nome).findFirst();
+    }
+
     public Optional<Aluno> buscarPorId(int id) {
         return alunoList.stream().filter(a -> a.getId() == id).findFirst();
     }

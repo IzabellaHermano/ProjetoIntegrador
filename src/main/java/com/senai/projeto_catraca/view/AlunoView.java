@@ -24,8 +24,9 @@ public class AlunoView {
                                         |           1- Cadastrar Alunos                         |
                                         |           2- Atualizar Alunos                         |
                                         |           3- Listar Alunos                            |
-                                        |           4- Deletar Alunos                           |
-                                        |           5- Sair                                     |
+                                        |           4- Buscar Alunos Por ID                     |
+                                        |           5- Deletar Alunos                           |
+                                        |           6- Sair                                     |
                                         |_______________________________________________________|
                     
                     """;
@@ -38,8 +39,8 @@ public class AlunoView {
                     String CPF = scannerPrompt("|CPF:");
                     String telefone = scannerPrompt("|Telefone:");
                     String endereco= scannerPrompt("|Endereço:");
-                    String matricula = scannerPrompt("|Matricula:");
-                    String rfid= scannerPrompt("|ID do cartão RFID:");
+                    int matricula = scannerPromptInt("|Matricula:");
+                    int rfid= scannerPromptInt("|ID do cartão RFID:");
                     String senha = scannerPrompt("|Senha:");
                     System.out.println(controller.cadastrarAluno(nome,senha,CPF,endereco,telefone,matricula,rfid));
                     break;
@@ -49,8 +50,8 @@ public class AlunoView {
                     String CPFN = scannerPrompt("|Novo CPF:");
                     String telefoneN = scannerPrompt("|Novo Telefone:");
                     String enderecoN = scannerPrompt("|Novo Endereço:");
-                    String matriculaN = scannerPrompt("|Nova Matricula:");
-                    String rfidN = scannerPrompt("|Novo ID do cartão RFID:");
+                    int matriculaN = scannerPromptInt("|Nova Matricula:");
+                    int rfidN = scannerPromptInt("|Novo ID do cartão RFID:");
                     String senhaN = scannerPrompt("|Nova Senha:");
                     System.out.println(controller.atualizarAluno(nomeN, senhaN,CPFN,id, enderecoN, telefoneN, matriculaN, rfidN));
                     break;
@@ -61,10 +62,14 @@ public class AlunoView {
                     }
                     break;
                 case 4:
+                    int idB = scannerPromptInt("Informe o ID do aluno que deseja buscar\n|ID:");
+                    System.out.println(controller.buscarPorID(idB));
+                    break;
+                case 5:
                     int idD = scannerPromptInt("Informe o ID do aluno que deseja deletar\n|ID:");
                     System.out.println(controller.deletarAluno(idD));
                     break;
-                case 5:
+                case 6:
                     System.out.println("Fim de Programa!");
                     break;
                 default:
