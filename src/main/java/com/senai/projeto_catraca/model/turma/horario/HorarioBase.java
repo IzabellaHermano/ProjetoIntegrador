@@ -1,12 +1,10 @@
 package com.senai.projeto_catraca.model.turma.horario;
 
-import java.sql.Date;
-import java.time.LocalTime;
-
 public class HorarioBase {
     private int id;
     private int idProfessor;
     private int idTurma;
+
 
     public HorarioBase(int id, int idProfessor, int idTurma) {
         this.id = id;
@@ -37,5 +35,4 @@ public class HorarioBase {
     public void setIdTurma(int idTurma) {
         this.idTurma = idTurma;
     }
-
 }

@@ -1,8 +1,8 @@
-package com.senai.projeto_catraca.model.turma;
+package com.senai.projeto_catraca.model.dao.json;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.senai.projeto_catraca.model.turma.horario.Ambiente;
+import com.senai.projeto_catraca.model.turma.Turmas;
 
 import java.io.FileReader;
 import java.io.FileWriter;

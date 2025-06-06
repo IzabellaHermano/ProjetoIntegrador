@@ -42,15 +42,13 @@ public class HorarioView {
     private void cadastrar(){
         int professor = scannerPromptInt("ID do professor: ");
         int turma = scannerPromptInt("ID da turma: ");
-        String horario = scannerPrompt("Horario da turma: ");
-        System.out.println(controller.cadastrarHorario(professor, turma, horario));
+        System.out.println(controller.cadastrarHorario(professor, turma));
     }
     private void atualizar(){
         int id = scannerPromptInt("ID do horario: ");
         int professor = scannerPromptInt("ID do professor: ");
         int turma = scannerPromptInt("ID da turma");
-        String horario = scannerPrompt("Horario da turma: ");
-        System.out.println(controller.atualizarHorario(id, professor, turma, horario));
+        System.out.println(controller.atualizarHorario(id, professor, turma));
     }
     private void remover(){
         int id = scannerPromptInt("ID do ambiente: ");
@@ -58,8 +56,8 @@ public class HorarioView {
     }
     public void listar() {
         for (HorarioBase h : controller.listarHorario()) {
-            System.out.printf("ID: %d | ID do Professor: %d | ID do Aluno: %d | Horario: %s%n",
-                    h.getId(), h.getIdProfessor(), h.getIdTurma(), h.getHorario());
+            System.out.printf("ID: %d | ID do Professor: %d | ID do Aluno: %d%n",
+                    h.getId(), h.getIdProfessor(), h.getIdTurma());
         }
     }
     private int scannerPromptInt(String msg) {
