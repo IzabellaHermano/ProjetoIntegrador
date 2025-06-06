@@ -26,7 +26,7 @@ public class LoginController {
         if (professor.isPresent() && professor.get().getSenha().equals(senha) ) return  Optional.of(professor.get());
 
         Optional <? extends Usuario > coordenador = coordenadorDAO.buscarPorLogin(nome);
-        if (coordenador.isPresent() && professor.get().getSenha().equals(senha)) return  Optional.of(coordenador.get());
+        if (coordenador.isPresent() && coordenador.get().getSenha().equals(senha)) return  Optional.of(coordenador.get());
 
         return Optional.empty();
     }

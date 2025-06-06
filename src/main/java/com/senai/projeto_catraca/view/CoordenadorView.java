@@ -63,6 +63,7 @@ public class CoordenadorView {
         String telefone = scanner.nextLine();
         controller.cadastrarCoordenador(nome, senha, CPF, endereco, telefone);
     }
+
     public void deletar(){
         System.out.println("--- Coordenadores ---");
         for (Coordenador c : controller.listarCoordenadores()) {
@@ -72,6 +73,7 @@ public class CoordenadorView {
         int id = scanner.nextInt();
         controller.removerCoordenador(id);
     }
+
     public void atualizar(){
         System.out.print("Digite o ID do Coordenador que deseja atualizar: ");
         int id = scanner.nextInt();
@@ -89,6 +91,7 @@ public class CoordenadorView {
         String telefone = scanner.nextLine();
         controller.atualizarCoordenador(id, nome, senha, CPF, endereco, telefone);
     }
+
     public void exibir(){
         if (controller.listarCoordenadores().isEmpty()){
             System.out.println("Não há coordenadores cadastrados!!");

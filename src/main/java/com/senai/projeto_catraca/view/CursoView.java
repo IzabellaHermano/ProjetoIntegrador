@@ -71,7 +71,7 @@ public class CursoView {
         System.out.print("Duração do curso (anos): ");
         int duracao = scanner.nextInt();
 
-        // parte dedicada ao tipo do cursar
+        // parte dedicada ao tipo do curso
         String tipo;
         System.out.print("""
                 Selecione do curso:
