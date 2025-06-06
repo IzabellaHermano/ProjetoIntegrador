@@ -13,7 +13,7 @@ public class MqttSubscriber {
             client.connect();
             client.subscribe(TOPICO, (topic, msg) -> {
                 String payload = new String(msg.getPayload());
-                String resposta = controller.gerarOcorrencia(payload);
+                String resposta = controller.gerarOcorrenciaAtraso(payload);
                 System.out.println(resposta); // este será redirecionado para a view em um próximo passo, se necessário
             });
             System.out.println("Inscrito no tópico MQTT: " + TOPICO);
