@@ -29,9 +29,11 @@ public class Aluno extends Usuario {
         this.idCartaoRfid = idCartaoRfid;
         this.matricula = matricula;
     }
+
     public boolean Atraso(LocalTime horarioEntrada) {
         return LocalTime.now().isAfter(horarioEntrada.plusMinutes(15));
     }
+
     @Override
     public String getTipo() {
         return "Aluno";

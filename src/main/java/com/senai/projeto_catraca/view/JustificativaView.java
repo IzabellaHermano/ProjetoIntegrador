@@ -17,11 +17,11 @@ public class JustificativaView {
         System.out.println("--Justificativas--");
         String menu = """
                 ______________________________
-                |1. Cadastrar Justificativa  |
+                |1. Gerar Justificativa      |
                 |2. Deletar Justificativa    |
                 |3. Atualizar Justificativa  |
                 |4. Exibir Justificativa     |
-                |5. Sair                     |
+                |6. Sair                     |
                 |____________________________|
                """;
 
@@ -40,13 +40,16 @@ public class JustificativaView {
                 case 4: exibir();
                     break;
                 case 5:
+                    exibirNaoAprovadas();
+                    break;
+                case 6:
                     System.out.println("Encerrando o Sistema!...");
                     break;
                 default:
                     System.out.println("Digite uma opção válida.");
                     break;
             }
-        } while (opcao != 5);
+        } while (opcao != 6);
 
     }
 
@@ -86,28 +89,15 @@ public class JustificativaView {
         // Parte do arquivo de anexo
         System.out.println("Deseja adicionar um anexo? (s/n):");
         String resposta = scanner.nextLine();
-        if (resposta.equals("s")) {
+        if (resposta.equals("s")){
+            controller.addAnexo(resposta);
             String anexo;
-            while (true) {
-                System.out.println("Digite o caminho do anexo:");
-                anexo = scanner.nextLine();
-
-                File arquivo = new File(anexo);
-                if (arquivo.exists() && !arquivo.isDirectory()) {
-                    break;
-                } else {
-                    System.out.println("Erro: O arquivo de anexo não existe! Tente novamente.");
-                }
-            }
-            controller.cadastrarJustificativa(tipo, descricao, data, anexo);
-        } else if (resposta.equals("n")) {
-            System.out.println("Nenhum anexo adicionado.");
-            String anexo = "Sem anexo";
+            System.out.println("Digite o nome ou caminho do anexo (ou digite 1 para voltar):");
+            anexo = scanner.nextLine();
+            controller.addAnexo(anexo);
             controller.cadastrarJustificativa(tipo, descricao, data, anexo);
         } else {
-            System.out.println("Opção inválida. Nenhum anexo adicionado.");
-            String anexo = "";
-            controller.cadastrarJustificativa(tipo, descricao, data, anexo);
+            System.out.println("Nenhum anexo adicionado.");
         }
     }
 
@@ -163,37 +153,29 @@ public class JustificativaView {
             // Parte do arquivo de anexo
             System.out.println("Deseja adicionar um anexo? (s/n):");
             String resposta = scanner.nextLine();
-
-            if (resposta.equals("s")) {
+            if (resposta.equals("s")){
+                controller.addAnexo(resposta);
                 String anexo;
-                while (true) {
-                    System.out.println("Digite o caminho do anexo (ou digite 1 para voltar):");
-                    anexo = scanner.nextLine();
-
-                    if (anexo.equals("1")) {
-                        System.out.println("Voltando ao menu anterior...");
-                        return;
-                    }
-
-                    File arquivo = new File(anexo);
-                    if (arquivo.exists() && !arquivo.isDirectory()) {
-                        break;
-                    } else {
-                        System.out.println("Erro: O arquivo de anexo não existe! Tente novamente ou digite 1 para voltar.");
-                    }
-                }
-
+                System.out.println("Digite o nome ou caminho do anexo (ou digite 1 para voltar):");
+                anexo = scanner.nextLine();
+                controller.addAnexo(anexo);
                 controller.atualizarJustificativa(tipo, descricao, data, anexo, id);
-
-            } else if (resposta.equals("n")) {
-                System.out.println("Nenhum anexo adicionado.");
-                String anexo = "Sem anexo";
-                controller.atualizarJustificativa(tipo, descricao, data, anexo, id);
-
             } else {
-                System.out.println("Opção inválida. Nenhum anexo adicionado.");
-                String anexo = "";
-                controller.atualizarJustificativa(tipo, descricao, data, anexo, id);
+                System.out.println("Nenhum anexo adicionado.");
+            }
+
+        }
+    }
+
+    public void exibirNaoAprovadas() {
+        if (controller.listarJustificativa().isEmpty()) {
+            System.out.println("Não há Justificativas cadastradas!!");
+        } else {
+            for (Justificativa j : controller.listarJustificativa()) {
+                if (j.getStatus().equals("Aguardando aprovação da AQV...")) {
+                    System.out.println("--- Justificativas ---");
+                    System.out.printf("ID: %d | Tipo: %s | Descrição: %s | Anexo: %s | Status: %s\n", j.getId(), j.getTipo(), j.getDescricao(), j.getAnexo(), j.getStatus());
+                }
             }
         }
     }
@@ -202,7 +184,10 @@ public class JustificativaView {
             System.out.println("Não há Justificativas cadastradas!!");
         } else System.out.println("--- Justificativas ---");
         for (Justificativa j : controller.listarJustificativa()) {
-            System.out.printf("ID: %d | Tipo: %s | Descrição: %s |Anexo: %s\n", j.getId(), j.getTipo(), j.getDescricao(), j.getAnexo());
+            System.out.printf("ID: %d | Tipo: %s | Descrição: %s | Anexo: %s | Status: %s\n", j.getId(), j.getTipo(), j.getDescricao(), j.getAnexo(), j.getStatus());
         }
+
+
+
     }
 }

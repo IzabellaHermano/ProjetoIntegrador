@@ -43,5 +43,3 @@ public class ControleDeAcessoController {
         return "[ENTRADA AUTORIZADA] Aluno: " + aluno.getNome();
     }
 }
-
-

@@ -12,7 +12,6 @@ public class CursoView {
     private final ArrayList<UnidadeCurricular> listaUCs = new ArrayList<>();
     private final CursoController controllerCurso = new CursoController();
     private final Scanner scanner = new Scanner(System.in);
-    ;
     private final CursoDAO cursoDAO = new CursoDAO();
 
 
@@ -121,7 +120,7 @@ public class CursoView {
     }
 
     public void deletar() {
-        if (cursoDAO.listar().isEmpty()) {
+        if (controllerCurso.listarCurso().isEmpty()) {
             System.out.println("Não há cursos cadastrados!");
         } else {
             System.out.println("--- Cursos ---");
@@ -137,7 +136,7 @@ public class CursoView {
     }
 
     public void listar() {
-        if (cursoDAO.listar().isEmpty()) {
+        if (controllerCurso.listarCurso().isEmpty()) {
             System.out.println("Não há cursos cadastrados!");
         } else {
             System.out.println("--- Cursos ---");

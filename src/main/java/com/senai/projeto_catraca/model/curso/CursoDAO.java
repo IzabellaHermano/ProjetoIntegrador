@@ -77,17 +77,6 @@ public class CursoDAO {
         salvar(cursos);
     }
 
-    // Metodo apenas para atualizar apenas a lista de UCs
-   /* public void atualizarUC(int idCurso, ArrayList<UnidadeCurricular> listaUCs) {
-        for (Curso c : cursos) {
-            if (c.getId() == idCurso) {
-                c.setListaUnidadeCurricular(listaUCs);
-                break;
-            }
-        }
-        salvar(cursos);
-    } */
-
     public Optional<Curso> buscarPorId(int idCurso) {
         return cursos.stream().filter(c -> c.getId() == idCurso).findFirst();
     }
@@ -114,11 +103,7 @@ public class CursoDAO {
         Curso c = cursoOpt.get();
         c.getListaUnidadeCurricular().removeIf(uc -> uc.getId() == idUC);
         salvar(cursos);
-    }
-}
-
-    public Optional<UnidadeCurricular> buscarUCPorId(int idUC) {
-        return unidadeCurriculares.stream().filter(uc -> uc.getId() == idUC).findFirst();
+        }
     }
     public List<UnidadeCurricular> listarUC(){
         return unidadeCurriculares;

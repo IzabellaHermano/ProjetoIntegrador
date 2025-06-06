@@ -6,6 +6,7 @@ import com.senai.projeto_catraca.model.curso.UnidadeCurricular;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 public class CursoController {
@@ -29,6 +30,10 @@ public class CursoController {
 
     public List<Curso> listarCurso() {
         return cursoDAO.listar();
+    }
+
+    public Optional<Curso> buscaPorId(int idCurso){
+        return cursoDAO.buscarPorId(idCurso);
     }
 
     public UnidadeCurricular cadastrarUC(int idCurso, String cargaHoraria, String nome) {

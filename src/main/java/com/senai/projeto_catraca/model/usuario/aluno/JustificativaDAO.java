@@ -2,7 +2,6 @@ package com.senai.projeto_catraca.model.usuario.aluno;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.senai.projeto_catraca.model.usuario.Coordenador;
 
 
 import java.io.File;
@@ -59,6 +58,18 @@ public class JustificativaDAO {
     }
     public List<Justificativa> listar(){
         return justificativas;
+    }
+
+    public void addAnexo(String resposta) {
+        String anexo = "Sem anexo";
+        if (resposta.equals("s")) {
+            while (true) {
+                File arquivo = new File(anexo);
+                if (arquivo.exists() && !arquivo.isDirectory()) {
+                    break;
+                }
+            }
+        }
     }
 
 }
