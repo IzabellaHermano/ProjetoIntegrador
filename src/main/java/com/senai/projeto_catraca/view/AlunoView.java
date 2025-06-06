@@ -75,7 +75,7 @@ public class AlunoView {
                 default:
                     System.out.println("Opção Inválida");
             }
-        }while (opcaoMenu !=5);
+        }while (opcaoMenu !=6);
     }
     private String scannerPrompt(String msg) {
         System.out.print(msg);

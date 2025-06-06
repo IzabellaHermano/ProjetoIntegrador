@@ -27,5 +27,9 @@ public class AlunoController {
         alunoDAO.buscarPorId(idB);
         return "[BUSCA REALIZADA COM SUCESSO]";
     }
+    public  String buscarRFID (String nome){
+        alunoDAO.buscarRfid(nome);
+        return "[BUSCA REALIZADA COM SUCESSO]";
+    }
 
 }
