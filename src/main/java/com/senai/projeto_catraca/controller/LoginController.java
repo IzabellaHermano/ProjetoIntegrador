@@ -1,8 +1,9 @@
 package com.senai.projeto_catraca.controller;
 
+import com.senai.projeto_catraca.model.dao.json.AQVDAO;
 import com.senai.projeto_catraca.model.dao.json.CoordenadorDAO;
 import com.senai.projeto_catraca.model.dao.json.ProfessorDAO;
-import com.senai.projeto_catraca.model.usuario.AQVDAO;
+
 import com.senai.projeto_catraca.model.usuario.Usuario;
 import com.senai.projeto_catraca.model.usuario.aluno.AlunoDAO;
 
@@ -11,7 +12,7 @@ import java.util.Optional;
 public class LoginController {
     private final AlunoDAO alunoDAO= new AlunoDAO();
     private final AQVDAO aqvdao = new AQVDAO();
-    private final ProfessorDao professorDao = new ProfessorDao();
+    private final ProfessorDAO professorDao = new ProfessorDAO();
     private final CoordenadorDAO coordenadorDAO = new CoordenadorDAO();
 
     public Optional <Usuario> autenticarUsuario (String nome, String senha){
