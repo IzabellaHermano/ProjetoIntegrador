@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class TurmasDAO {
  private final String caminho = "turma.json";
@@ -59,5 +60,11 @@ public class TurmasDAO {
     }
     public List<Turmas> listarTodos() {
         return turma;
+    }
+
+    public Optional<Turmas> buscarTurmaPorId(int id) {
+        return turma.stream()
+                .filter(t -> t.getId() == id)
+                .findFirst();
     }
 }
