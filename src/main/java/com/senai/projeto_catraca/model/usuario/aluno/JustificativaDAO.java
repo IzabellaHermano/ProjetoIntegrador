@@ -9,8 +9,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class JustificativaDAO {
     private final String caminho = "justificativa.json";
@@ -60,16 +62,7 @@ public class JustificativaDAO {
         return justificativas;
     }
 
-    public void addAnexo(String resposta) {
-        String anexo = "Sem anexo";
-        if (resposta.equals("s")) {
-            while (true) {
-                File arquivo = new File(anexo);
-                if (arquivo.exists() && !arquivo.isDirectory()) {
-                    break;
-                }
-            }
-        }
+    public Optional<Justificativa> buscarPorId(int idJust){
+        return justificativas.stream().filter(j -> j.getId() == idJust).findFirst();
     }
-
 }

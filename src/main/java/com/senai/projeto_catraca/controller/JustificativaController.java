@@ -5,16 +5,21 @@ import com.senai.projeto_catraca.model.usuario.aluno.Justificativa;
 import com.senai.projeto_catraca.model.usuario.aluno.JustificativaDAO;
 
 import java.util.List;
+import java.util.Optional;
 
 public class JustificativaController {
     private final JustificativaDAO justificativaDAO = new JustificativaDAO();
 
     public String cadastrarJustificativa(String tipo, String descricao, String data, String anexo) {
-        justificativaDAO.inserir(new Justificativa(tipo, anexo, data, descricao, 0,"Aguardando aprovação da AQV..."));
+        if (anexo.isEmpty()) {
+            anexo = "Sem anexo";
+        }
+        Justificativa justificativa = new Justificativa(tipo, anexo, data, descricao, 0, "Aguardando aprovação da AQV...");
+        justificativaDAO.inserir(justificativa);
         return "Justificativa criada com sucesso!";
     }
 
-    public String atualizarJustificativa(String tipo, String descricao, String data, String anexo, int id) {
+    public String atualizarJustificativa(String tipo, String descricao, String data, int id, String anexo) {
         justificativaDAO.atualizar(new Justificativa(tipo, anexo, data, descricao, id,"Aguardando aprovação da AQV..."));
         return "Justificativa atualizada.";
     }
@@ -28,7 +33,8 @@ public class JustificativaController {
         return justificativaDAO.listar();
     }
 
-    public void addAnexo(String resposta){
-        justificativaDAO.addAnexo(resposta);
+    public Optional<Justificativa> buscarPorId(int idJust){
+        return justificativaDAO.buscarPorId(idJust);
     }
+
 }

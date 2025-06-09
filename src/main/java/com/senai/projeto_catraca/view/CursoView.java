@@ -88,7 +88,7 @@ public class CursoView {
     }
 
     public void atualizar() {
-        if (cursoDAO.listar().isEmpty()) {
+        if (controllerCurso.listarCurso().isEmpty()) {
             System.out.println("Não há cursos cadastrados!");
         } else {
             System.out.print("Digite o ID do Curso que deseja atualizar: ");
@@ -208,9 +208,9 @@ public class CursoView {
                 System.out.print("Nome: ");
                 String nome = scanner.nextLine();
 
+
                 c.getListaUnidadeCurricular().add(controllerCurso.cadastrarUC(idCurso, cargaHoraria, nome));
 
-                cursoDAO.atualizar(c);
             }
         }
     }
@@ -240,7 +240,7 @@ public class CursoView {
                 System.out.println("Digite o id da Unidade Curricular que deseja deletar: ");
                 int idUC = scanner.nextInt();
                 controllerCurso.removerUC(idCurso, idUC);
-                cursoDAO.atualizar(c);
+
             }
         }
     }
@@ -269,4 +269,5 @@ public class CursoView {
                     uc.getId(), uc.getNome(), uc.getCargaHoraria());
         }
     }
+
     */

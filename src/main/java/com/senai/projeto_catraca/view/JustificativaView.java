@@ -4,6 +4,7 @@ import com.senai.projeto_catraca.controller.JustificativaController;
 import com.senai.projeto_catraca.model.usuario.aluno.Justificativa;
 
 import java.io.File;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class JustificativaView {
@@ -89,16 +90,22 @@ public class JustificativaView {
         // Parte do arquivo de anexo
         System.out.println("Deseja adicionar um anexo? (s/n):");
         String resposta = scanner.nextLine();
-        if (resposta.equals("s")){
-            controller.addAnexo(resposta);
-            String anexo;
-            System.out.println("Digite o nome ou caminho do anexo (ou digite 1 para voltar):");
-            anexo = scanner.nextLine();
-            controller.addAnexo(anexo);
-            controller.cadastrarJustificativa(tipo, descricao, data, anexo);
-        } else {
-            System.out.println("Nenhum anexo adicionado.");
+        String anexo = "Sem anexo";
+
+        if (resposta.equals("s")) {
+            boolean anexoValido = false;
+
+            while (!anexoValido) {
+                System.out.print("Digite o nome ou caminho do anexo: ");
+                anexo = scanner.nextLine();
+                anexoValido = new File(anexo).exists();
+
+                if (!anexoValido) {
+                    System.out.println("Arquivo não encontrado. Tente novamente.");
+                }
+            }
         }
+        controller.cadastrarJustificativa(tipo, descricao, data, anexo);
     }
 
     public void deletar(){
@@ -153,31 +160,53 @@ public class JustificativaView {
             // Parte do arquivo de anexo
             System.out.println("Deseja adicionar um anexo? (s/n):");
             String resposta = scanner.nextLine();
-            if (resposta.equals("s")){
-                controller.addAnexo(resposta);
-                String anexo;
-                System.out.println("Digite o nome ou caminho do anexo (ou digite 1 para voltar):");
-                anexo = scanner.nextLine();
-                controller.addAnexo(anexo);
-                controller.atualizarJustificativa(tipo, descricao, data, anexo, id);
-            } else {
-                System.out.println("Nenhum anexo adicionado.");
-            }
+            String anexo = "Sem anexo";
 
+            if (resposta.equals("s")) {
+                boolean anexoValido = false;
+
+                while (!anexoValido) {
+                    System.out.print("Digite o nome ou caminho do anexo: ");
+                    anexo = scanner.nextLine();
+                    anexoValido = new File(anexo).exists();
+
+                    if (!anexoValido) {
+                        System.out.println("Arquivo não encontrado. Tente novamente.");
+                    }
+                }
+            }
+            controller.atualizarJustificativa(tipo, descricao, data, id, anexo);
         }
+
     }
 
     public void exibirNaoAprovadas() {
         if (controller.listarJustificativa().isEmpty()) {
             System.out.println("Não há Justificativas cadastradas!!");
         } else {
+            System.out.println("--- Justificativas ---");
             for (Justificativa j : controller.listarJustificativa()) {
                 if (j.getStatus().equals("Aguardando aprovação da AQV...")) {
-                    System.out.println("--- Justificativas ---");
+
                     System.out.printf("ID: %d | Tipo: %s | Descrição: %s | Anexo: %s | Status: %s\n", j.getId(), j.getTipo(), j.getDescricao(), j.getAnexo(), j.getStatus());
                 }
             }
         }
+        System.out.println("----!!SIMULAÇÃO!!----");
+        System.out.println("deseja aprovar alguma justificativa? (s/n)");
+        String resposta = scanner.nextLine();
+        if (resposta.equals("s")){
+            System.out.println("Digite o ID da justificativa para aprovar: ");
+            int idJust = scanner.nextInt();
+            scanner.nextLine();
+            Optional<Justificativa> justificativaOptional = controller.buscarPorId(idJust);
+            if (justificativaOptional.isPresent()){
+                Justificativa j = justificativaOptional.get();
+                j.setStatus("Aprovado pela AQV");
+                System.out.println("Aprovada com sucesso.");
+            }
+        }
+
     }
     public void exibir(){
         if (controller.listarJustificativa().isEmpty()){

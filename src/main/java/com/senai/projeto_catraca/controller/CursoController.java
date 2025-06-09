@@ -47,8 +47,5 @@ public class CursoController {
         return "UC removida.";
     }
 
-    public List<UnidadeCurricular> listarUC() {
-        return cursoDAO.listarUC();
-    }
 
 }
