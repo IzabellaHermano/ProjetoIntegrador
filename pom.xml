@@ -13,10 +13,6 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-<<<<<<< HEAD
-=======
-
->>>>>>> 5e588ac9484caf9b6fba8eb42073efe2ee773e53
 
     <dependencies>
         <dependency>
@@ -80,8 +76,4 @@
 
     </dependencies>
 
-<<<<<<< HEAD
 </project>
-=======
-</project>
->>>>>>> 5e588ac9484caf9b6fba8eb42073efe2ee773e53
