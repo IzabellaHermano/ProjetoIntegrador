@@ -43,15 +43,23 @@ public class HorarioView {
     private void cadastrar(){
         int professor = scannerPromptInt("ID do professor: ");
         int turma = scannerPromptInt("ID da turma: ");
+<<<<<<< HEAD
         LocalTime horario = LocalTime.parse(scannerPrompt("Horario da turma: "));
         System.out.println(controller.cadastrarHorario(professor, turma, horario));
+=======
+        System.out.println(controller.cadastrarHorario(professor, turma));
+>>>>>>> 5e588ac9484caf9b6fba8eb42073efe2ee773e53
     }
     private void atualizar(){
         int id = scannerPromptInt("ID do horario: ");
         int professor = scannerPromptInt("ID do professor: ");
         int turma = scannerPromptInt("ID da turma");
+<<<<<<< HEAD
         LocalTime horario = LocalTime.parse(scannerPrompt("Horario da turma: "));
         System.out.println(controller.atualizarHorario(id, professor, turma, horario));
+=======
+        System.out.println(controller.atualizarHorario(id, professor, turma));
+>>>>>>> 5e588ac9484caf9b6fba8eb42073efe2ee773e53
     }
     private void remover(){
         int id = scannerPromptInt("ID do ambiente: ");
@@ -59,8 +67,8 @@ public class HorarioView {
     }
     public void listar() {
         for (HorarioBase h : controller.listarHorario()) {
-            System.out.printf("ID: %d | ID do Professor: %d | ID do Aluno: %d | Horario: %s%n",
-                    h.getId(), h.getIdProfessor(), h.getIdTurma(), h.getHorario());
+            System.out.printf("ID: %d | ID do Professor: %d | ID do Aluno: %d%n",
+                    h.getId(), h.getIdProfessor(), h.getIdTurma());
         }
     }
     private int scannerPromptInt(String msg) {

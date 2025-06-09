@@ -1,8 +1,8 @@
-package com.senai.projeto_catraca.model.turma;
+package com.senai.projeto_catraca.model.dao.json;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.senai.projeto_catraca.model.turma.horario.Ambiente;
+import com.senai.projeto_catraca.model.turma.Turmas;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class TurmasDAO {
  private final String caminho = "turma.json";
@@ -59,5 +60,11 @@ public class TurmasDAO {
     }
     public List<Turmas> listarTodos() {
         return turma;
+    }
+
+    public Optional<Turmas> buscarTurmaPorId(int id) {
+        return turma.stream()
+                .filter(t -> t.getId() == id)
+                .findFirst();
     }
 }

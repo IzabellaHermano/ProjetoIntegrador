@@ -8,11 +8,11 @@ import java.util.List;
 
 public class SubTurma {
     private int id;
-    private List<String> alunos = new ArrayList<>();
+    private int idAlunos;
 
-    public SubTurma(int id, List<String> alunos) {
+    public SubTurma(int id, int idAlunos) {
         this.id = id;
-        this.alunos = alunos;
+        this.idAlunos = idAlunos;
     }
 
     public int getId() {
@@ -23,11 +23,11 @@ public class SubTurma {
         this.id = id;
     }
 
-    public List<String> getAlunos() {
-        return alunos;
+    public int getIdAlunos() {
+        return idAlunos;
     }
 
-    public void setAlunos(List<String> alunos) {
-        this.alunos = alunos;
+    public void setIdAlunos(int idAlunos) {
+        this.idAlunos = idAlunos;
     }
 }
