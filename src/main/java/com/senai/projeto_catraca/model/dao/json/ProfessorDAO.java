@@ -1,16 +1,17 @@
 package com.senai.projeto_catraca.model.dao.json;
 
 
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.Gson;
-import com.senai.projeto_catraca.model.usuario.Professor;
-import com.senai.projeto_catraca.model.usuario.aluno.Aluno;
-
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.senai.projeto_catraca.model.usuario.Professor;
 
 public class ProfessorDAO {
     private final String caminho = "professores.json";
