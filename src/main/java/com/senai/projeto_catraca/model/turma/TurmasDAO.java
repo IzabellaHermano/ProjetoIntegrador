@@ -1,8 +1,4 @@
-package com.senai.projeto_catraca.model.dao.json;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.senai.projeto_catraca.model.turma.Turmas;
+package com.senai.projeto_catraca.model.turma;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -11,6 +7,9 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class TurmasDAO {
  private final String caminho = "turma.json";

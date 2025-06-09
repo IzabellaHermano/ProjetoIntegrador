@@ -2,8 +2,6 @@ package com.senai.projeto_catraca.model.usuario.aluno;
 
 import com.senai.projeto_catraca.model.usuario.Usuario;
 
-import java.time.LocalTime;
-
 public class Aluno extends Usuario {
     private int idCartaoRfid;
     private int matricula;
@@ -29,13 +27,6 @@ public class Aluno extends Usuario {
         this.idCartaoRfid = idCartaoRfid;
         this.matricula = matricula;
     }
-<<<<<<< HEAD
-
-    public boolean Atraso(LocalTime horarioEntrada) {
-        return LocalTime.now().isAfter(horarioEntrada.plusMinutes(15));
-    }
-=======
->>>>>>> 5e588ac9484caf9b6fba8eb42073efe2ee773e53
 
     @Override
     public String getTipo() {

@@ -1,10 +1,7 @@
 package com.senai.projeto_catraca.controller;
 
 import com.senai.projeto_catraca.model.turma.horario.HorarioBase;
-import com.senai.projeto_catraca.model.dao.json.HorarioBaseDAO;
-
-import java.time.LocalTime;
-import java.util.List;
+import com.senai.projeto_catraca.model.turma.horario.HorarioBaseDAO;
 
 public class HorarioController {
      private final HorarioBaseDAO horarioBaseDAO = new HorarioBaseDAO();

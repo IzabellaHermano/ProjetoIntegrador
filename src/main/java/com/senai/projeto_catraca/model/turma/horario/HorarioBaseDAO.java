@@ -1,9 +1,5 @@
 package com.senai.projeto_catraca.model.turma.horario;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.senai.projeto_catraca.model.turma.horario.Ambiente;
-
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,6 +7,9 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class HorarioBaseDAO {
     private final String caminho = "horarios.json";

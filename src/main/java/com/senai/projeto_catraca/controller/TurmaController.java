@@ -1,11 +1,11 @@
 package com.senai.projeto_catraca.controller;
 
-import com.senai.projeto_catraca.model.turma.SubTurma;
-import com.senai.projeto_catraca.model.turma.Turmas;
-import com.senai.projeto_catraca.model.dao.json.TurmasDAO;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.senai.projeto_catraca.model.turma.SubTurma;
+import com.senai.projeto_catraca.model.turma.Turmas;
+import com.senai.projeto_catraca.model.turma.TurmasDAO;
 
 public class TurmaController {
 
