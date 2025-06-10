@@ -65,4 +65,15 @@ public class JustificativaDAO {
     public Optional<Justificativa> buscarPorId(int idJust){
         return justificativas.stream().filter(j -> j.getId() == idJust).findFirst();
     }
+
+    public void setStatus(Justificativa j){
+        for (int i = 0; i < justificativas.size(); i++) {
+            if (justificativas.get(i).getId() == j.getId()){
+                justificativas.set(i, j);
+                break;
+            }
+        }
+        salvar(justificativas);
+    }
+
 }

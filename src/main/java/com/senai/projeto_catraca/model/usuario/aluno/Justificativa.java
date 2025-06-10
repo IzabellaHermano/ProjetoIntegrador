@@ -17,10 +17,6 @@ public class Justificativa {
         this.status = status;
     }
 
-    public Justificativa(String anexo) {
-        this.anexo = anexo;
-    }
-
     public String getStatus() {
         return status;
     }

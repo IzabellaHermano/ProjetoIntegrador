@@ -36,5 +36,8 @@ public class JustificativaController {
     public Optional<Justificativa> buscarPorId(int idJust){
         return justificativaDAO.buscarPorId(idJust);
     }
+    public void setStatus(String tipo, String descricao, String data, int id, String anexo, String status){
+        justificativaDAO.setStatus(new Justificativa(tipo, anexo, data, descricao, id, status));
+    }
 
 }
