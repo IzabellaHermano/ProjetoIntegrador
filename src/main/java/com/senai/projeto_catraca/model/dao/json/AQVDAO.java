@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class AQVDAO {
@@ -61,7 +62,7 @@ public class AQVDAO {
         return aqvList.stream().filter(a -> a.getId() == id).findFirst();
     }
     public Optional<AQV> buscarPorLogin(String nome) {
-        return aqvList.stream().filter(a -> a.getNome() == nome).findFirst();
+        return aqvList.stream().filter(a -> Objects.equals(a.getNome(), nome)).findFirst();
     }
     public List<AQV>listarAQV(){
         return aqvList;

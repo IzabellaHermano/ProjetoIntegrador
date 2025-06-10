@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class AlunoDAO {
@@ -62,7 +63,7 @@ public class AlunoDAO {
     }
 
     public Optional<Aluno> buscarPorLogin(String nome) {
-        return alunoList.stream().filter(a -> a.getNome() == nome).findFirst();
+        return alunoList.stream().filter(a -> Objects.equals(a.getNome(), nome)).findFirst();
     }
 
     public Optional<Aluno> buscarPorId(int id) {

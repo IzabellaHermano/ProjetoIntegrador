@@ -12,10 +12,11 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class CoordenadorDAO {
-    private final String caminho = "alunos.json";
+    private final String caminho = "coordenadores.json";
     private final Gson gson = new Gson();
     private final List<Coordenador> coordenadores;
 
@@ -59,7 +60,7 @@ public class CoordenadorDAO {
         salvar(coordenadores);
     }
     public Optional<Coordenador> buscarPorLogin(String nome) {
-        return coordenadores.stream().filter(c -> c.getNome() == nome).findFirst();
+        return coordenadores.stream().filter(c -> Objects.equals(c.getNome(), nome)).findFirst();
     }
 
     public Optional<Coordenador> buscarPorId(int id) {
