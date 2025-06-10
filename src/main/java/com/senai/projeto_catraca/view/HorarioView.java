@@ -13,10 +13,10 @@ public class HorarioView {
     private final HorarioController controller = new HorarioController();
 
     public static void main(String[] args) {
-      HorarioView view = new HorarioView();
-      view.menu();
-
+        HorarioView view = new HorarioView();
+        view.menu();
     }
+
     public void menu() {
         String opcao;
         String menuTurma = """
@@ -40,41 +40,37 @@ public class HorarioView {
             }
         } while (!opcao.equals("0"));
     }
+
     private void cadastrar(){
         int professor = scannerPromptInt("ID do professor: ");
         int turma = scannerPromptInt("ID da turma: ");
-<<<<<<< HEAD
-        LocalTime horario = LocalTime.parse(scannerPrompt("Horario da turma: "));
-        System.out.println(controller.cadastrarHorario(professor, turma, horario));
-=======
         System.out.println(controller.cadastrarHorario(professor, turma));
->>>>>>> 5e588ac9484caf9b6fba8eb42073efe2ee773e53
     }
+
     private void atualizar(){
-        int id = scannerPromptInt("ID do horario: ");
+        int id = scannerPromptInt("ID do horário: ");
         int professor = scannerPromptInt("ID do professor: ");
-        int turma = scannerPromptInt("ID da turma");
-<<<<<<< HEAD
-        LocalTime horario = LocalTime.parse(scannerPrompt("Horario da turma: "));
-        System.out.println(controller.atualizarHorario(id, professor, turma, horario));
-=======
+        int turma = scannerPromptInt("ID da turma: "); // ✅ Corrigido: adicionados os dois pontos
         System.out.println(controller.atualizarHorario(id, professor, turma));
->>>>>>> 5e588ac9484caf9b6fba8eb42073efe2ee773e53
     }
+
     private void remover(){
-        int id = scannerPromptInt("ID do ambiente: ");
+        int id = scannerPromptInt("ID do horário: "); // ✅ Corrigido: "horário" em vez de "ambiente"
         System.out.println(controller.removerHorario(id));
     }
+
     public void listar() {
         for (HorarioBase h : controller.listarHorario()) {
-            System.out.printf("ID: %d | ID do Professor: %d | ID do Aluno: %d%n",
+            System.out.printf("ID: %d | ID do Professor: %d | ID da Turma: %d%n", // ✅ Corrigido: "ID da Turma"
                     h.getId(), h.getIdProfessor(), h.getIdTurma());
         }
     }
+
     private int scannerPromptInt(String msg) {
         System.out.print(msg);
         return Integer.parseInt(scanner.nextLine());
     }
+
     private String scannerPrompt(String msg) {
         System.out.print(msg);
         return (scanner.nextLine());
