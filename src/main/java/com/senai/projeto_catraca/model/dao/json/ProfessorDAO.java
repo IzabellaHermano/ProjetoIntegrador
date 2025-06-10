@@ -67,7 +67,7 @@ public class ProfessorDAO {
     }
 
     public Optional<Professor> buscarPorLogin(String nome) {
-        return professores.stream().filter(p -> p.getNome() == nome).findFirst();
+        return professores.stream().filter(p -> Objects.equals(p.getNome(), nome)).findFirst();
     }
 
     public List<Professor> listarTodos() {
