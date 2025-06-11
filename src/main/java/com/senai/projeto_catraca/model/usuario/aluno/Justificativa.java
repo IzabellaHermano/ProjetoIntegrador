@@ -1,3 +1,4 @@
+
 package com.senai.projeto_catraca.model.usuario.aluno;
 
 public class Justificativa {
@@ -5,14 +6,24 @@ public class Justificativa {
     private String descricao;
     private String data;
     private String anexo;
+    private String status;
     private int id;
 
-    public Justificativa(String tipo, String anexo, String data, String descricao, int id) {
+    public Justificativa(String tipo, String anexo, String data, String descricao, int id, String status) {
         this.tipo = tipo;
         this.anexo = anexo;
         this.data = data;
         this.descricao = descricao;
         this.id = id;
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getTipo() {
