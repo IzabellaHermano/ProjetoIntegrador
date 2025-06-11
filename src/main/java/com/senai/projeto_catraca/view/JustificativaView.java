@@ -3,6 +3,7 @@ package com.senai.projeto_catraca.view;
 import com.senai.projeto_catraca.controller.JustificativaController;
 import com.senai.projeto_catraca.model.usuario.aluno.Justificativa;
 
+
 import java.io.File;
 import java.util.Optional;
 import java.util.Scanner;

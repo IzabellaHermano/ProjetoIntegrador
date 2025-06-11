@@ -40,6 +40,7 @@ build/
 Oracle_JDK-24
 
 aqvs.json
+AQV.json
 ocorrencias.json
 professores.json
 alunos.json
@@ -51,3 +52,5 @@ ALUNOS.json
 ambiente.json
 anexoJustificativa.txt
 anexoDoisJustificativa
+
+MainApplication.java
