@@ -15,7 +15,7 @@ public class CursoController {
 
     public String cadastrarCurso(String nome, String tipo, int duracao, ArrayList<UnidadeCurricular> listaUCs) {
         cursoDAO.inserir(new Curso(nome, tipo, duracao, 0, new ArrayList<>(listaUCs)));
-        return "Curso adicionado com sucesso!";
+        return "Curso adicionado com sucesso.";
     }
 
     public String atualizarCurso(String nome, String tipo, int duracao, int id, ArrayList<UnidadeCurricular> listaUCs) {
