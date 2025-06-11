@@ -80,7 +80,7 @@ public class MainApplication {
             WebSocketClienteConsole.conectar();
             System.out.println("✓ Cliente WebSocket conectado");
 
-            // 3. Iniciar MQTT Subscriber
+            // 3. Iniciar MQTT Subscriber (precisa de adm)
             System.out.print("Iniciando MQTT Subscriber... ");
             MqttSubscriber.iniciarMqtt();
             System.out.println("✓ MQTT Subscriber iniciado");
