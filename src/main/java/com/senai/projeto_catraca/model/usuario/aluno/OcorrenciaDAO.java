@@ -14,8 +14,8 @@ import java.util.List;
 
 public class OcorrenciaDAO {
     private static final String FILE_PATH = "ocorrencias.json";
-    private Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    private Type listType = new TypeToken<List<Ocorrencia>>() {}.getType();
+    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private final Type listType = new TypeToken<List<Ocorrencia>>() {}.getType();
 
     private List<Ocorrencia> lerOcorrencias() {
         try (FileReader reader = new FileReader(FILE_PATH)) {
