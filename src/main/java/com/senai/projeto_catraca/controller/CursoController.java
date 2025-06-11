@@ -14,12 +14,12 @@ public class CursoController {
 
 
     public String cadastrarCurso(String nome, String tipo, int duracao, ArrayList<UnidadeCurricular> listaUCs) {
-        cursoDAO.inserir(new Curso(nome, tipo, duracao, 0, listaUCs));
+        cursoDAO.inserir(new Curso(nome, tipo, duracao, 0, new ArrayList<>(listaUCs)));
         return "Curso adicionado com sucesso!";
     }
 
-    public String atualizarCurso(String nome, String tipo, int duracao, int id,ArrayList<UnidadeCurricular> listaUCs) {
-        cursoDAO.atualizar(new Curso(nome, tipo, duracao, id, listaUCs));
+    public String atualizarCurso(String nome, String tipo, int duracao, int id, ArrayList<UnidadeCurricular> listaUCs) {
+        cursoDAO.atualizar(new Curso(nome, tipo, duracao, id, new ArrayList<>(listaUCs)));
         return "Curso atualizado.";
     }
 
@@ -32,12 +32,12 @@ public class CursoController {
         return cursoDAO.listar();
     }
 
-    public Optional<Curso> buscaPorId(int idCurso){
+    public Optional<Curso> buscaPorId(int idCurso) {
         return cursoDAO.buscarPorId(idCurso);
     }
 
     public UnidadeCurricular cadastrarUC(int idCurso, String cargaHoraria, String nome) {
-        UnidadeCurricular unidadecurricular  = new UnidadeCurricular(0, cargaHoraria, nome);
+        UnidadeCurricular unidadecurricular = new UnidadeCurricular(0, cargaHoraria, nome);
         cursoDAO.inserirUC(idCurso, unidadecurricular);
         return unidadecurricular;
     }

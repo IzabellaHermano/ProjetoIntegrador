@@ -16,16 +16,15 @@ public class CursoDAO {
     private final String caminho = "curso.json";
     private final Gson gson = new Gson();
     private final List<Curso> cursos;
-    private final List<UnidadeCurricular> unidadeCurriculares;
 
     public CursoDAO() {
         this.cursos = carregar();
-        this.unidadeCurriculares = carregarUC();
     }
 
-    public List<Curso> carregar(){
+    public List<Curso> carregar() {
         try (FileReader reader = new FileReader(caminho)) {
-            Type listType = new TypeToken<List<Curso>>() {}.getType();
+            Type listType = new TypeToken<List<Curso>>() {
+            }.getType();
             return gson.fromJson(reader, listType);
         } catch (IOException e) {
             return new ArrayList<>();
@@ -33,38 +32,25 @@ public class CursoDAO {
     }
 
 
-    private void salvar(List<Curso> lista){
-        try (FileWriter writer = new FileWriter(caminho)){
+    private void salvar(List<Curso> lista) {
+        try (FileWriter writer = new FileWriter(caminho)) {
             gson.toJson(lista, writer);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void salvarUC(List<UnidadeCurricular> listaUCs){
 
-    }
-
-    private List<UnidadeCurricular> carregarUC(){
-        try (FileReader reader = new FileReader(caminho)) {
-            Type listType = new TypeToken<List<UnidadeCurricular>>() {}.getType();
-            return gson.fromJson(reader, listType);
-        } catch (IOException e) {
-            return new ArrayList<>();
-        }
-    }
-
-
-    public void inserir(Curso curso){
+    public void inserir(Curso curso) {
         int novoId = cursos.stream().mapToInt(Curso::getId).max().orElse(0) + 1;
         curso.setId(novoId);
         cursos.add(curso);
         salvar(cursos);
     }
 
-    public void atualizar(Curso curso){
+    public void atualizar(Curso curso) {
         for (int i = 0; i < cursos.size(); i++) {
-            if (cursos.get(i).getId() == curso.getId()){
+            if (cursos.get(i).getId() == curso.getId()) {
                 cursos.set(i, curso);
                 break;
             }
@@ -72,7 +58,7 @@ public class CursoDAO {
         salvar(cursos);
     }
 
-    public void remover(int id){
+    public void remover(int id) {
         cursos.removeIf(a -> a.getId() == id);
         salvar(cursos);
     }
@@ -81,14 +67,13 @@ public class CursoDAO {
         return cursos.stream().filter(c -> c.getId() == idCurso).findFirst();
     }
 
-    public List<Curso> listar(){
+    public List<Curso> listar() {
         return cursos;
     }
 
     //parte para UCS
     public void inserirUC(int idCurso, UnidadeCurricular unidadeCurricular) {
         Curso curso = cursos.stream().filter(c -> c.getId() == idCurso).findFirst().orElse(null);
-
         if (curso != null) {
             int novoIdUC = curso.getListaUnidadeCurricular().stream().mapToInt(UnidadeCurricular::getId).max().orElse(0) + 1;
             unidadeCurricular.setId(novoIdUC);
@@ -99,14 +84,11 @@ public class CursoDAO {
 
     public void removerUC(int idCurso, int idUC) {
         Optional<Curso> cursoOpt = buscarPorId(idCurso);
-        if (cursoOpt.isPresent()){
-        Curso c = cursoOpt.get();
-        c.getListaUnidadeCurricular().removeIf(uc -> uc.getId() == idUC);
-        salvar(cursos);
+        if (cursoOpt.isPresent()) {
+            Curso c = cursoOpt.get();
+            c.getListaUnidadeCurricular().removeIf(uc -> uc.getId() == idUC);
+            salvar(cursos);
         }
-    }
-    public List<UnidadeCurricular> listarUC(){
-        return unidadeCurriculares;
     }
 
 }

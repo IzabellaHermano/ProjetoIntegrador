@@ -127,9 +127,11 @@ public class JustificativaView {
             System.out.println("Não há Justificativas cadastradas!!");
         } else {
             System.out.println("--- Justificativas ---");
-            for (Justificativa j : controller.listarJustificativa()) {
-                System.out.printf("ID: %d | Tipo: %s | Descrição: %s |Anexo: %s\n", j.getId(), j.getTipo(), j.getDescricao(), j.getAnexo());
-            }
+            controller.listarJustificativa().forEach(
+                    j -> {
+                        System.out.printf("ID: %d | Tipo: %s | Descrição: %s |Anexo: %s\n", j.getId(), j.getTipo(), j.getDescricao(), j.getAnexo());
+                    }
+            );
             System.out.print("Digite o id do Justificativa que deseja deletar: ");
             int id = scanner.nextInt();
             controller.removerJustificativa(id);
@@ -206,13 +208,15 @@ public class JustificativaView {
             System.out.println("Não há Justificativas cadastradas!!");
         } else {
             System.out.println("--- Justificativas ---");
-            for (Justificativa j : controller.listarJustificativa()) {
-                if (j.getStatus().equals("Aguardando aprovação da AQV...")) {
+           controller.listarJustificativa().forEach(
+                   j -> {
+                       if (j.getStatus().equals("Aguardando aprovação da AQV...")) {
 
-                    System.out.printf("ID: %d | Tipo: %s | Descrição: %s | Anexo: %s | Status: %s\n",
-                            j.getId(), j.getTipo(), j.getDescricao(), j.getAnexo(), j.getStatus());
-                }
-            }
+                           System.out.printf("ID: %d | Tipo: %s | Descrição: %s | Anexo: %s | Status: %s\n",
+                                   j.getId(), j.getTipo(), j.getDescricao(), j.getAnexo(), j.getStatus());
+                       }
+                   }
+           );
         }
         System.out.println("----!!SIMULAÇÃO!!----");
         System.out.println("Deseja aprovar alguma justificativa? (s/n)");
@@ -271,12 +275,14 @@ public class JustificativaView {
             System.out.println("Não há Justificativas cadastradas!!");
         } else {
             System.out.println("--- Justificativas ---");
-            for (Justificativa j : controller.listarJustificativa()) {
-                if (j.getStatus().equals("Aprovado pela AQV. Aguarde ciência do professor.")) {
-                    System.out.printf("ID: %d | Tipo: %s | Descrição: %s | Anexo: %s | Status: %s\n",
-                            j.getId(), j.getTipo(), j.getDescricao(), j.getAnexo(), j.getStatus());
-                }
-            }
+            controller.listarJustificativa().forEach(
+                    j -> {
+                        if (j.getStatus().equals("Aprovado pela AQV. Aguarde ciência do professor.")) {
+                            System.out.printf("ID: %d | Tipo: %s | Descrição: %s | Anexo: %s | Status: %s\n",
+                                    j.getId(), j.getTipo(), j.getDescricao(), j.getAnexo(), j.getStatus());
+                        }
+                    }
+            );
         }
         System.out.println("Deseja dar ciência para alguma justificativa? (s/n)");
         String resposta = scanner.nextLine();
@@ -303,11 +309,11 @@ public class JustificativaView {
         if (controller.listarJustificativa().isEmpty()) {
             System.out.println("Não há Justificativas cadastradas!!");
         } else System.out.println("--- Justificativas ---");
-        for (Justificativa j : controller.listarJustificativa()) {
-            System.out.printf("ID: %d | Tipo: %s | Descrição: %s | Anexo: %s | Status: %s\n",
-                    j.getId(), j.getTipo(), j.getDescricao(), j.getAnexo(), j.getStatus());
-        }
-
-
+        controller.listarJustificativa().forEach(
+                j -> {
+                    System.out.printf("ID: %d | Tipo: %s | Descrição: %s | Anexo: %s | Status: %s\n",
+                            j.getId(), j.getTipo(), j.getDescricao(), j.getAnexo(), j.getStatus());
+                }
+        );
     }
 }

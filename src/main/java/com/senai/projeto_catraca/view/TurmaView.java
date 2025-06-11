@@ -18,7 +18,7 @@ public class TurmaView {
     public void menu(){
       String opcao;
       String menuTurma = """
-                 \n1 - Cadastrar Turma
+                 1 - Cadastrar Turma
                  2 - Lista Turma
                  3 - Atualizar Turma
                  4 - Remover Turma
@@ -56,6 +56,7 @@ do {
 //        SubTurma subTurma = new SubTurma(0, alunos);
 //        List<SubTurma> listaSubTurmas = new ArrayList<>();
 //        listaSubTurmas.add(subTurma);
+
         //codigo para a lista de SubTurma.
         System.out.println(controller.cadastrarTurma(nome, sigla, dataInicio, qntSemestres, horarioEntrada, periodo));
 

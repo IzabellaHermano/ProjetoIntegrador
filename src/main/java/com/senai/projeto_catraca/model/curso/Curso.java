@@ -14,7 +14,14 @@ public class Curso {
         this.tipo = tipo;
         this.duracao = duracao;
         this.id = id;
-        this.listaUnidadeCurricular = unidadeCurricular;
+        this.listaUnidadeCurricular = unidadeCurricular != null ? unidadeCurricular : new ArrayList<>();
+    }
+    public Curso(String nome, String tipo, int duracao, int id) {
+        this.nome = nome;
+        this.tipo = tipo;
+        this.duracao = duracao;
+        this.id = id;
+        this.listaUnidadeCurricular = new ArrayList<>();
     }
 
     public String getNome() {
