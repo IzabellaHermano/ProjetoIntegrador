@@ -40,7 +40,6 @@ do {
       } while (!opcao.equals("0"));
     }
     private void cadastrar(){
-        String nome = scannerPrompt("Nome da turma: ");
         String sigla = scannerPrompt("Sigla da turma: ");
         String dataInicio = scannerPrompt("Data de inicio: ");
         int qntSemestres = scannerPromptInt("Quantidades de Semestres: ");
@@ -74,7 +73,7 @@ do {
         listaSubTurmas.add(subTurma);
 
         //codigo para a lista de SubTurma.
-        System.out.println(controller.cadastrarTurma(nome, sigla, dataInicio, qntSemestres, horarioEntrada, periodo, listaSubTurmas));
+        System.out.println(controller.cadastrarTurma( sigla, dataInicio, qntSemestres, horarioEntrada, periodo, listaSubTurmas));
 
     }
 
@@ -114,7 +113,7 @@ do {
         List<SubTurma> listaSubTurmas = new ArrayList<>();
         listaSubTurmas.add(subTurma);
             ;
-        System.out.println(controller.atualizarTurma(id,nome, sigla, dataInicio, qntSemestres, horarioEntrada, periodo, listaSubTurmas));
+        System.out.println(controller.atualizarTurma(id, sigla, dataInicio, qntSemestres, horarioEntrada, periodo, listaSubTurmas));
 
     }
 
@@ -126,8 +125,8 @@ do {
     }
     public void listar(){
         for (Turmas t : controller.listarTurmas()){
-            System.out.printf("ID: %d | Nome: %s | Sigla: %s | Data de inicio: %s | Quantidade de Semestres: %d | Horario de entrada: %s | Periodo: %s\n",
-                    t.getId(), t.getNome(), t.getSigla(), t.getDataInicio(), t.getQntSemestre(), t.getHorarioEntrada(), t.getPeriodo());
+            System.out.printf("ID: %d | Sigla: %s | Data de inicio: %s | Quantidade de Semestres: %d | Horario de entrada: %s | Periodo: %s\n",
+                    t.getId(), t.getSigla(), t.getDataInicio(), t.getQntSemestre(), t.getHorarioEntrada(), t.getPeriodo());
         }
     }
 

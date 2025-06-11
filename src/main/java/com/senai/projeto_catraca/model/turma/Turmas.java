@@ -4,7 +4,6 @@ import java.util.List;
 
 public class Turmas {
  private int id;
- private String nome;
  private String sigla;
  private String dataInicio;
  private int qntSemestre;
@@ -15,9 +14,8 @@ public class Turmas {
  //Subturma voltou a ser id, por causa que é muito complicado bota list no MySQL, a pedido do Professor.
  private List<SubTurma> subTurmas;
 
- public Turmas(int id, String nome, String sigla, String dataInicio, int qntSemestre, String horarioEntrada, String periodo, List<SubTurma> subTurmas) {
+ public Turmas(int id, String sigla, String dataInicio, int qntSemestre, String horarioEntrada, String periodo, List<SubTurma> subTurmas) {
   this.id = id;
-  this.nome = nome;
   this.sigla = sigla;
   this.dataInicio = dataInicio;
   this.qntSemestre = qntSemestre;
@@ -32,14 +30,6 @@ public class Turmas {
 
  public void setId(int id) {
   this.id = id;
- }
-
- public String getNome() {
-  return nome;
- }
-
- public void setNome(String nome) {
-  this.nome = nome;
  }
 
  public String getSigla() {

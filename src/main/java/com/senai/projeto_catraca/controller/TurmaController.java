@@ -10,14 +10,14 @@ import java.util.List;
 public class TurmaController {
 
     private final TurmasDAO turmasDAO = new TurmasDAO();
-    public String cadastrarTurma(String nome, String sigla, String dataInicio, int qntSemestres, String horarioEntrada, String periodo, List<SubTurma> subTurmas) {
-        turmasDAO.inserir(new Turmas(0, nome, sigla, dataInicio, qntSemestres, horarioEntrada, periodo, subTurmas));
+    public String cadastrarTurma(String sigla, String dataInicio, int qntSemestres, String horarioEntrada, String periodo, List<SubTurma> subTurmas) {
+        turmasDAO.inserir(new Turmas(0, sigla, dataInicio, qntSemestres, horarioEntrada, periodo, subTurmas));
         return "Turma cadastrada com sucesso.";
     }
 
 
-    public String atualizarTurma(int id, String nome, String sigla, String dataInicio, int qntSemestres, String horarioEntrada, String periodo, List<SubTurma> subTurmas) {
-        turmasDAO.atualizar(new Turmas(id, nome, sigla, dataInicio, qntSemestres, horarioEntrada, periodo, subTurmas));
+    public String atualizarTurma(int id, String sigla, String dataInicio, int qntSemestres, String horarioEntrada, String periodo, List<SubTurma> subTurmas) {
+        turmasDAO.atualizar(new Turmas(id, sigla, dataInicio, qntSemestres, horarioEntrada, periodo, subTurmas));
         return "Turma atualizada com sucesso.";
     }
 
