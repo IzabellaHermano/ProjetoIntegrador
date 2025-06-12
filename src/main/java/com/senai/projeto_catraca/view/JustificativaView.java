@@ -47,12 +47,6 @@ public class JustificativaView {
                 case 4:
                     exibir();
                     break;
-                case 5:
-                    exibirNaoAprovadas();
-                    break;
-                case 6:
-                    exibirNaoAprovadasProfessor();
-                    break;
                 case 0:
                     System.out.println("Encerrando o Sistema!...");
                     break;
