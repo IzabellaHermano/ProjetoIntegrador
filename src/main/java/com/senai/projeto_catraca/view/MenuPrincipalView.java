@@ -157,6 +157,7 @@ public class MenuPrincipalView {
 
                     break;
                 case 5:
+                    justificativaController.listarJustificativa();
                     break;
                 case 6:
                     logar();
