@@ -2,7 +2,9 @@ package com.senai.projeto_catraca.model.dao.json;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.senai.projeto_catraca.model.turma.SubTurma;
 import com.senai.projeto_catraca.model.turma.Turmas;
+import com.senai.projeto_catraca.model.usuario.aluno.Aluno;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -10,6 +12,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class TurmasDAO {
  private final String caminho = "turma.json";
@@ -56,6 +59,35 @@ public class TurmasDAO {
     public void remover(int id) {
         turma.removeIf(p -> p.getId() == id);
         salvar(turma);
+    }
+
+    public Optional<Turmas> buscarPorId(int id) {
+        return turma.stream().filter(t -> t.getId() == id).findFirst();
+    }
+
+    public Optional<Turmas> buscarPorAluno(Aluno aluno) {
+        return turma.stream()
+                .filter(t ->
+                        t.getSubTurmas().stream()
+                                .anyMatch(subTurma ->
+                                        subTurma.getAlunos().stream()
+                                                .anyMatch(a -> a.equals(aluno))
+                                )
+                ).findFirst();
+    }
+
+    public void adicionarAlunosNaSubturma(SubTurma subTurma, List<Aluno> alunos) {
+        turma.stream()
+                .filter(turma ->
+                        turma.getSubTurmas().contains(subTurma)
+                ).findFirst().flatMap(
+                        turma -> turma.getSubTurmas().stream()
+                                .filter(
+                                        s -> s.equals(subTurma)
+                                ).findFirst()
+                ).ifPresent(
+                        s -> s.getAlunos().addAll(alunos)
+                );
     }
     public List<Turmas> listarTodos() {
         return turma;

@@ -12,39 +12,60 @@ import java.util.Scanner;
 public class TurmaView {
     private final Scanner scanner = new Scanner(System.in);
     private final TurmaController controller = new TurmaController();
+    private final List<SubTurma> listaSubTurmas = new ArrayList<>();
+
     public static void main(String[] args) {
         TurmaView view = new TurmaView();
         view.menu();
     }
-    public void menu(){
-      String opcao;
-      String menuTurma = """
-                 \n1 - Cadastrar Turma
-                 2 - Lista Turma
-                 3 - Atualizar Turma
-                 4 - Remover Turma
-                 0 - Sair.
-              """;
-do {
-    System.out.println(menuTurma);
-    opcao = scanner.nextLine();
 
-    switch (opcao) {
-        case "1" -> cadastrar();
-        case "2" -> listar();
-        case "3" -> atualizar();
-        case "4" -> remover();
-        case "0" -> System.out.println("Ate mais");
-        default -> System.out.println("Opção invalida");
+    public void menu() {
+        String opcao;
+        String menuTurma = """
+                   \t1 - Cadastrar Turma
+                   2 - Lista Turma
+                   3 - Atualizar Turma
+                   4 - Remover Turma
+                   0 - Sair.
+                """;
+        do {
+            System.out.println(menuTurma);
+            opcao = scanner.nextLine();
+
+            switch (opcao) {
+                case "1" -> cadastrar();
+                case "2" -> listar();
+                case "3" -> atualizar();
+                case "4" -> remover();
+                case "5" -> menuSubTurmas();
+                case "0" -> System.out.println("Ate mais");
+                default -> System.out.println("Opção invalida");
+            }
+        } while (!opcao.equals("0"));
     }
-      } while (!opcao.equals("0"));
+
+    private void menuSubTurmas() {
+        String opcao;
+        String menuTurma = """
+                  \t1 - Cadastrar Turma
+                   2 - Remover Turma
+                   0 - Sair.
+                """;
+        do {
+            System.out.println(menuTurma);
+            opcao = scanner.nextLine();
+
+            switch (opcao) {
+                case "1" -> cadastrarSubTurma();
+                case "2" -> removerSubTurma();
+                case "0" -> System.out.println("Ate mais");
+                default -> System.out.println("Opção invalida");
+            }
+        } while (!opcao.equals("0"));
     }
-    private void cadastrar(){
-        String sigla = scannerPrompt("Sigla da turma: ");
-        String dataInicio = scannerPrompt("Data de inicio: ");
-        int qntSemestres = scannerPromptInt("Quantidades de Semestres: ");
-        String horarioEntrada = scannerPrompt("O Horario de entrada: ");
-        String periodo = scannerPrompt("O periodo entre as aulas: ");
+    private void cadastrarSubTurma(){
+        int idTurma = scannerPromptInt("Digitar ID turma");
+        controller.buscarPorId(idTurma);
 
         List<Aluno> alunos = new ArrayList<>();
         String resposta;
@@ -54,13 +75,12 @@ do {
             String nomealuno = scannerPrompt("Nome: ");
             String senha = scannerPrompt("Senha: ");
             String cpf = scannerPrompt("CPF: ");
-            int id = scannerPromptInt("ID do usuário: ");
             String endereco = scannerPrompt("Endereço: ");
             String telefone = scannerPrompt("Telefone: ");
             String idCartaoRfid = scannerPrompt("ID do Cartão RFID: ");
             int matricula = scannerPromptInt("Matrícula: ");
 
-            Aluno aluno = new Aluno(nomealuno, senha, cpf, id, endereco, telefone, idCartaoRfid,
+            Aluno aluno = new Aluno(nomealuno, senha, cpf, 0, endereco, telefone, idCartaoRfid,
                     new ArrayList<>(), new ArrayList<>(), matricula);
 
             alunos.add(aluno);
@@ -68,74 +88,116 @@ do {
             resposta = scannerPrompt("Deseja adicionar outro aluno? (sim/fim): ");
         } while (!resposta.equalsIgnoreCase("fim"));
 
-        SubTurma subTurma = new SubTurma(0, alunos);
-        List<SubTurma> listaSubTurmas = new ArrayList<>();
-        listaSubTurmas.add(subTurma);
+        SubTurma subTurma = new SubTurma(1, alunos);
 
-        //codigo para a lista de SubTurma.
-        System.out.println(controller.cadastrarTurma( sigla, dataInicio, qntSemestres, horarioEntrada, periodo, listaSubTurmas));
+        listaSubTurmas.add(subTurma);
+    }
+
+    private void removerSubTurma(){
 
     }
 
 
-    private void atualizar(){
-            int id = scannerPromptInt("ID da turma: ");
-            String sigla = scannerPrompt("Sigla da turma: ");
-            String dataInicio = scannerPrompt("Data de inicio: ");
-            int qntSemestres = scannerPromptInt("Quantidades de Semestres: ");
-            String horarioEntrada = scannerPrompt("O Horario de entrada: ");
-            String periodo = scannerPrompt("O periodo entre as aulas: ");
+private void cadastrar() {
+    String sigla = scannerPrompt("Sigla da turma: ");
+    String dataInicio = scannerPrompt("Data de inicio: ");
+    int qntSemestres = scannerPromptInt("Quantidades de Semestres: ");
+    String horarioEntrada = scannerPrompt("O Horario de entrada: ");
+    String periodo = scannerPrompt("O periodo entre as aulas: ");
+    System.out.println(controller.cadastrarTurma(sigla, dataInicio, qntSemestres, horarioEntrada, periodo, listaSubTurmas));
 
-        List<Aluno> alunos = new ArrayList<>();
-        String resposta;
-        do {
-            System.out.println("Atulizando aluno:");
+  /*  List<Aluno> alunos = new ArrayList<>();
+    String resposta;
+    do {
+        System.out.println("Cadastrando novo aluno:");
 
-            String nomealuno = scannerPrompt("Nome: ");
-            String senha = scannerPrompt("Senha: ");
-            String cpf = scannerPrompt("CPF: ");
+        String nomealuno = scannerPrompt("Nome: ");
+        String senha = scannerPrompt("Senha: ");
+        String cpf = scannerPrompt("CPF: ");
+        String endereco = scannerPrompt("Endereço: ");
+        String telefone = scannerPrompt("Telefone: ");
+        String idCartaoRfid = scannerPrompt("ID do Cartão RFID: ");
+        int matricula = scannerPromptInt("Matrícula: ");
+
+        Aluno aluno = new Aluno(nomealuno, senha, cpf, 0, endereco, telefone, idCartaoRfid,
+                new ArrayList<>(), new ArrayList<>(), matricula);
+
+        alunos.add(aluno);
+
+        resposta = scannerPrompt("Deseja adicionar outro aluno? (sim/fim): ");
+    } while (!resposta.equalsIgnoreCase("fim"));
+
+    SubTurma subTurma = new SubTurma(1, alunos);
+
+    listaSubTurmas.add(subTurma);
+
+    //codigo para a lista de SubTurma.
+
+
+    */
+
+}
+
+
+private void atualizar() {
+    int id = scannerPromptInt("ID da turma: ");
+    String sigla = scannerPrompt("Sigla da turma: ");
+    String dataInicio = scannerPrompt("Data de inicio: ");
+    int qntSemestres = scannerPromptInt("Quantidades de Semestres: ");
+    String horarioEntrada = scannerPrompt("O Horario de entrada: ");
+    String periodo = scannerPrompt("O periodo entre as aulas: ");
+
+    List<Aluno> alunos = new ArrayList<>();
+    String resposta;
+    do {
+        System.out.println("Atulizando aluno:");
+
+        String nomealuno = scannerPrompt("Nome: ");
+        String senha = scannerPrompt("Senha: ");
+        String cpf = scannerPrompt("CPF: ");
 //            int idatualiza = scannerPromptInt("ID do usuário: ");
-            String endereco = scannerPrompt("Endereço: ");
-            String telefone = scannerPrompt("Telefone: ");
-//            String idCartaoRfid = scannerPrompt("ID do Cartão RFID: ");
-            int matricula = scannerPromptInt("Matrícula: ");
+        String endereco = scannerPrompt("Endereço: ");
+        String telefone = scannerPrompt("Telefone: ");
+        String idCartaoRfid = scannerPrompt("ID do Cartão RFID: ");
+        int matricula = scannerPromptInt("Matrícula: ");
 
-            Aluno aluno = new Aluno(nomealuno, senha, cpf, 0, endereco, telefone, "0",
-                    new ArrayList<>(), new ArrayList<>(), matricula);
+        Aluno aluno = new Aluno(nomealuno, senha, cpf, 0, endereco, telefone, idCartaoRfid,
+                new ArrayList<>(), new ArrayList<>(), matricula);
 
-            alunos.add(aluno);
+        alunos.add(aluno);
 
-            resposta = scannerPrompt("Deseja adicionar outro aluno? (sim/fim): ");
-        } while (!resposta.equalsIgnoreCase("fim"));
+        resposta = scannerPrompt("Deseja adicionar outro aluno? (sim/fim): ");
+    } while (!resposta.equalsIgnoreCase("fim"));
 
-        SubTurma subTurma = new SubTurma(0, alunos);
-        List<SubTurma> listaSubTurmas = new ArrayList<>();
-        listaSubTurmas.add(subTurma);
-            ;
-        System.out.println(controller.atualizarTurma(id, sigla, dataInicio, qntSemestres, horarioEntrada, periodo, listaSubTurmas));
+    SubTurma subTurma = new SubTurma(0, alunos);
+    List<SubTurma> listaSubTurmas = new ArrayList<>();
+    listaSubTurmas.add(subTurma);
+    ;
+    System.out.println(controller.atualizarTurma(id, sigla, dataInicio, qntSemestres, horarioEntrada, periodo, listaSubTurmas));
 
+}
+
+
+private void remover() {
+    int idTurma = scannerPromptInt("ID da turma: ");
+    System.out.println(controller.removerTurma(idTurma));
+}
+
+public void listar() {
+    for (Turmas t : controller.listarTurmas()) {
+        System.out.printf("ID: %d | Sigla: %s | Data de inicio: %s | Quantidade de Semestres: %d | Horario de entrada: %s | Periodo: %s\n",
+                t.getId(), t.getSigla(), t.getDataInicio(), t.getQntSemestre(), t.getHorarioEntrada(), t.getPeriodo());
+        System.out.printf("%s", t.getSubTurmas());
     }
+}
 
+private int scannerPromptInt(String msg) {
+    System.out.print(msg);
+    return Integer.parseInt(scanner.nextLine());
+}
 
-
-        private void remover(){
-        int idTurma = scannerPromptInt("ID da turma: ");
-        System.out.println(controller.removerTurma(idTurma));
-    }
-    public void listar(){
-        for (Turmas t : controller.listarTurmas()){
-            System.out.printf("ID: %d | Sigla: %s | Data de inicio: %s | Quantidade de Semestres: %d | Horario de entrada: %s | Periodo: %s\n",
-                    t.getId(), t.getSigla(), t.getDataInicio(), t.getQntSemestre(), t.getHorarioEntrada(), t.getPeriodo());
-            System.out.printf("%s", t.getSubTurmas());
-        }
-    }
-
-    private int scannerPromptInt(String msg) {
-        System.out.print(msg);
-        return Integer.parseInt(scanner.nextLine());
-    }
-    private String scannerPrompt(String msg) {
-        System.out.print(msg);
-        return (scanner.nextLine());
-    }
+private String scannerPrompt(String msg) {
+    System.out.print(msg);
+    return (scanner.nextLine());
+}
 }
