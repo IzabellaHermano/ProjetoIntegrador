@@ -80,7 +80,6 @@ do {
 
     private void atualizar(){
             int id = scannerPromptInt("ID da turma: ");
-            String nome = scannerPrompt("Nome da turma: ");
             String sigla = scannerPrompt("Sigla da turma: ");
             String dataInicio = scannerPrompt("Data de inicio: ");
             int qntSemestres = scannerPromptInt("Quantidades de Semestres: ");
@@ -95,13 +94,13 @@ do {
             String nomealuno = scannerPrompt("Nome: ");
             String senha = scannerPrompt("Senha: ");
             String cpf = scannerPrompt("CPF: ");
-            int idatualiza = scannerPromptInt("ID do usuário: ");
+//            int idatualiza = scannerPromptInt("ID do usuário: ");
             String endereco = scannerPrompt("Endereço: ");
             String telefone = scannerPrompt("Telefone: ");
-            String idCartaoRfid = scannerPrompt("ID do Cartão RFID: ");
+//            String idCartaoRfid = scannerPrompt("ID do Cartão RFID: ");
             int matricula = scannerPromptInt("Matrícula: ");
 
-            Aluno aluno = new Aluno(nomealuno, senha, cpf, idatualiza, endereco, telefone, idCartaoRfid,
+            Aluno aluno = new Aluno(nomealuno, senha, cpf, 0, endereco, telefone, "0",
                     new ArrayList<>(), new ArrayList<>(), matricula);
 
             alunos.add(aluno);
@@ -127,7 +126,7 @@ do {
         for (Turmas t : controller.listarTurmas()){
             System.out.printf("ID: %d | Sigla: %s | Data de inicio: %s | Quantidade de Semestres: %d | Horario de entrada: %s | Periodo: %s\n",
                     t.getId(), t.getSigla(), t.getDataInicio(), t.getQntSemestre(), t.getHorarioEntrada(), t.getPeriodo());
-            System.out.printf("ID: %d", t.getSubTurmas());
+            System.out.printf("%s", t.getSubTurmas());
         }
     }
 

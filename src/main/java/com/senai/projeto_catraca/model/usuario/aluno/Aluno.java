@@ -58,8 +58,4 @@ public class Aluno extends Usuario {
     public String getTipo() {
         return "Aluno";
     }
-
-  public String getNome(){
-        return getNome();
-  }
 }
