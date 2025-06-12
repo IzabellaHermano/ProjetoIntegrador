@@ -127,6 +127,7 @@ do {
         for (Turmas t : controller.listarTurmas()){
             System.out.printf("ID: %d | Sigla: %s | Data de inicio: %s | Quantidade de Semestres: %d | Horario de entrada: %s | Periodo: %s\n",
                     t.getId(), t.getSigla(), t.getDataInicio(), t.getQntSemestre(), t.getHorarioEntrada(), t.getPeriodo());
+            System.out.printf("ID: %d", t.getSubTurmas());
         }
     }
 
