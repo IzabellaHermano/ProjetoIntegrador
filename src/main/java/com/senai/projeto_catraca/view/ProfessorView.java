@@ -12,6 +12,10 @@ public class ProfessorView {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        ProfessorView professorView = new ProfessorView();
+        professorView.menu();
+    }
+    public void menu() {
         System.out.printf("Bem vindo");
         executarMenu("""
                     ===== MENU PROFESSOR =====

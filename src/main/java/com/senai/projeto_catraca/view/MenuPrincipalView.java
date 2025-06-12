@@ -124,6 +124,9 @@ public class MenuPrincipalView {
         OcorrenciaController ocorrenciaController = new OcorrenciaController();
         JustificativaController justificativaController = new JustificativaController();
         ProfessorView professorView = new ProfessorView();
+        CursoView cursoView = new CursoView();
+        TurmaView turmaView = new TurmaView();
+        HorarioView horarioView = new HorarioView();
 
         int opcaoMenu;
         do {
@@ -133,11 +136,15 @@ public class MenuPrincipalView {
                                         |       Menu de Coordenador:                            |
                                         |           1- Gerenciar Aluno                          |
                                         |           2- Gerenciar AQV                            |
-                                        |           3- Gerenciar Coordenadore                   |
-                                        |           4- Analisar Ocorrências                     |
-                                        |           5- Listar Justificativas                    |
-                                        |           6- Logout                                   |
-                                        |           7- Sair                                     |
+                                        |           3- Gerenciar Coordenadores                  |
+                                        |           4- Gerenciar Professores                    |
+                                        |           5- Gerenciar Cursos                         |
+                                        |           6- Gerenciar Turmas                         |
+                                        |           7- Gerenciar Horarios                       |
+                                        |           8- Analisar Ocorrências                     |
+                                        |           9- Listar Justificativas                    |
+                                        |           10- Logout                                  |
+                                        |           11- Sair                                    |
                                         |_______________________________________________________|
                     """;
             System.out.println(menu);
@@ -154,16 +161,19 @@ public class MenuPrincipalView {
                     coordenadorView.menu();
                     break;
                 case 4:
-
+                    professorView.menu();
                     break;
                 case 5:
-                    justificativaController.listarJustificativa();
+                    cursoView.menu();
                     break;
                 case 6:
-                    logar();
+                   turmaView.menu();
                     break;
                 case 7:
-                    System.out.println("Fim do Programa...");
+                    horarioView.menu();
+                    break;
+                case 8:
+
                     break;
                 default:
                     System.out.println("Opção Inválida!");
