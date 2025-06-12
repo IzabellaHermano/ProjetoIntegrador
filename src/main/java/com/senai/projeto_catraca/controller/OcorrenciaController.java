@@ -84,6 +84,7 @@ public class OcorrenciaController {
     }
 
     // Método para criar ocorrência de falta
+    //aqui eu ainda preciso ver com o andre
     public boolean criarOcorrenciaFalta(int alunoId) {
         return criarOcorrencia(alunoId, 2); // Assumindo que 2 = justificativa de falta
     }
