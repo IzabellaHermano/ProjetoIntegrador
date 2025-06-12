@@ -1,10 +1,10 @@
 package com.senai.projeto_catraca.view;
 
-import com.senai.projeto_catraca.model.usuario.aluno.Ocorrencia;
-import com.senai.projeto_catraca.controller.OcorrenciaController;
-
 import java.util.List;
 import java.util.Scanner;
+
+import com.senai.projeto_catraca.controller.OcorrenciaController;
+import com.senai.projeto_catraca.model.usuario.aluno.Ocorrencia;
 
 public class OcorrenciaView {
     private final OcorrenciaController ocorrenciaController = new OcorrenciaController();
@@ -36,7 +36,7 @@ public class OcorrenciaView {
                     System.out.println("Digite o ID da justificativa:");
                     int justificativaId = Integer.parseInt(scanner.nextLine());
 
-                    System.out.println("Digite a data e hora (ex: 2024-05-29 14:30):");
+                    System.out.println("Digite a data e hora (ex: 29-05-2025 14:30):");
                     String dataHora = scanner.nextLine();
 
                     Ocorrencia ocorrencia = new Ocorrencia(id, alunoId, justificativaId, dataHora);
