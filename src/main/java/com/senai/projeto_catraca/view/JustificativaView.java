@@ -209,17 +209,16 @@ public class JustificativaView {
             System.out.println("Não há Justificativas cadastradas!!");
         } else {
             System.out.println("--- Justificativas ---");
-           controller.listarJustificativa().forEach(
-                   j -> {
-                       if (j.getStatus().equals("Aguardando aprovação da AQV...")) {
+            controller.listarJustificativa().forEach(
+                    j -> {
+                        if (j.getStatus().equals("Aguardando aprovação da AQV...")) {
 
-                           System.out.printf("ID: %d | Tipo: %s | Descrição: %s | Anexo: %s | Status: %s\n",
-                                   j.getId(), j.getTipo(), j.getDescricao(), j.getAnexo(), j.getStatus());
-                       }
-                   }
-           );
+                            System.out.printf("ID: %d | Tipo: %s | Descrição: %s | Anexo: %s | Status: %s\n",
+                                    j.getId(), j.getTipo(), j.getDescricao(), j.getAnexo(), j.getStatus());
+                        }
+                    }
+            );
         }
-        System.out.println("----!!SIMULAÇÃO!!----");
         System.out.println("Deseja aprovar alguma justificativa? (s/n)");
         String resposta = scanner.nextLine();
         if (resposta.equals("s")) {

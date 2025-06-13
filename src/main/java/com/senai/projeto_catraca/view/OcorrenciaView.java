@@ -14,7 +14,7 @@ public class OcorrenciaView {
         view.executarMenu();
     }
 
-    private void executarMenu() {
+    public void executarMenu() {
         Scanner scanner = new Scanner(System.in);
 
         executarMenu("""
@@ -108,7 +108,7 @@ public class OcorrenciaView {
         });
     }
 
-    private void executarMenu(String titulo, java.util.function.Consumer<String> acoes) {
+    public void executarMenu(String titulo, java.util.function.Consumer<String> acoes) {
         Scanner scanner = new Scanner(System.in);
         String opcao;
         do {

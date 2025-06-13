@@ -84,6 +84,7 @@ public class MenuPrincipalView {
     }
 
     private static void menuProfessor(Professor professor) {
+        JustificativaView justificativaView = new JustificativaView();
         int opcaoMenu;
         do {
             String menu = """
@@ -91,7 +92,7 @@ public class MenuPrincipalView {
                                         |   Bem-Vindo ao SENAI - Anchieta:                      |
                                         |       Menu de Professor:                              |
                                         |           1- Receber Notificação                      |
-                                        |           2- Verificar Ocorrencias                    |
+                                        |           2- Verificar Justificativas                 |
                                         |           3- Logout                                   |
                                         |           4- Sair                                     |
                                         |_______________________________________________________|
@@ -104,7 +105,7 @@ public class MenuPrincipalView {
                     WebSocketClienteConsole.conectar();
                     break;
                 case 2:
-
+                    justificativaView.exibirNaoAprovadasProfessor();
                     break;
                 case 3:
                     WebSocketClienteConsole.desconectar();
@@ -124,7 +125,7 @@ public class MenuPrincipalView {
         CoordenadorView coordenadorView = new CoordenadorView();
         AlunoView alunoView = new AlunoView();
         AqvView aqvView = new AqvView();
-        OcorrenciaController ocorrenciaController = new OcorrenciaController();
+        OcorrenciaView ocorrenciaView = new OcorrenciaView();
         JustificativaController justificativaController = new JustificativaController();
         ProfessorView professorView = new ProfessorView();
         CursoView cursoView = new CursoView();
@@ -170,23 +171,117 @@ public class MenuPrincipalView {
                     cursoView.menu();
                     break;
                 case 6:
-                   turmaView.menu();
+                    turmaView.menu();
                     break;
                 case 7:
                     horarioView.menu();
                     break;
                 case 8:
-
+                    ocorrenciaView.executarMenu();
+                    break;
+                case 9:
+                    justificativaController.listarJustificativa();
+                    break;
+                case 10:
+                    logar();
+                    break;
+                case 11:
+                    System.out.println("Fim do Programa!");
                     break;
                 default:
                     System.out.println("Opção Inválida!");
             }
-        } while (opcaoMenu != 7);
-
+        } while (opcaoMenu != 11);
     }
 
     private static void menuAqv(AQV aqv) {
+        JustificativaView justificativaView = new JustificativaView();
+        JustificativaController justificativaController = new JustificativaController();
+        OcorrenciaController ocorrenciaController = new OcorrenciaController();
+        AlunoView alunoView = new AlunoView();
+        int opcaoMenu;
+        do {
+            String menu = """
+                                        _________________________________________________________
+                                        |   Bem-Vindo ao SENAI - Anchieta:                      |
+                                        |       Menu de AQV:                                    |
+                                        |           1- Analisar Justificativas                  |
+                                        |           2- Listar Ocorrencias                       |
+                                        |           3- Buscar Ocorrencia por Aluno              |
+                                        |           4- Buscar Ocorrencia por Justificativa      |
+                                        |           5- Liberar Entrada                          |
+                                        |           6- Liberar Saida                            |
+                                        |           7- Alunos                                   |
+                                        |           8- Logout                                   |
+                                        |           9- Sair                                     |
+                                        |_______________________________________________________|
+                    """;
+            System.out.println(menu);
+            opcaoMenu = scanner.nextInt();
+            scanner.nextLine();
+            switch (opcaoMenu){
+                case 1:
+                    int opJust;
+                    do{
+                        String menuJust = """
+                                | 1- listar Justificativas
+                                | 2- Buscar Justificativa por ID
+                                | 3- Analisar Justificativas
+                                | 4- Voltar
+                                """;
+                        System.out.println(menuJust);
+                        opJust = scanner.nextInt();
+                        scanner.nextLine();
+                        switch (opJust){
+                            case 1:
+                                justificativaView.exibir();
+                                break;
+                            case 2:
+                                System.out.println("Digite o ID que deseja Buscar:");
+                                int id = scannerPromptInt("|ID:");
+                                System.out.println(justificativaController.buscarPorId(id));
+                                break;
+                            case 3:
+                                justificativaView.exibirNaoAprovadas();
+                                break;
+                            case 4:
+                                menuAqv(aqv);
+                                break;
+                            default:
+                                System.out.println("Opcão Inválida");
+                        }
+                    }while (opJust != 4);
+                    break;
+                case 2:
+                    ocorrenciaController.listarOcorrencias();
+                    break;
+                case 3:
+                    int id = scannerPromptInt("|ID:");
+                    System.out.println(ocorrenciaController.buscarOcorrenciasPorAluno(id));
+                    break;
+                case 4:
+                    int idJ = scannerPromptInt("|ID:");
+                    System.out.println(ocorrenciaController.buscarOcorrenciasPorJustificativa(idJ));
+                    break;
+                case 5:
 
+                    break;
+                case 6:
+
+                    break;
+                case 7:
+                    alunoView.menu();
+                    break;
+                case 8:
+                    logar();
+                    break;
+                case 9:
+                    System.out.println("Fim do programa...");
+                    break;
+                default:
+                    System.out.println("Opção Invalida!");
+            }
+        }while (opcaoMenu !=9);
     }
 
     private static String scannerPrompt(String msg) {

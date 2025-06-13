@@ -71,4 +71,7 @@ public class OcorrenciaDAO {
                 .findFirst()
                 .orElse(null);
     }
+    public void setStatusOcorrencia(Ocorrencia o){
+
+    }
 }
