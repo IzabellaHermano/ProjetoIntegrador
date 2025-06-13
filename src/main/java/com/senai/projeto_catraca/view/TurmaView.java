@@ -26,6 +26,7 @@ public class TurmaView {
                    2 - Lista Turma
                    3 - Atualizar Turma
                    4 - Remover Turma
+                   5 - SubTurmas
                    0 - Sair.
                 """;
         do {
@@ -49,6 +50,7 @@ public class TurmaView {
         String menuTurma = """
                   \t1 - Cadastrar Turma
                    2 - Remover Turma
+                   3 - Atualizar SubTurma
                    0 - Sair.
                 """;
         do {
@@ -58,6 +60,7 @@ public class TurmaView {
             switch (opcao) {
                 case "1" -> cadastrarSubTurma();
                 case "2" -> removerSubTurma();
+                case "3" -> atualizarSubTurma();
                 case "0" -> System.out.println("Ate mais");
                 default -> System.out.println("Opção invalida");
             }
@@ -91,9 +94,16 @@ public class TurmaView {
         SubTurma subTurma = new SubTurma(1, alunos);
 
         listaSubTurmas.add(subTurma);
+
+
+
     }
 
     private void removerSubTurma(){
+
+    }
+
+    private void atualizarSubTurma(){
 
     }
 
@@ -106,35 +116,32 @@ private void cadastrar() {
     String periodo = scannerPrompt("O periodo entre as aulas: ");
     System.out.println(controller.cadastrarTurma(sigla, dataInicio, qntSemestres, horarioEntrada, periodo, listaSubTurmas));
 
-  /*  List<Aluno> alunos = new ArrayList<>();
-    String resposta;
-    do {
-        System.out.println("Cadastrando novo aluno:");
-
-        String nomealuno = scannerPrompt("Nome: ");
-        String senha = scannerPrompt("Senha: ");
-        String cpf = scannerPrompt("CPF: ");
-        String endereco = scannerPrompt("Endereço: ");
-        String telefone = scannerPrompt("Telefone: ");
-        String idCartaoRfid = scannerPrompt("ID do Cartão RFID: ");
-        int matricula = scannerPromptInt("Matrícula: ");
-
-        Aluno aluno = new Aluno(nomealuno, senha, cpf, 0, endereco, telefone, idCartaoRfid,
-                new ArrayList<>(), new ArrayList<>(), matricula);
-
-        alunos.add(aluno);
-
-        resposta = scannerPrompt("Deseja adicionar outro aluno? (sim/fim): ");
-    } while (!resposta.equalsIgnoreCase("fim"));
-
-    SubTurma subTurma = new SubTurma(1, alunos);
-
-    listaSubTurmas.add(subTurma);
+//   List<Aluno> alunos = new ArrayList<>();
+//    String resposta;
+//    do {
+//        System.out.println("Cadastrando novo aluno:");
+//
+//        String nomealuno = scannerPrompt("Nome: ");
+//        String senha = scannerPrompt("Senha: ");
+//        String cpf = scannerPrompt("CPF: ");
+//        String endereco = scannerPrompt("Endereço: ");
+//        String telefone = scannerPrompt("Telefone: ");
+//        String idCartaoRfid = scannerPrompt("ID do Cartão RFID: ");
+//        int matricula = scannerPromptInt("Matrícula: ");
+//
+//        Aluno aluno = new Aluno(nomealuno, senha, cpf, 0, endereco, telefone, idCartaoRfid,
+//                new ArrayList<>(), new ArrayList<>(), matricula);
+//
+//        alunos.add(aluno);
+//
+//        resposta = scannerPrompt("Deseja adicionar outro aluno? (sim/fim): ");
+//    } while (!resposta.equalsIgnoreCase("fim"));
+//
+//    SubTurma subTurma = new SubTurma(1, alunos);
+//
+//    listaSubTurmas.add(subTurma);
 
     //codigo para a lista de SubTurma.
-
-
-    */
 
 }
 
