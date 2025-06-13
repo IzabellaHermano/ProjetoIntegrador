@@ -14,6 +14,7 @@ public class Ocorrencia {
         this.dataHora = dataHora;
     }
 
+
     public int getAlunoID() {
         return AlunoID;
     }

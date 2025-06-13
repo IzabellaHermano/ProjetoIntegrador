@@ -84,7 +84,6 @@ public class MenuPrincipalView {
     }
 
     private static void menuProfessor(Professor professor) {
-        HorarioView horarioView = new HorarioView();
         int opcaoMenu;
         do {
             String menu = """
@@ -92,8 +91,9 @@ public class MenuPrincipalView {
                                         |   Bem-Vindo ao SENAI - Anchieta:                      |
                                         |       Menu de Professor:                              |
                                         |           1- Receber Notificação                      |
-                                        |           2- Logout                                   |
-                                        |           3- Sair                                     |
+                                        |           2- Verificar Ocorrencias                    |
+                                        |           3- Logout                                   |
+                                        |           4- Sair                                     |
                                         |_______________________________________________________|
                     """;
             System.out.println(menu);
@@ -104,15 +104,18 @@ public class MenuPrincipalView {
                     WebSocketClienteConsole.conectar();
                     break;
                 case 2:
+
+                    break;
+                case 3:
                     WebSocketClienteConsole.desconectar();
                     logar();
                     break;
-                case 3:
+                case 4:
                     System.out.println("Fim de Programa...");
                     WebSocketClienteConsole.desconectar();
                     break;
             }
-        } while (opcaoMenu != 2);
+        } while (opcaoMenu != 3);
 
 
     }
