@@ -36,7 +36,7 @@ public class SubTurma {
     public String toString() {
         StringBuilder sb = new StringBuilder(); // Usado para montar o texto final com performance melhor
 
-        sb.append("SubTurma com ").append(alunos.size()).append(" alunos:\n");
+//        sb.append("SubTurma com ").append(alunos.size()).append(" alunos:\n");
 
         for (Aluno a : alunos) {
             sb.append("  Nome: ").append(a.getNome())
