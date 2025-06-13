@@ -1,15 +1,21 @@
 package com.senai.projeto_catraca.view;
 
-import com.senai.projeto_catraca.model.usuario.aluno.Ocorrencia;
-import com.senai.projeto_catraca.model.usuario.aluno.OcorrenciaDAO;
-
 import java.util.List;
 import java.util.Scanner;
 
+import com.senai.projeto_catraca.controller.OcorrenciaController;
+import com.senai.projeto_catraca.model.usuario.aluno.Ocorrencia;
+
 public class OcorrenciaView {
+    private final OcorrenciaController ocorrenciaController = new OcorrenciaController();
+
     public static void main(String[] args) {
+        OcorrenciaView view = new OcorrenciaView();
+        view.executarMenu();
+    }
+
+    private void executarMenu() {
         Scanner scanner = new Scanner(System.in);
-        OcorrenciaDAO ocorrenciaDAO = new OcorrenciaDAO();
 
         executarMenu("""
                 ===== MENU OCORRÊNCIA =====
@@ -30,16 +36,20 @@ public class OcorrenciaView {
                     System.out.println("Digite o ID da justificativa:");
                     int justificativaId = Integer.parseInt(scanner.nextLine());
 
-                    System.out.println("Digite a data e hora (ex: 2024-05-29 14:30):");
+                    System.out.println("Digite a data e hora (ex: 29-05-2025 14:30):");
                     String dataHora = scanner.nextLine();
 
                     Ocorrencia ocorrencia = new Ocorrencia(id, alunoId, justificativaId, dataHora);
-                    ocorrenciaDAO.adicionar(ocorrencia);
-                    System.out.println("Ocorrência adicionada com sucesso!");
+
+                    if (ocorrenciaController.adicionarOcorrencia(ocorrencia)) {
+                        System.out.println("Ocorrência adicionada com sucesso!");
+                    } else {
+                        System.out.println("Erro ao adicionar ocorrência.");
+                    }
                 }
 
                 case "2" -> {
-                    List<Ocorrencia> lista = ocorrenciaDAO.listar();
+                    List<Ocorrencia> lista = ocorrenciaController.listarOcorrencias();
                     if (lista.isEmpty()) {
                         System.out.println("Nenhuma ocorrência cadastrada.");
                     } else {
@@ -54,7 +64,7 @@ public class OcorrenciaView {
                 case "3" -> {
                     System.out.println("Digite o ID da ocorrência a ser atualizada:");
                     int id = Integer.parseInt(scanner.nextLine());
-                    Ocorrencia ocorrencia = ocorrenciaDAO.buscarPorId(id);
+                    Ocorrencia ocorrencia = ocorrenciaController.buscarOcorrenciaPorId(id);
 
                     if (ocorrencia != null) {
                         System.out.println("Digite o novo ID do aluno (atual: " + ocorrencia.getAlunoID() + "):");
@@ -70,7 +80,7 @@ public class OcorrenciaView {
                         ocorrencia.setJustificativaID(novaJustificativaId);
                         ocorrencia.setDataHora(novaDataHora);
 
-                        if (ocorrenciaDAO.atualizar(ocorrencia)) {
+                        if (ocorrenciaController.atualizarOcorrencia(ocorrencia)) {
                             System.out.println("Ocorrência atualizada com sucesso.");
                         } else {
                             System.out.println("Erro ao atualizar a ocorrência.");
@@ -83,7 +93,8 @@ public class OcorrenciaView {
                 case "4" -> {
                     System.out.println("Digite o ID da ocorrência a ser removida:");
                     int id = Integer.parseInt(scanner.nextLine());
-                    if (ocorrenciaDAO.deletar(id)) {
+
+                    if (ocorrenciaController.removerOcorrencia(id)) {
                         System.out.println("Ocorrência removida com sucesso.");
                     } else {
                         System.out.println("Ocorrência não encontrada.");
@@ -97,7 +108,7 @@ public class OcorrenciaView {
         });
     }
 
-    private static void executarMenu(String titulo, java.util.function.Consumer<String> acoes) {
+    private void executarMenu(String titulo, java.util.function.Consumer<String> acoes) {
         Scanner scanner = new Scanner(System.in);
         String opcao;
         do {

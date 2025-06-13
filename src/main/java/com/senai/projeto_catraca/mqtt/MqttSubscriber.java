@@ -1,6 +1,8 @@
 package com.senai.projeto_catraca.mqtt;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttException;
+
 import com.senai.projeto_catraca.controller.OcorrenciaController;
-import org.eclipse.paho.client.mqttv3.*;
 public class MqttSubscriber {
     private static final String BROKER = "tcp://localhost:1883";
     private static final String CLIENT_ID = "ServidorJava";
@@ -13,8 +15,6 @@ public class MqttSubscriber {
             client.connect();
             client.subscribe(TOPICO, (topic, msg) -> {
                 String payload = new String(msg.getPayload());
-                String resposta = controller.gerarOcorrenciaAtraso(payload);
-                System.out.println(resposta); // este será redirecionado para a view em um próximo passo, se necessário
             });
             System.out.println("Inscrito no tópico MQTT: " + TOPICO);
         } catch (MqttException e) {
