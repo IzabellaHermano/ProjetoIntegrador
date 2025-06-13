@@ -5,6 +5,7 @@ import com.senai.projeto_catraca.model.turma.Turmas;
 import com.senai.projeto_catraca.model.dao.json.TurmasDAO;
 import com.senai.projeto_catraca.model.usuario.aluno.Aluno;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,8 +42,10 @@ public class TurmaController {
 //        return "SubTurma removida.";
 //    }
 
-    public SubTurma cadastrarSub(int idsubTurma, List<Aluno> listaAlunos) {
-
+    public SubTurma cadastrarSub(int idsubTurma, List<Aluno> listaAlunos, String nomealuno, String senha, String cpf, int idAluno, String endereco, String telefone, String idCartaoRfid, int matricula) {
+        Aluno aluno = new Aluno(nomealuno, senha, cpf, idAluno, endereco, telefone, idCartaoRfid,
+                new ArrayList<>(), new ArrayList<>(), matricula);
+           listaAlunos.add(aluno);
         SubTurma subTurma = new SubTurma(idsubTurma, listaAlunos);
         turmasDAO.cadastrarSubTurma(idsubTurma, subTurma);
         return subTurma;

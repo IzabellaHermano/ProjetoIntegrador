@@ -87,16 +87,10 @@ public class TurmaView {
                 String telefone = scannerPrompt("Telefone: ");
                 String idCartaoRfid = scannerPrompt("ID do Cartão RFID: ");
                 int matricula = scannerPromptInt("Matrícula: ");
-
-                Aluno aluno = new Aluno(nomealuno, senha, cpf, idAluno, endereco, telefone, idCartaoRfid,
-                        new ArrayList<>(), new ArrayList<>(), matricula);
-
-                alunos.add(aluno);
-
                 resposta = scannerPrompt("Deseja adicionar outro aluno? (sim/fim): ");
-
+                controller.cadastrarSub(idTurma, alunos, nomealuno, senha, cpf, idAluno, endereco, telefone, idCartaoRfid, matricula);
             } while (!resposta.equalsIgnoreCase("fim"));
-            controller.cadastrarSub(idTurma, alunos);
+
         }
     }
 
