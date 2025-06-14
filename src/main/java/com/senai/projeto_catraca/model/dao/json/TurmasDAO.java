@@ -80,13 +80,29 @@ public class TurmasDAO {
     }
 
 
-    public void cadastrarSubTurma(int idTurma, SubTurma subTurma) {
+    public void cadastrarSubTurma(int idTurma, SubTurma subTurma, List<Aluno> alunos) {
         Turmas t = turma.stream().filter(c -> c.getId() == idTurma).findFirst().orElse(null);
         if (t != null) {
             int novoIdSub = t.getSubTurmas().stream().mapToInt(SubTurma::getId).max().orElse(0) + 1;
             subTurma.setId(novoIdSub);
             t.getSubTurmas().add(subTurma);
             salvar(turma);
+
+        }
+    }
+
+    public void atualizarSubTurma(int idTurma, SubTurma subTurma, List<Aluno> alunos) {
+        Turmas t = turma.stream().filter(c -> c.getId() == idTurma).findFirst().orElse(null);
+        if (t != null) {
+            List<SubTurma> subTurmas = t.getSubTurmas();
+            for (SubTurma s : subTurmas) {
+                if (s.getId() == subTurma.getId()) {
+                    s.getAlunos().addAll(subTurma.getAlunos());
+                    salvar(turma);
+                    salvarAlunos(alunos);
+                    break;
+                }
+            }
         }
     }
 

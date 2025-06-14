@@ -45,11 +45,12 @@ public class TurmaController {
     public SubTurma cadastrarSub(int idsubTurma, List<Aluno> listaAlunos, String nomealuno, String senha, String cpf, int idAluno, String endereco, String telefone, String idCartaoRfid, int matricula) {
         Aluno aluno = new Aluno(nomealuno, senha, cpf, idAluno, endereco, telefone, idCartaoRfid,
                 new ArrayList<>(), new ArrayList<>(), matricula);
-           listaAlunos.add(aluno);
+        listaAlunos.add(aluno);
         SubTurma subTurma = new SubTurma(idsubTurma, listaAlunos);
-        turmasDAO.cadastrarSubTurma(idsubTurma, subTurma);
+        turmasDAO.cadastrarSubTurma(idsubTurma, subTurma, listaAlunos);
         return subTurma;
     }
+
 
     public SubTurma atualizarSub (int idsubTurma, int idTurma, List<Aluno> alunoList){
         SubTurma subTurma = new SubTurma(idsubTurma, alunoList);
