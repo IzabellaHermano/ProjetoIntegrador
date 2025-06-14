@@ -43,6 +43,7 @@ public class MenuPrincipalView {
     private static void menuAluno(Aluno aluno) {
         JustificativaView justificativaView = new JustificativaView();
         AlunoController alunoController = new AlunoController();
+        OcorrenciaController ocorrenciaController = new OcorrenciaController();
 
         int opcaoMenu;
         do {
@@ -52,11 +53,9 @@ public class MenuPrincipalView {
                                         |       Menu de Aluno:                                  |
                                         |           1- Gerenciar Justificativa                  |
                                         |           2- Buscar Cartão RFID                       |
-                                        |           3- Solicitar Entrada                        |
-                                        |           4- Solicitar Saida                          |
-                                        |           5- Listar Ocorrências                       |
-                                        |           6- Logout                                   |
-                                        |           7- Sair                                     |
+                                        |           3- Listar Ocorrências                       |
+                                        |           4- Logout                                   |
+                                        |           5- Sair                                     |
                                         |_______________________________________________________|
                     """;
             System.out.println(menu);
@@ -70,15 +69,19 @@ public class MenuPrincipalView {
                     String nome = scannerPrompt("|Nome: ");
                     System.out.println(alunoController.buscarRFID(nome));
                     break;
-                case 6:
+                case 3:
+                    int id = scannerPromptInt("|ID:");
+                    ocorrenciaController.buscarOcorrenciasPorAluno(id);
+                case 4:
                     logar();
-                case 7:
+                    break;
+                case 5:
                     System.out.println("Fim de programa...");
                     break;
                 default:
                     System.out.println("Opção Inválida!");
             }
-        } while (opcaoMenu != 7);
+        } while (opcaoMenu != 5);
 
 
     }
@@ -116,7 +119,7 @@ public class MenuPrincipalView {
                     WebSocketClienteConsole.desconectar();
                     break;
             }
-        } while (opcaoMenu != 3);
+        } while (opcaoMenu != 4);
 
 
     }
@@ -209,11 +212,9 @@ public class MenuPrincipalView {
                                         |           2- Listar Ocorrencias                       |
                                         |           3- Buscar Ocorrencia por Aluno              |
                                         |           4- Buscar Ocorrencia por Justificativa      |
-                                        |           5- Liberar Entrada                          |
-                                        |           6- Liberar Saida                            |
-                                        |           7- Alunos                                   |
-                                        |           8- Logout                                   |
-                                        |           9- Sair                                     |
+                                        |           5- Alunos                                   |
+                                        |           6- Logout                                   |
+                                        |           7- Sair                                     |
                                         |_______________________________________________________|
                     """;
             System.out.println(menu);
@@ -264,24 +265,18 @@ public class MenuPrincipalView {
                     System.out.println(ocorrenciaController.buscarOcorrenciasPorJustificativa(idJ));
                     break;
                 case 5:
-
-                    break;
-                case 6:
-
-                    break;
-                case 7:
                     alunoView.menu();
                     break;
-                case 8:
+                case 6:
                     logar();
                     break;
-                case 9:
+                case 7:
                     System.out.println("Fim do programa...");
                     break;
                 default:
                     System.out.println("Opção Invalida!");
             }
-        }while (opcaoMenu !=9);
+        }while (opcaoMenu !=7);
     }
 
     private static String scannerPrompt(String msg) {

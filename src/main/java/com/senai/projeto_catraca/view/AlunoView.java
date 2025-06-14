@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class AlunoView {
     private final Scanner scanner = new Scanner(System.in);
     private final AlunoController controller = new AlunoController();
+    private final TurmaView turmaView = new TurmaView();
 
     public static void main(String[] args) {
         AlunoView alunoView = new AlunoView();
@@ -35,14 +36,7 @@ public class AlunoView {
             scanner.nextLine();
             switch (opcaoMenu) {
                 case 1:
-                    String nome = scannerPrompt("|Nome: ");
-                    String CPF = scannerPrompt("|CPF:");
-                    String telefone = scannerPrompt("|Telefone:");
-                    String endereco= scannerPrompt("|Endereço:");
-                    int matricula = scannerPromptInt("|Matricula:");
-                    int rfid= scannerPromptInt("|ID do cartão RFID:");
-                    String senha = scannerPrompt("|Senha:");
-                    System.out.println(controller.cadastrarAluno(nome,senha,CPF,endereco,telefone,matricula,rfid));
+                    turmaView.atualizarSubTurma();
                     break;
                 case 2:
                     int id = scannerPromptInt("Informe o ID do aluno que deseja atualizar\n|ID:");

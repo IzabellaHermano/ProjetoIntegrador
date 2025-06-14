@@ -122,7 +122,7 @@ public class TurmaView {
         }
     }
 
-    private void atualizarSubTurma() {
+    public void atualizarSubTurma() {
         controller.listarTurmas().forEach(
                 t -> {
                     System.out.printf("Id: %d | Nome: %s \n", t.getId(), t.getSigla());
