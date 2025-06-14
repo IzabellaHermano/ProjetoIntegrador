@@ -1,30 +1,41 @@
 package com.senai.projeto_catraca.model.turma;
 
+import com.senai.projeto_catraca.model.curso.Curso;
+
+import java.util.List;
+
 public class Turmas {
  private int id;
- private String nome;
  private String sigla;
  private String dataInicio;
  private int qntSemestre;
  private String horarioEntrada;
  private String periodo;
+ private Curso curso;
 //A ideia é criar uma lista vazia de alunos na classe subturma para salvar la, mais o id que seria o numero da subturma.
 //essa lista seria tipo, pra guardar os nomes de alunos.
  //Subturma voltou a ser id, por causa que é muito complicado bota list no MySQL, a pedido do Professor.
- private int idSubTurmas;
+ private List<SubTurma> subTurmas;
 
- public Turmas(int id, String nome, String sigla, String dataInicio, int qntSemestre, String horarioEntrada, String periodo, int idSubTurmas) {
+ public Turmas(int id, String sigla, String dataInicio, int qntSemestre, String horarioEntrada, String periodo, Curso curso, List<SubTurma> subTurmas) {
   this.id = id;
-  this.nome = nome;
   this.sigla = sigla;
   this.dataInicio = dataInicio;
   this.qntSemestre = qntSemestre;
   this.horarioEntrada = horarioEntrada;
   this.periodo = periodo;
-  this.idSubTurmas = idSubTurmas;
+  this.curso = curso;
+  this.subTurmas = subTurmas;
  }
 
- public Turmas(int id, String nome, String sigla, String dataInicio, int qntSemestres, String horarioEntrada, String periodo, String s) {
+ public Turmas(int id, String sigla, String dataInicio, int qntSemestre, String horarioEntrada, String periodo, List<SubTurma> subTurmas) {
+  this.id = id;
+  this.sigla = sigla;
+  this.dataInicio = dataInicio;
+  this.qntSemestre = qntSemestre;
+  this.horarioEntrada = horarioEntrada;
+  this.periodo = periodo;
+  this.subTurmas = subTurmas;
  }
 
  public int getId() {
@@ -33,14 +44,6 @@ public class Turmas {
 
  public void setId(int id) {
   this.id = id;
- }
-
- public String getNome() {
-  return nome;
- }
-
- public void setNome(String nome) {
-  this.nome = nome;
  }
 
  public String getSigla() {
@@ -83,11 +86,19 @@ public class Turmas {
   this.periodo = periodo;
  }
 
- public int getIdSubTurmas() {
-  return idSubTurmas;
+ public List<SubTurma> getSubTurmas() {
+  return subTurmas;
  }
 
- public void setIdSubTurmas(int idSubTurmas) {
-  this.idSubTurmas = idSubTurmas;
+ public void setSubTurmas(List<SubTurma> subTurmas) {
+  this.subTurmas = subTurmas;
+ }
+
+ public Curso getCurso() {
+  return curso;
+ }
+
+ public void setCurso(Curso curso) {
+  this.curso = curso;
  }
 }

@@ -8,11 +8,11 @@ import java.util.List;
 
 public class SubTurma {
     private int id;
-    private int idAlunos;
+    private List<Aluno> alunos;
 
-    public SubTurma(int id, int idAlunos) {
+    public SubTurma(int id, List<Aluno> alunos) {
         this.id = id;
-        this.idAlunos = idAlunos;
+        this.alunos = alunos;
     }
 
     public int getId() {
@@ -23,11 +23,34 @@ public class SubTurma {
         this.id = id;
     }
 
-    public int getIdAlunos() {
-        return idAlunos;
+    public List<Aluno> getAlunos() {
+        return alunos;
     }
 
-    public void setIdAlunos(int idAlunos) {
-        this.idAlunos = idAlunos;
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
     }
+
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder(); // Usado para montar o texto final com performance melhor
+
+//        sb.append("SubTurma com ").append(alunos.size()).append(" alunos:\n");
+
+        for (Aluno a : alunos) {
+            sb.append("  Nome: ").append(a.getNome())
+                    .append(" | Matrícula: ").append(a.getMatricula())
+                    .append(" | CPF: ").append(a.getCPF())
+                    .append(" | RFID: ").append(a.getIdCartaoRfid())
+                    .append(" | Endereço: ").append(a.getEndereco())
+                    .append(" | Telefone: ").append(a.getTelefone())
+                    .append("\n"); // Nova linha para cada aluno
+        }
+
+        return sb.toString(); // Retorna o texto formatado
+    }
+
 }
+
+
