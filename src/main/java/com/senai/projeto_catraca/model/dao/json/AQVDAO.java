@@ -1,72 +1,71 @@
 package com.senai.projeto_catraca.model.dao.json;
-
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.senai.projeto_catraca.model.usuario.AQV;
+import com.senai.projeto_catraca.model.usuario.Coordenador;
+
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 public class AQVDAO {
-    private final String caminho = "aqvs.json";
+    private List<AQV> aqvList;
+    private final  String FILE_PATH = "AQV.json";
     private final Gson gson = new Gson();
-    private final List<AQV> aqvs;
 
-    public AQVDAO() {
-        aqvs = carregar();
+    public AQVDAO (){
+        aqvList = carregarAQV();
+
     }
 
-    private List<AQV> carregar() {
-        try (FileReader reader = new FileReader(caminho)) {
+    private List<AQV> carregarAQV() {
+        try (FileReader reader = new FileReader(FILE_PATH)) {
             Type listType = new TypeToken<List<AQV>>() {}.getType();
             return gson.fromJson(reader, listType);
         } catch (IOException e) {
             return new ArrayList<>();
         }
     }
-
-    private void salvar(List<AQV> lista) {
-        try (FileWriter writer = new FileWriter(caminho)) {
-            gson.toJson(lista, writer);
+    private void salvarAQV(List<AQV> aqvList) {
+        try (FileWriter writer = new FileWriter(FILE_PATH)) {
+            gson.toJson(aqvList, writer);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
     public void inserir(AQV aqv) {
-        int novoId = aqvs.stream().mapToInt(AQV::getId).max().orElse(0) + 1;
+        int novoId = aqvList.stream().mapToInt(AQV::getId).max().orElse(0) + 1;
         aqv.setId(novoId);
-        aqvs.add(aqv);
-        salvar(aqvs);
+        aqvList.add(aqv);
+        salvarAQV(aqvList);
     }
-
     public void atualizar(AQV aqv) {
-        for (int i = 0; i < aqvs.size(); i++) {
-            if (aqvs.get(i).getId() == aqv.getId()) {
-                aqvs.set(i, aqv);
+        for (int i = 0; i < aqvList.size(); i++) {
+            if (aqvList.get(i).getId() == aqv.getId()) {
+                aqvList.set(i, aqv);
                 break;
             }
         }
-        salvar(aqvs);
+        salvarAQV(aqvList);
     }
-
-    public void remover(int id) {
-        aqvs.removeIf(a -> a.getId() == id);
-        salvar(aqvs);
+    public void removerAQV(int id) {
+        aqvList.removeIf(a -> a.getId() == id);
+        salvarAQV(aqvList);
     }
-
     public Optional<AQV> buscarPorId(int id) {
-        return carregar().stream().filter(a -> a.getId() == id).findFirst();
+        return aqvList.stream().filter(a -> a.getId() == id).findFirst();
     }
-
-    public Optional<AQV> buscarPorLogin(String login) {
-        return aqvs.stream().filter(a -> a.getNome().equals(login)).findFirst();
+    public Optional<AQV> buscarPorLogin(String nome) {
+        return aqvList.stream().filter(a -> Objects.equals(a.getNome(), nome)).findFirst();
     }
+    public List<AQV>listarAQV(){
+        return aqvList;
 
-    public List<AQV> listarTodos() {
-        return aqvs;
     }
 }

@@ -1,54 +1,43 @@
 package com.senai.projeto_catraca.controller;
 
-import com.senai.projeto_catraca.model.usuario.aluno.Justificativa;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
+import com.senai.projeto_catraca.model.usuario.aluno.Justificativa;
+import com.senai.projeto_catraca.model.usuario.aluno.JustificativaDAO;
+
 import java.util.List;
 import java.util.Optional;
 
 public class JustificativaController {
+    private final JustificativaDAO justificativaDAO = new JustificativaDAO();
 
-    private final List<Justificativa> listaJustificativas = new ArrayList<>();
-    private int proximoId = 1;
+    public String cadastrarJustificativa(String tipo, String descricao, String data, String anexo) {
+        if (anexo.isEmpty()) {
+            anexo = "Sem anexo";
+        }
+        Justificativa justificativa = new Justificativa(tipo, anexo, data, descricao, 0, "Aguardando aprovação da AQV...");
+        justificativaDAO.inserir(justificativa);
+        return "Justificativa criada com sucesso!";
+    }
 
-    public void cadastrarJustificativa(String tipo, String descricao, LocalDate data, String anexo) {
-        Justificativa nova = new Justificativa(proximoId++, tipo, descricao, data, anexo);
-        listaJustificativas.add(nova);
-        System.out.println("Justificativa cadastrada com sucesso.");
+    public String atualizarJustificativa(String tipo, String descricao, String data, int id, String anexo) {
+        justificativaDAO.atualizar(new Justificativa(tipo, anexo, data, descricao, id,"Aguardando aprovação da AQV..."));
+        return "Justificativa atualizada.";
+    }
+
+    public String removerJustificativa(int id) {
+        justificativaDAO.remover(id);
+        return "Justificativa removida.";
     }
 
     public List<Justificativa> listarJustificativa() {
-        return listaJustificativas;
+        return justificativaDAO.listar();
     }
 
-    public void removerJustificativa(int id) {
-        Optional<Justificativa> justificativaEncontrada = listaJustificativas.stream()
-                .filter(j -> j.getId() == id)
-                .findFirst();
-
-        if (justificativaEncontrada.isPresent()) {
-            listaJustificativas.remove(justificativaEncontrada.get());
-            System.out.println("Justificativa removida com sucesso.");
-        } else {
-            System.out.println("Justificativa com ID " + id + " não encontrada.");
-        }
+    public Optional<Justificativa> buscarPorId(int idJust){
+        return justificativaDAO.buscarPorId(idJust);
+    }
+    public void setStatus(String tipo, String descricao, String data, int id, String anexo, String status){
+        justificativaDAO.setStatus(new Justificativa(tipo, anexo, data, descricao, id, status));
     }
 
-    public void atualizarJustificativa(String tipo, String descricao, LocalDate data, String anexo, int id) {
-        Optional<Justificativa> justificativaEncontrada = listaJustificativas.stream()
-                .filter(j -> j.getId() == id)
-                .findFirst();
-
-        if (justificativaEncontrada.isPresent()) {
-            Justificativa j = justificativaEncontrada.get();
-            j.setTipo(tipo);
-            j.setDescricao(descricao);
-            j.setData(data);
-            j.setAnexo(anexo);
-            System.out.println("Justificativa atualizada com sucesso.");
-        } else {
-            System.out.println("Justificativa com ID " + id + " não encontrada.");
-        }
-    }
 }

@@ -5,6 +5,7 @@ public class Ocorrencia {
     private int AlunoID;
     private int JustificativaID;
     private String dataHora;
+    private String status;
 
     public Ocorrencia(int id, int alunoID, int justificativaID, String dataHora) {
         this.id = id;
@@ -12,6 +13,7 @@ public class Ocorrencia {
         JustificativaID = justificativaID;
         this.dataHora = dataHora;
     }
+
 
     public int getAlunoID() {
         return AlunoID;

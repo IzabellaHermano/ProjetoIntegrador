@@ -2,15 +2,17 @@ package com.senai.projeto_catraca.model.usuario.aluno;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.senai.projeto_catraca.model.usuario.Coordenador;
 
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class JustificativaDAO {
     private final String caminho = "justificativa.json";
@@ -21,9 +23,9 @@ public class JustificativaDAO {
         this.justificativas = carregar();
     }
 
-    private List<Justificativa> carregar() {
+    private List<Justificativa> carregar(){
         try (FileReader reader = new FileReader(caminho)) {
-            Type listType = new TypeToken<List<Coordenador>>() {}.getType();
+            Type listType = new TypeToken<List<Justificativa>>() {}.getType();
             return gson.fromJson(reader, listType);
         } catch (IOException e) {
             return new ArrayList<>();
@@ -53,10 +55,25 @@ public class JustificativaDAO {
     }
 
     public void remover(int id){
-        justificativas.remove(id);
+        justificativas.removeIf(a -> a.getId() == id);
         salvar(justificativas);
     }
     public List<Justificativa> listar(){
         return justificativas;
     }
+
+    public Optional<Justificativa> buscarPorId(int idJust){
+        return justificativas.stream().filter(j -> j.getId() == idJust).findFirst();
+    }
+
+    public void setStatus(Justificativa j){
+        for (int i = 0; i < justificativas.size(); i++) {
+            if (justificativas.get(i).getId() == j.getId()){
+                justificativas.set(i, j);
+                break;
+            }
+        }
+        salvar(justificativas);
+    }
+
 }

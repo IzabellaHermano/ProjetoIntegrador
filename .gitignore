@@ -36,3 +36,21 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+Oracle_JDK-24
+
+aqvs.json
+AQV.json
+ocorrencias.json
+professores.json
+alunos.json
+justificativa.json
+coordenador.json
+turma.json
+curso.json
+ALUNOS.json
+ambiente.json
+anexoJustificativa.txt
+anexoDoisJustificativa
+
+MainApplication.java

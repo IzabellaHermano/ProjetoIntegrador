@@ -1,56 +1,64 @@
 package com.senai.projeto_catraca.model.usuario.aluno;
 
-import java.time.LocalDate;
-
 public class Justificativa {
-    private int id;
     private String tipo;
     private String descricao;
-    private LocalDate data;
+    private String data;
     private String anexo;
+    private String status;
+    private int id;
 
-    public Justificativa(int id, String tipo, String descricao, LocalDate data, String anexo) {
-        this.id = id;
+    public Justificativa(String tipo, String anexo, String data, String descricao, int id, String status) {
         this.tipo = tipo;
-        this.descricao = descricao;
-        this.data = data;
         this.anexo = anexo;
+        this.data = data;
+        this.descricao = descricao;
+        this.id = id;
+        this.status = status;
     }
 
-    public int getId() {
-        return id;
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getTipo() {
         return tipo;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public LocalDate getData() {
-        return data;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public String getAnexo() {
         return anexo;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setAnexo(String anexo) {
+        this.anexo = anexo;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public String getDescricao() {
+        return descricao;
     }
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
-    public void setData(LocalDate data) {
-        this.data = data;
-    }
-
-    public void setAnexo(String anexo) {
-        this.anexo = anexo;
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {

@@ -9,68 +9,77 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class AlunoDAO {
-    private final String caminho = "alunos.json";
+    private List<Aluno> alunoList;
+    private final String FILE_PATH = "ALUNOS.json";
     private final Gson gson = new Gson();
-    private final List<Aluno> alunos;
 
-    public AlunoDAO(){
-        alunos = carregar();
+    public AlunoDAO() {
+        alunoList = carregarAluno();
+
     }
 
-    private List<Aluno> carregar() {
-        try (FileReader reader = new FileReader(caminho)) {
-            Type listType = new TypeToken<List<Aluno>>() {}.getType();
+    private List<Aluno> carregarAluno() {
+        try (FileReader reader = new FileReader(FILE_PATH)) {
+            Type listType = new TypeToken<List<Aluno>>() {
+            }.getType();
             return gson.fromJson(reader, listType);
         } catch (IOException e) {
             return new ArrayList<>();
         }
     }
 
-    private void salvar(List<Aluno> lista) {
-        try (FileWriter writer = new FileWriter(caminho)) {
-            gson.toJson(lista, writer);
+    private void salvar(List<Aluno> listaAluno) {
+        try (FileWriter writer = new FileWriter(FILE_PATH)) {
+            gson.toJson(listaAluno, writer);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void inserir(Aluno aluno) {
-        int novoId = alunos.stream().mapToInt(Aluno::getId).max().orElse(0) + 1;
+        int novoId = alunoList.stream().mapToInt(Aluno::getId).max().orElse(0) + 1;
         aluno.setId(novoId);
-        alunos.add(aluno);
-        salvar(alunos);
+        alunoList.add(aluno);
+        salvar(alunoList);
     }
 
     public void atualizar(Aluno aluno) {
-        for (int i = 0; i < alunos.size(); i++) {
-            if (alunos.get(i).getId() == aluno.getId()) {
-                alunos.set(i, aluno);
+        for (int i = 0; i < alunoList.size(); i++) {
+            if (alunoList.get(i).getId() == aluno.getId()) {
+                alunoList.set(i, aluno);
                 break;
             }
         }
-        salvar(alunos);
+        salvar(alunoList);
     }
 
-    public void remover(int id) {
-        alunos.removeIf(a -> a.getId() == id);
-        salvar(alunos);
+    public void removerAluno(int id) {
+        alunoList.removeIf(a -> a.getId() == id);
+        salvar(alunoList);
+    }
+
+    public Optional<Aluno> buscarPorLogin(String nome) {
+        return alunoList.stream().filter(a -> Objects.equals(a.getNome(), nome)).findFirst();
     }
 
     public Optional<Aluno> buscarPorId(int id) {
-        return alunos.stream().filter(a -> a.getId() == id).findFirst();
+        return alunoList.stream().filter(a -> a.getId() == id).findFirst();
+    }
+
+    public List<Aluno> listarAlunos() {
+        return alunoList;
+
     }
 
     public Optional<Aluno> buscarPorRfid(String rfid) {
-        return alunos.stream().filter(a -> rfid.equals(a.getIdCartaoRfid())).findFirst();
-    }
-    public Optional<Aluno> buscarPorLogin(String login) {
-        return alunos.stream().filter(a -> a.getNome().equals(login)).findFirst();
+        return alunoList.stream().filter(a -> rfid.equals(a.getIdCartaoRfid())).findFirst();
     }
 
-    public List<Aluno> listarTodos() {
-        return alunos;
+    public Optional<Integer> buscarRfid(String nome) {
+        return alunoList.stream().filter(aluno -> aluno.getNome().equals(nome)).map(Aluno::getIdCartaoRfid).findFirst();
     }
 }

@@ -1,16 +1,18 @@
 package com.senai.projeto_catraca.model.dao.json;
 
 
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.Gson;
-import com.senai.projeto_catraca.model.usuario.Administrador;
-import com.senai.projeto_catraca.model.usuario.Professor;
-
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.senai.projeto_catraca.model.usuario.Professor;
 
 public class ProfessorDAO {
     private final String caminho = "professores.json";
@@ -65,8 +67,8 @@ public class ProfessorDAO {
         return carregar().stream().filter(p -> p.getId() == id).findFirst();
     }
 
-    public Optional<Professor> buscarPorLogin(String login) {
-        return professores.stream().filter(a -> a.getNome().equals(login)).findFirst();
+    public Optional<Professor> buscarPorLogin(String nome) {
+        return professores.stream().filter(p -> Objects.equals(p.getNome(), nome)).findFirst();
     }
 
     public List<Professor> listarTodos() {

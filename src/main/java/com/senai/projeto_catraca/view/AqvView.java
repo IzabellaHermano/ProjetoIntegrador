@@ -1,111 +1,82 @@
 package com.senai.projeto_catraca.view;
 
-import com.senai.projeto_catraca.model.dao.json.AQVDAO;
-import com.senai.projeto_catraca.model.usuario.AQV;
 
-import java.util.List;
-import java.util.Optional;
+import com.senai.projeto_catraca.controller.AqvController;
+import com.senai.projeto_catraca.model.usuario.AQV;
+import com.senai.projeto_catraca.model.usuario.aluno.Aluno;
+
 import java.util.Scanner;
 
 public class AqvView {
+    private final Scanner scanner = new Scanner(System.in);
+    private final AqvController controller = new AqvController();
+
     public static void main(String[] args) {
-        System.out.printf("Bem vindo");
-        Scanner scanner = new Scanner(System.in);
-        AQVDAO aqvDAO = new AQVDAO();
-        executarMenu("""
-                    ===== MENU AQV =====
-                    1. Cadastrar AQV
-                    2. Listar AQVs
-                    3. Remover AQV
-                    4. Atualizar AQV
-                    0. Sair
-                    """,
-                opcao -> {
-                    switch (opcao) {
-                        case "1" -> {
-                            System.out.println("Digite o nome: ");
-                            String nome = scanner.nextLine();
-                            System.out.println("Digite uma senha: ");
-                            String senha = scanner.nextLine();
-                            System.out.println("Digite um CPF: ");
-                            String cpf = scanner.nextLine();
-                            System.out.println("Digite um endereço: ");
-                            String endereco = scanner.nextLine();
-                            System.out.println("Digite um telefone: ");
-                            String telefone = scanner.nextLine();
-
-                            AQV novoAQV = new AQV(nome, senha, cpf, 0, endereco, telefone);
-                            aqvDAO.inserir(novoAQV);
-                            System.out.println("AQV cadastrado com sucesso!");
-                            System.out.println("Nome: " + novoAQV.getNome());
-                            System.out.println("Endereço: " + endereco);
-                        }
-                        case "2" -> {
-                            List<AQV> listaAQVs = aqvDAO.listarTodos();
-                            if (listaAQVs.isEmpty()) {
-                                System.out.println("Nenhum AQV cadastrado.");
-                            } else {
-                                System.out.println("Lista de AQVs:");
-                                for (AQV aqv : listaAQVs) {
-                                    System.out.println("ID: " + aqv.getId() + ", Nome: " + aqv.getNome());
-                                }
-                            }
-                        }
-                        case "3" -> {
-                            System.out.println("Remover");
-                            System.out.println("Qual o ID do AQV que deseja remover?");
-                            int id = scanner.nextInt();
-                            aqvDAO.remover(id);
-                            System.out.println("Removido com sucesso");
-                            scanner.nextLine(); // limpa o buffer
-                        }
-                        case "4" -> {
-                            System.out.println("Atualizar");
-                            System.out.println("Qual o ID do AQV que deseja atualizar?");
-                            int id = scanner.nextInt();
-                            scanner.nextLine();
-                            Optional<AQV> aqvOpt = aqvDAO.buscarPorId(id);
-                            if (aqvOpt.isPresent()) {
-                                AQV aqv = aqvOpt.get();
-                                System.out.println("Digite o novo nome (atual: " + aqv.getNome() + "):");
-                                String nome = scanner.nextLine();
-                                System.out.println("Digite a nova senha (atual: " + aqv.getSenha() + "):");
-                                String senha = scanner.nextLine();
-                                System.out.println("Digite o novo CPF (atual: " + aqv.getCPF() + "):");
-                                String cpf = scanner.nextLine();
-                                System.out.println("Digite o novo endereço (atual: " + aqv.getEndereco() + "):");
-                                String endereco = scanner.nextLine();
-                                System.out.println("Digite o novo telefone (atual: " + aqv.getTelefone() + "):");
-                                String telefone = scanner.nextLine();
-
-                                aqv.setNome(nome);
-                                aqv.setSenha(senha);
-                                aqv.setCPF(cpf);
-                                aqv.setEndereco(endereco);
-                                aqv.setTelefone(telefone);
-
-                                aqvDAO.atualizar(aqv);
-                                System.out.println("AQV atualizado com sucesso!");
-                            } else {
-                                System.out.println("AQV com ID " + id + " não encontrado.");
-                            }
-                        }
-                        default -> {
-                            if (!opcao.equals("0")) {
-                                System.out.println("Opção inválida!");
-                            }
-                        }
-                    }
-                });
+        AqvView aqvView = new AqvView();
+        aqvView.menu();
     }
-
-    private static void executarMenu(String titulo, java.util.function.Consumer<String> acoes) {
-        String opcao;
-        Scanner scanner = new Scanner(System.in);
+    public void menu(){
+        int opcaoMenu;
         do {
-            System.out.print(titulo);
-            opcao = scanner.nextLine();
-            acoes.accept(opcao);
-        } while (!opcao.equals("0"));
+            String menu = """
+                                        _________________________________________________________
+                                        |   Bem-Vindo ao SENAI - Anchieta:                      |
+                                        |       Menu de AQV:                                    |
+                                        |           1- Cadastrar Aqv                            |
+                                        |           2- Atualizar Aqv                            |
+                                        |           3- Listar Aqv                               |
+                                        |           4- Deletar Aqv                              |
+                                        |           5- Sair                                     |
+                                        |_______________________________________________________|
+                    
+                    """;
+            System.out.println(menu);
+            opcaoMenu = scanner.nextInt();
+            scanner.nextLine();
+            switch (opcaoMenu) {
+                case 1:
+                    String nome = scannerPrompt("|Nome: ");
+                    String CPF = scannerPrompt("|CPF:");
+                    String telefone = scannerPrompt("|Telefone:");
+                    String endereco= scannerPrompt("|Endereço:");
+                    String senha = scannerPrompt("|Senha:");
+                    System.out.println(controller.cadastrarAqv(nome,senha,CPF,endereco,telefone));
+                    break;
+                case 2:
+                    int id = scannerPromptInt("Informe o ID do AQV que deseja atualizar\n|ID:");
+                    String nomeN = scannerPrompt("|Novo Nome: ");
+                    String CPFN = scannerPrompt("|Novo CPF:");
+                    String telefoneN = scannerPrompt("|Novo Telefone:");
+                    String enderecoN = scannerPrompt("|Novo Endereço:");
+                    String senhaN = scannerPrompt("|Nova Senha:");
+                    System.out.println(controller.atualizarAqv(nomeN, senhaN,CPFN,id, enderecoN, telefoneN));
+                    break;
+                case 3:
+                    System.out.println("Analistas de Qualidade de Vida:");
+                    for (AQV aqv: controller.listarAqv()) {
+                        System.out.printf("|ID: %d | Nome: %s\n", aqv.getId(), aqv.getNome());
+                    }
+                    break;
+                case 4:
+                    int idD = scannerPromptInt("Informe o ID do AQV que deseja deletar\n|ID:");
+                    System.out.println(controller.deletarAqv(idD));
+                    break;
+                case 5:
+                    System.out.println("Fim de Programa!");
+                    break;
+                default:
+                    System.out.println("Opção Inválida");
+            }
+        }while (opcaoMenu !=5);
     }
+    private String scannerPrompt(String msg) {
+        System.out.print(msg);
+        return scanner.nextLine();
+    }
+
+    private int scannerPromptInt(String msg) {
+        System.out.print(msg);
+        return Integer.parseInt(scanner.nextLine());
+    }
+
 }

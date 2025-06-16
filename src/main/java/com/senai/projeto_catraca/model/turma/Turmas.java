@@ -1,70 +1,104 @@
 package com.senai.projeto_catraca.model.turma;
 
-import com.senai.projeto_catraca.model.usuario.aluno.Aluno;
+import com.senai.projeto_catraca.model.curso.Curso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Turmas {
-    private int id;
-    private String nome;
-    private String turno;
-    private int professorId;
-    private List<Aluno> matriculasAlunos = new ArrayList<>();  // IDs de alunos associados à turma
+ private int id;
+ private String sigla;
+ private String dataInicio;
+ private int qntSemestre;
+ private String horarioEntrada;
+ private String periodo;
+ private Curso curso;
+//A ideia é criar uma lista vazia de alunos na classe subturma para salvar la, mais o id que seria o numero da subturma.
+//essa lista seria tipo, pra guardar os nomes de alunos.
+ //Subturma voltou a ser id, por causa que é muito complicado bota list no MySQL, a pedido do Professor.
+ private List<SubTurma> subTurmas;
 
-    public Turmas(String nome, String turno, int professorId) {
-        this.nome = nome;
-        this.turno = turno;
-        this.professorId = professorId;
-    }
+ public Turmas(int id, String sigla, String dataInicio, int qntSemestre, String horarioEntrada, String periodo, Curso curso, List<SubTurma> subTurmas) {
+  this.id = id;
+  this.sigla = sigla;
+  this.dataInicio = dataInicio;
+  this.qntSemestre = qntSemestre;
+  this.horarioEntrada = horarioEntrada;
+  this.periodo = periodo;
+  this.curso = curso;
+  this.subTurmas = subTurmas;
+ }
 
-    public int getId() {
-        return id;
-    }
+ public Turmas(int id, String sigla, String dataInicio, int qntSemestre, String horarioEntrada, String periodo, List<SubTurma> subTurmas) {
+  this.id = id;
+  this.sigla = sigla;
+  this.dataInicio = dataInicio;
+  this.qntSemestre = qntSemestre;
+  this.horarioEntrada = horarioEntrada;
+  this.periodo = periodo;
+  this.subTurmas = subTurmas;
+ }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+ public int getId() {
+  return id;
+ }
 
-    public String getNome() {
-        return nome;
-    }
+ public void setId(int id) {
+  this.id = id;
+ }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+ public String getSigla() {
+  return sigla;
+ }
 
-    public String getTurno() {
-        return turno;
-    }
+ public void setSigla(String sigla) {
+  this.sigla = sigla;
+ }
 
-    public void setTurno(String turno) {
-        this.turno = turno;
-    }
+ public String getDataInicio() {
+  return dataInicio;
+ }
 
-    public int getProfessorId() {
-        return professorId;
-    }
+ public void setDataInicio(String dataInicio) {
+  this.dataInicio = dataInicio;
+ }
 
-    public void setProfessorId(int professorId) {
-        this.professorId = professorId;
-    }
+ public int getQntSemestre() {
+  return qntSemestre;
+ }
 
-    public List<Aluno> getMatriculasAlunos() {
-        return matriculasAlunos;
-    }
+ public void setQntSemestre(int qntSemestre) {
+  this.qntSemestre = qntSemestre;
+ }
 
-    public void setMatriculasAlunos(List<Aluno> matriculasAlunos) {
-        this.matriculasAlunos = matriculasAlunos;
-    }
+ public String getHorarioEntrada() {
+  return horarioEntrada;
+ }
 
-    public void adicionarAluno(Aluno aluno) {
-        if (!matriculasAlunos.contains(aluno)) {
-            matriculasAlunos.add(aluno);
-        }
-    }
+ public void setHorarioEntrada(String horarioEntrada) {
+  this.horarioEntrada = horarioEntrada;
+ }
 
-    public void removerAluno(int matricula) {
-        matriculasAlunos.remove(Integer.valueOf(matricula));
-    }
+ public String getPeriodo() {
+  return periodo;
+ }
+
+ public void setPeriodo(String periodo) {
+  this.periodo = periodo;
+ }
+
+ public List<SubTurma> getSubTurmas() {
+  return subTurmas;
+ }
+
+ public void setSubTurmas(List<SubTurma> subTurmas) {
+  this.subTurmas = subTurmas;
+ }
+
+ public Curso getCurso() {
+  return curso;
+ }
+
+ public void setCurso(Curso curso) {
+  this.curso = curso;
+ }
 }

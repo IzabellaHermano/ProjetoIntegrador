@@ -1,0 +1,18 @@
+[
+  {
+    "tipo": "Atestado Médico",
+    "descricao": "Fiquei doente",
+    "data": "10-06-2025",
+    "anexo": "anexoJustificativa.txt",
+    "status": "Aprovada.",
+    "id": 1
+  },
+  {
+    "tipo": "Atestado Médico",
+    "descricao": "atestado",
+    "data": "20-10-2025",
+    "anexo": "anexoDoisJustificativa",
+    "status": "Aprovada.",
+    "id": 3
+  }
+]
