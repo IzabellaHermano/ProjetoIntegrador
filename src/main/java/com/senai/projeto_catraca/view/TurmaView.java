@@ -14,6 +14,7 @@ public class TurmaView {
     private final Scanner scanner = new Scanner(System.in);
     private final TurmaController controller = new TurmaController();
     private final List<SubTurma> listaSubTurmas = new ArrayList<>();
+    private final List<Aluno> alunos = new ArrayList<>();
 
     public static void main(String[] args) {
         TurmaView view = new TurmaView();
@@ -62,7 +63,7 @@ public class TurmaView {
                 case "1" -> cadastrarSubTurma();
                 case "2" -> removerSubTurma();
                 case "3" -> atualizarSubTurma();
-                case "0" -> System.out.println("Ate mais");
+                case "0" -> System.out.println("");
                 default -> System.out.println("Opção invalida");
             }
         } while (!opcao.equals("0"));
@@ -70,13 +71,17 @@ public class TurmaView {
 
 
     private void cadastrarSubTurma() {
-        List<Aluno> alunos = new ArrayList<>();
-        String resposta;
-        int idTurma = scannerPromptInt("Digitar ID turma: ");
+        controller.listarTurmas().forEach(
+                t -> {
+                    System.out.printf("Id: %d | Nome: %s \n", t.getId(), t.getSigla());
+                }
+        );
+        int idTurma = scannerPromptInt("Digitar ID turma para adicionar um aluno: ");
+
         Optional<Turmas> optionalTurmas = controller.buscarPorId(idTurma);
         if (optionalTurmas.isPresent()) {
             Turmas t = optionalTurmas.get();
-            do {
+
                 System.out.println("Cadastrando novo aluno:");
 
                 String nomealuno = scannerPrompt("Nome: ");
@@ -85,18 +90,16 @@ public class TurmaView {
                 int idAluno = scannerPromptInt("ID do usuário: ");
                 String endereco = scannerPrompt("Endereço: ");
                 String telefone = scannerPrompt("Telefone: ");
-                String idCartaoRfid = scannerPrompt("ID do Cartão RFID: ");
+                int idCartaoRfid = scannerPromptInt("ID do Cartão RFID: ");
                 int matricula = scannerPromptInt("Matrícula: ");
-                resposta = scannerPrompt("Deseja adicionar outro aluno? (sim/fim): ");
                 controller.cadastrarSub(idTurma, alunos, nomealuno, senha, cpf, idAluno, endereco, telefone, idCartaoRfid, matricula);
-            } while (!resposta.equalsIgnoreCase("fim"));
 
         }
     }
 
     public void removerSubTurma() {
         if (controller.listarTurmas().isEmpty()) {
-            System.out.println("Cadastre uma Turma para deletar uma Sub Turma!");
+            System.out.println("Cadastre uma Turma para deletar uma SubTurma!");
         } else {
             System.out.println("--- Turmas ---");
             controller.listarTurmas().forEach(
@@ -130,31 +133,18 @@ public class TurmaView {
         );
         int idTurma = scannerPromptInt("ID da Turma que contém a SubTurma: ");
         int idSB =scannerPromptInt("ID da SubTurma que irá adicionar o aluno: ");
-
-        List<Aluno> alunos = new ArrayList<>();
-        String resposta;
-        do {
-            System.out.println("Atualizando aluno: ");
-
+            System.out.println("Cadastrar novo aluno: ");
             String nomealuno = scannerPrompt("Nome: ");
             String senha = scannerPrompt("Senha: ");
             String cpf = scannerPrompt("CPF: ");
             int idatualiza = scannerPromptInt("ID do usuário: ");
             String endereco = scannerPrompt("Endereço: ");
             String telefone = scannerPrompt("Telefone: ");
-            String idCartaoRfid = scannerPrompt("ID do Cartão RFID: ");
+            int idCartaoRfid = scannerPromptInt("ID do Cartão RFID: ");
             int matricula = scannerPromptInt("Matrícula: ");
+            controller.atualizarSub(idSB, idTurma, alunos, nomealuno, senha, cpf, idatualiza, endereco, telefone, idCartaoRfid, matricula);
 
-            Aluno aluno = new Aluno(nomealuno, senha, cpf, idatualiza, endereco, telefone, idCartaoRfid,
-                    new ArrayList<>(), new ArrayList<>(), matricula);
 
-            alunos.add(aluno);
-
-            resposta = scannerPrompt("Deseja adicionar outro aluno? (sim/fim): ");
-        } while (!resposta.equalsIgnoreCase("fim"));
-
-        // Enviar para controller
-        controller.atualizarSub(idSB, idTurma, alunos);
     }
 
 

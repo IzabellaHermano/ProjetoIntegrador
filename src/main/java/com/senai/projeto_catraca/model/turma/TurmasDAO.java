@@ -1,4 +1,4 @@
-package com.senai.projeto_catraca.model.dao.json;
+package com.senai.projeto_catraca.model.turma;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -16,7 +16,7 @@ import java.util.Optional;
 
 public class TurmasDAO {
     private final String caminho = "turma.json";
-    private final String caminho2 = "alunos.json";
+    private final String caminhoA = "alunos.json";
     private final Gson gson = new Gson();
     private final List<Turmas> turma;
 
@@ -25,6 +25,16 @@ public class TurmasDAO {
     }
 
     private List<Turmas> carregar() {
+        try (FileReader reader = new FileReader(caminho)) {
+            Type listType = new TypeToken<List<Turmas>>() {
+            }.getType();
+            return gson.fromJson(reader, listType);
+        } catch (IOException e) {
+            return new ArrayList<>();
+        }
+    }
+
+    private List<Turmas> carregar2() {
         try (FileReader reader = new FileReader(caminho)) {
             Type listType = new TypeToken<List<Turmas>>() {
             }.getType();
@@ -45,7 +55,7 @@ public class TurmasDAO {
     }
 
     private void salvarAlunos(List<Aluno> lista) {
-        try (FileWriter writer = new FileWriter(caminho2)) {
+        try (FileWriter writer = new FileWriter(caminhoA)) {
             gson.toJson(lista, writer);
         } catch (IOException e) {
             e.printStackTrace();
@@ -87,7 +97,7 @@ public class TurmasDAO {
             subTurma.setId(novoIdSub);
             t.getSubTurmas().add(subTurma);
             salvar(turma);
-
+            salvarAlunos(alunos);
         }
     }
 
@@ -100,20 +110,6 @@ public class TurmasDAO {
                     s.getAlunos().addAll(subTurma.getAlunos());
                     salvar(turma);
                     salvarAlunos(alunos);
-                    break;
-                }
-            }
-        }
-    }
-
-    public void atualizarSubTurma(int idTurma, SubTurma subTurma) {
-        Turmas t = turma.stream().filter(c -> c.getId() == idTurma).findFirst().orElse(null);
-        if (t != null) {
-            List<SubTurma> subTurmas = t.getSubTurmas();
-            for (SubTurma s : subTurmas) {
-                if (s.getId() == subTurma.getId()) {
-                    s.getAlunos().addAll(subTurma.getAlunos());
-                    salvar(turma);
                     break;
                 }
             }

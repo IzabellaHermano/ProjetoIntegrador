@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public class AlunoDAO {
     private List<Aluno> alunoList;
-    private final String FILE_PATH = "ALUNOS.json";
+    private final String FILE_PATH = "alunos.json";
     private final Gson gson = new Gson();
 
     public AlunoDAO() {

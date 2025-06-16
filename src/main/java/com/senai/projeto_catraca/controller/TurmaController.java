@@ -2,7 +2,7 @@ package com.senai.projeto_catraca.controller;
 
 import com.senai.projeto_catraca.model.turma.SubTurma;
 import com.senai.projeto_catraca.model.turma.Turmas;
-import com.senai.projeto_catraca.model.dao.json.TurmasDAO;
+import com.senai.projeto_catraca.model.turma.TurmasDAO;
 import com.senai.projeto_catraca.model.usuario.aluno.Aluno;
 
 import java.util.ArrayList;
@@ -37,14 +37,9 @@ public class TurmaController {
         return "SubTurma removida.";
     }
 
-//    public String removerAlunos(int idTurma, int idAluno) {
-//        turmasDAO.removerAluno(idTurma, idAluno);
-//        return "SubTurma removida.";
-//    }
 
-    public SubTurma cadastrarSub(int idsubTurma, List<Aluno> listaAlunos, String nomealuno, String senha, String cpf, int idAluno, String endereco, String telefone, String idCartaoRfid, int matricula) {
-        Aluno aluno = new Aluno(nomealuno, senha, cpf, idAluno, endereco, telefone, idCartaoRfid,
-                new ArrayList<>(), new ArrayList<>(), matricula);
+    public SubTurma cadastrarSub(int idsubTurma, List<Aluno> listaAlunos, String nomealuno, String senha, String cpf, int idAluno, String endereco, String telefone, int idCartaoRfid, int matricula) {
+        Aluno aluno = new Aluno(nomealuno, senha, cpf, idAluno, endereco, telefone, idCartaoRfid, matricula);
         listaAlunos.add(aluno);
         SubTurma subTurma = new SubTurma(idsubTurma, listaAlunos);
         turmasDAO.cadastrarSubTurma(idsubTurma, subTurma, listaAlunos);
@@ -52,9 +47,11 @@ public class TurmaController {
     }
 
 
-    public SubTurma atualizarSub (int idsubTurma, int idTurma, List<Aluno> alunoList){
-        SubTurma subTurma = new SubTurma(idsubTurma, alunoList);
-        turmasDAO.atualizarSubTurma(idTurma, subTurma);
+    public SubTurma atualizarSub (int idsubTurma, int idTurma, List<Aluno> listaAlunos, String nomealuno, String senha, String cpf, int idAluno, String endereco, String telefone, int idCartaoRfid, int matricula){
+        Aluno aluno = new Aluno(nomealuno, senha, cpf, idAluno, endereco, telefone, idCartaoRfid, matricula);
+        listaAlunos.add(aluno);
+        SubTurma subTurma = new SubTurma(idsubTurma, listaAlunos);
+        turmasDAO.atualizarSubTurma(idTurma, subTurma, listaAlunos);
         return subTurma;
     }
 
