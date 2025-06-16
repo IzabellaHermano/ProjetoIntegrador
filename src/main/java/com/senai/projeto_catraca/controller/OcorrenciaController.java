@@ -14,9 +14,7 @@ public class OcorrenciaController {
     // Métodos CRUD para gerenciar ocorrências via JSON
     public boolean adicionarOcorrencia(Ocorrencia ocorrencia) {
         try {
-            ocorrenciaDAO.adicionar(ocorrencia);
-            System.out.println("Ocorrência adicionada ao JSON: ID " + ocorrencia.getId());
-            return true;
+            return ocorrenciaDAO.adicionar(ocorrencia);
         } catch (Exception e) {
             System.err.println("Erro ao adicionar ocorrência ao JSON: " + e.getMessage());
             return false;
@@ -55,6 +53,39 @@ public class OcorrenciaController {
         return sucesso;
     }
 
+    // Método para alterar apenas o status da ocorrência
+    public boolean setStatusOcorrencia(int id, String status) {
+        if (status == null || status.trim().isEmpty()) {
+            System.err.println("Status inválido fornecido");
+            return false;
+        }
+        
+        // Validar se o status é válido
+        String[] statusValidos = {"Aprovada", "Pendente", "Recusada"};
+        boolean statusValido = false;
+        for (String s : statusValidos) {
+            if (s.equalsIgnoreCase(status.trim())) {
+                statusValido = true;
+                break;
+            }
+        }
+        
+        if (!statusValido) {
+            System.err.println("Status deve ser: Aprovada, Pendente ou Recusada");
+            return false;
+        }
+        
+        boolean sucesso = ocorrenciaDAO.setStatusOcorrencia(id, status.trim());
+        
+        if (sucesso) {
+            System.out.println("Status da ocorrência " + id + " alterado para: " + status);
+        } else {
+            System.err.println("Falha ao alterar status da ocorrência: ID " + id);
+        }
+        
+        return sucesso;
+    }
+
     // Método para criar uma nova ocorrência
     public boolean criarOcorrencia(int alunoId, int justificativaId) {
         try {
@@ -69,7 +100,8 @@ public class OcorrenciaController {
             return false;
         }
     }
-       private int gerarProximoId() {
+    
+    private int gerarProximoId() {
         List<Ocorrencia> ocorrencias = listarOcorrencias();
         return ocorrencias.stream()
                 .mapToInt(Ocorrencia::getId)
@@ -77,14 +109,12 @@ public class OcorrenciaController {
                 .orElse(0) + 1;
     }
 
-
     // Método para criar ocorrência de atraso
     public boolean criarOcorrenciaAtraso(int alunoId) {
         return criarOcorrencia(alunoId, 1); // Assumindo que 1 = justificativa de atraso
     }
 
     // Método para criar ocorrência de falta
-    //aqui eu ainda preciso ver com o andre
     public boolean criarOcorrenciaFalta(int alunoId) {
         return criarOcorrencia(alunoId, 2); // Assumindo que 2 = justificativa de falta
     }
@@ -101,6 +131,33 @@ public class OcorrenciaController {
         return ocorrenciaDAO.listar().stream()
                 .filter(o -> o.getJustificativaID() == justificativaId)
                 .toList();
+    }
 
-}
+    // Métodos para buscar por status
+    public List<Ocorrencia> buscarPorStatus(String status) {
+        return ocorrenciaDAO.buscarPorStatus(status);
+    }
+
+    // Métodos para estatísticas
+    public long contarOcorrenciasAprovadas() {
+        return ocorrenciaDAO.contarPorStatus("Aprovada");
+    }
+
+    public long contarOcorrenciasPendentes() {
+        return ocorrenciaDAO.contarPorStatus("Pendente");
+    }
+
+    public long contarOcorrenciasRecusadas() {
+        return ocorrenciaDAO.contarPorStatus("Recusada");
+    }
+
+    public long contarTotalOcorrencias() {
+        return listarOcorrencias().size();
+    }
+
+    // Método para validar se uma ocorrência existe
+    public boolean existeOcorrencia(int id) {
+        return ocorrenciaDAO.existeOcorrencia(id);
+    }
+    
 }
