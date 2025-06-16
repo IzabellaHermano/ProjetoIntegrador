@@ -72,6 +72,6 @@ public class OcorrenciaDAO {
                 .orElse(null);
     }
     public void setStatusOcorrencia(Ocorrencia o){
-
+        o.setStatus("");
     }
 }
