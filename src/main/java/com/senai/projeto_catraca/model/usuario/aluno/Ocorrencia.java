@@ -47,23 +47,13 @@ public class Ocorrencia {
         this.id = id;
     }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 95f1158cc6ef49de8044e73c834fefc3261e60ec
     public String getStatus() {
         return status;
     }
 
-<<<<<<< HEAD
 
     public void setStatus(String status) {
         this.status = status;
     }
     
-=======
-    public void setStatus(String status) {
-        this.status = status;
-    }
->>>>>>> 95f1158cc6ef49de8044e73c834fefc3261e60ec
 }

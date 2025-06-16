@@ -100,7 +100,6 @@ public class OcorrenciaDAO {
                 .findFirst()
                 .orElse(null);
     }
-<<<<<<< HEAD
 
     public boolean setStatusOcorrencia(int id, String status) {
         if (status == null || status.trim().isEmpty()) {
@@ -153,9 +152,5 @@ public class OcorrenciaDAO {
     // Método para contar ocorrências por status
     public long contarPorStatus(String status) {
         return buscarPorStatus(status).size();
-=======
-    public void setStatusOcorrencia(Ocorrencia o, String status){
-        o.setStatus(status);
->>>>>>> 95f1158cc6ef49de8044e73c834fefc3261e60ec
     }
 }
